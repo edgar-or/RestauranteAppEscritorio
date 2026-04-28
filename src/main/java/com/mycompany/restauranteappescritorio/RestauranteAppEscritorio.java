@@ -4,6 +4,8 @@
 
 package com.mycompany.restauranteappescritorio;
 
+import controlador.LoginControlador;
+
 /**
  *
  * @author ayala
@@ -11,6 +13,11 @@ package com.mycompany.restauranteappescritorio;
 public class RestauranteAppEscritorio {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        LoginControlador controlador = new LoginControlador(); 
+        
+        controlador.iniciar();
+
+
     }
 }

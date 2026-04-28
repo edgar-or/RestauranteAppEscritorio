@@ -1,3 +1,14 @@
+vista\VistaBar.class
+vista\VistaPrincipalAdministrador.class
+vista\VistaPrincipalMesero.class
+vista\VistaLogin$1.class
+controlador\ControladorPrincipal.class
+vista\VistaLogin$2.class
+controlador\LoginControlador.class
+vista\VistaLogin.class
+vista\VistaLogin$3.class
 com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.class
-vista\LoginVista.class
-vista\LoginVista$1.class
+modelo\LoginModelo.class
+vista\VistaCocina.class
+dao\conexion\Conexion.class
+vista\VistaPanaderia.class
