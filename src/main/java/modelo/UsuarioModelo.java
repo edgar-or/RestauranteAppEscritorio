@@ -8,9 +8,9 @@ package modelo;
  *
  * @author ayala
  */
-public class LoginModelo {
-   
+public class UsuarioModelo {
 
+    private int id_usuario;
     private String usuario;
     private String password;
 
@@ -20,12 +20,17 @@ public class LoginModelo {
         } else if (usuario.equals("admin") && password.equals("12345")) {
             return "ADMIN";
 
-        }else if(usuario.equals("admin2") && password.endsWith("1234")){
-        return "USER";
+        } else if (usuario.equals("panaderia") && password.endsWith("1234")) {
+            return "UserPanaderia";
+        } else if (usuario.equals("cocina") && password.endsWith("1234")) {
+            return "UserCocina";
+        } else if (usuario.equals("bar") && password.endsWith("1234")) {
+            return "UserBar";
+        } else if (usuario.equals("mesero") && password.endsWith("1234")) {
+            return "UserMesero";
         }
         return "ERROR";
     }
-
 
     public String getUsuario() {
         return usuario;
@@ -44,7 +49,3 @@ public class LoginModelo {
     }
 
 }
-
-    
-    
-

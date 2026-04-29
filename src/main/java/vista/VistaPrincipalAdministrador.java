@@ -33,16 +33,9 @@ public class VistaPrincipalAdministrador extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         btnCerrarSesion = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        menuAgregarDemerito = new javax.swing.JMenuItem();
-        menuAgregarMerito = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        menuBuscar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         menuGrado = new javax.swing.JMenuItem();
         menuEncargado = new javax.swing.JMenuItem();
-        menuDocente = new javax.swing.JMenuItem();
-        menuAlumno = new javax.swing.JMenuItem();
 
         jScrollPane1.setViewportView(jTree1);
 
@@ -72,41 +65,15 @@ public class VistaPrincipalAdministrador extends javax.swing.JFrame {
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jMenu2.setText("Agregar Demeritos");
-
-        menuAgregarDemerito.setText("Agregar Demerito");
-        jMenu2.add(menuAgregarDemerito);
-
-        menuAgregarMerito.setText("Agregar Merito");
-        menuAgregarMerito.addActionListener(this::menuAgregarMeritoActionPerformed);
-        jMenu2.add(menuAgregarMerito);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Ver");
-
-        menuBuscar.setText("Buscar");
-        menuBuscar.addActionListener(this::menuBuscarActionPerformed);
-        jMenu3.add(menuBuscar);
-
-        jMenuBar1.add(jMenu3);
-
         jMenu1.setText("Configuracion");
 
-        menuGrado.setText("Ver Grado");
+        menuGrado.setText("Ver Empleado");
         menuGrado.addActionListener(this::menuGradoActionPerformed);
         jMenu1.add(menuGrado);
 
-        menuEncargado.setText("Ver Encargado");
+        menuEncargado.setText("Ver Mesa");
         menuEncargado.addActionListener(this::menuEncargadoActionPerformed);
         jMenu1.add(menuEncargado);
-
-        menuDocente.setText("Ver Docente");
-        jMenu1.add(menuDocente);
-
-        menuAlumno.setText("Agregar Alumno");
-        menuAlumno.addActionListener(this::menuAlumnoActionPerformed);
-        jMenu1.add(menuAlumno);
 
         jMenuBar1.add(jMenu1);
 
@@ -132,29 +99,17 @@ public class VistaPrincipalAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuGradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGradoActionPerformed
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuGradoActionPerformed
-
-    private void menuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuBuscarActionPerformed
-
-    private void menuAgregarMeritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarMeritoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuAgregarMeritoActionPerformed
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void menuEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEncargadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuEncargadoActionPerformed
 
-    private void menuAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlumnoActionPerformed
+    private void menuGradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGradoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuAlumnoActionPerformed
-
-    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+    }//GEN-LAST:event_menuGradoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,17 +120,10 @@ public class VistaPrincipalAdministrador extends javax.swing.JFrame {
     public javax.swing.JButton btnCerrarSesion;
     public javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTree1;
-    public javax.swing.JMenuItem menuAgregarDemerito;
-    public javax.swing.JMenuItem menuAgregarMerito;
-    public javax.swing.JMenuItem menuAlumno;
-    public javax.swing.JMenuItem menuBuscar;
-    public javax.swing.JMenuItem menuDocente;
-    public javax.swing.JMenuItem menuEncargado;
-    public javax.swing.JMenuItem menuGrado;
+    private javax.swing.JMenuItem menuEncargado;
+    private javax.swing.JMenuItem menuGrado;
     // End of variables declaration//GEN-END:variables
 }
