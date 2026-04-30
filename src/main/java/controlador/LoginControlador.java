@@ -25,6 +25,8 @@ public class LoginControlador {
     private final VistaLogin loginVista;
     private VistaPrincipalAdministrador vista;
     private UsuarioModelo loginModelo; 
+    private ControladorMesero controladorMesero; 
+    private VistaPrincipalMesero visMesero; 
 
     private ControladorPrincipal controladorPrincipal;
 
@@ -61,6 +63,11 @@ public class LoginControlador {
                 loginVista.dispose();
                 
             } else if (rol.getRol().equalsIgnoreCase("mesero")) {
+                
+                visMesero = new VistaPrincipalMesero();
+                controladorMesero = new ControladorMesero(visMesero); 
+                controladorMesero.iniciar();
+                
 
             }
         }
