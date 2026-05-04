@@ -26,7 +26,7 @@ public class UsuarioDao {
                 + " FROM usuario u"
                 + " INNER JOIN empleado e ON u.idUsuario = e.idUsuario"
                 + " INNER JOIN rol r ON e.idRol = r.idRol"
-                + " Inner join area_produccion ap ON e.idempleado = ap.idempleado"
+                + " Inner join area_produccion ap ON e.idproduccion = ap.idproduccion"
                 + " WHERE u.usuario = ? AND u.contrasena = ?";
 
         System.out.println(consulta);
