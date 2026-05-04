@@ -17,5 +17,6 @@ dao\UsuarioDao.class
 vista\VistaCocina.class
 controlador\ControladorMesero.class
 dao\conexion\Conexion.class
+modelo\AreaProduccionModelo.class
 vista\VistaPanaderia.class
 controlador\ControladorBar.class

@@ -9,6 +9,7 @@ import dao.dto.LoginResultadoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import modelo.AreaProduccionModelo;
 import modelo.RolModelo;
 import modelo.UsuarioModelo;
 
@@ -21,10 +22,11 @@ public class UsuarioDao {
     public LoginResultadoDTO validar(String usuario, String password) {
         UsuarioModelo u = null;
         LoginResultadoDTO resultado = null;
-        String consulta = "SELECT u.*, r.idRol, r.rol AS nombreRol"
+        String consulta = "SELECT u.*, r.idRol, r.rol AS nombreRol, ap.nombre as nombreArea"
                 + " FROM usuario u"
                 + " INNER JOIN empleado e ON u.idUsuario = e.idUsuario"
                 + " INNER JOIN rol r ON e.idRol = r.idRol"
+                + " Inner join area_produccion ap ON e.idempleado = ap.idempleado"
                 + " WHERE u.usuario = ? AND u.contrasena = ?";
 
         System.out.println(consulta);
@@ -47,9 +49,13 @@ public class UsuarioDao {
                 RolModelo rol = new RolModelo();
                 rol.setIdRol(rs.getInt("idRol"));
                 rol.setRol(rs.getString("nombreRol"));
-
+                
+                AreaProduccionModelo area = new AreaProduccionModelo(); 
+                area.setNombre(rs.getString("nombreArea"));
+                
                 resultado.setUsuario(u);
                 resultado.setRol(rol);
+                resultado.setArea(area);
 
             }
 
