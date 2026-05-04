@@ -7,6 +7,7 @@ package controlador;
 import dao.UsuarioDao;
 import dao.dto.LoginResultadoDTO;
 import javax.swing.JOptionPane;
+import modelo.AreaProduccionModelo;
 import modelo.RolModelo;
 import modelo.UsuarioModelo;
 import vista.VistaBar;
@@ -24,9 +25,15 @@ public class LoginControlador {
 
     private final VistaLogin loginVista;
     private VistaPrincipalAdministrador vista;
-    private UsuarioModelo loginModelo; 
-    private ControladorMesero controladorMesero; 
-    private VistaPrincipalMesero visMesero; 
+    private UsuarioModelo loginModelo;
+    private ControladorCocina controladorCocina;
+    private ControladorBar controladorBar;
+    private VistaBar visBar;
+    private VistaCocina visCocina;
+    private VistaPanaderia visPan;
+    private ControladorPanaderia controladorPan;
+    private ControladorMesero controladorMesero;
+    private VistaPrincipalMesero visMesero;
 
     private ControladorPrincipal controladorPrincipal;
 
@@ -41,7 +48,6 @@ public class LoginControlador {
         this.loginVista.getRootPane().setDefaultButton(this.loginVista.btnLogin);
 
         this.loginVista.btnLogin.addActionListener(e -> login());
-       
 
     }
 
@@ -55,21 +61,43 @@ public class LoginControlador {
 
         if (res != null) {
             RolModelo rol = res.getRol();
+            AreaProduccionModelo area = res.getArea();
 
-            if (rol.getRol().equalsIgnoreCase("administrador")) {
+            System.out.println("ROL -> '" + rol.getRol() + "'");
+            if (rol.getIdRol()==1) {
                 vista = new VistaPrincipalAdministrador();
                 controladorPrincipal = new ControladorPrincipal(vista);
                 controladorPrincipal.iniciar();
-                loginVista.dispose();
-                
-            } else if (rol.getRol().equalsIgnoreCase("mesero")) {
-                
-                visMesero = new VistaPrincipalMesero();
-                controladorMesero = new ControladorMesero(visMesero); 
-                controladorMesero.iniciar();
-                
+                cerrar();
+
+            } else if (rol.getRol().equalsIgnoreCase("empleado")) {
+
+                if (area.getNombre().equalsIgnoreCase("mesero")) {
+                    visMesero = new VistaPrincipalMesero();
+                    controladorMesero = new ControladorMesero(visMesero);
+                    controladorMesero.iniciar();
+                    cerrar();
+                } else if (area.getNombre().equalsIgnoreCase("cocina")) {
+                    visCocina = new VistaCocina();
+                    controladorCocina = new ControladorCocina(visCocina);
+                    controladorCocina.iniciar();
+                    cerrar();
+                } else if (area.getNombre().equalsIgnoreCase("bar")) {
+                    visBar = new VistaBar();
+                    controladorBar = new ControladorBar(visBar);
+                    controladorBar.iniciar();
+                    cerrar();
+                } else if (area.getNombre().equalsIgnoreCase("panaderia")) {
+                    visPan = new VistaPanaderia();
+                    controladorPan = new ControladorPanaderia(visPan);
+                    controladorPan.iniciar();
+                    cerrar();
+                }
 
             }
+
+        } else {
+            mostrarError("Usuario o contraseña incorrectos");
         }
 
     }
