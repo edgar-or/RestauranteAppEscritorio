@@ -13,9 +13,13 @@ import java.sql.DriverManager;
  */
 public class Conexion {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/RestauranteAppEscritorio";
+     private static final String URL = "jdbc:postgresql://localhost:5432/restaurante";
     private static final String USER = "postgres";
-    private static final String PASS = "eaadmin76rag19$";
+    private static final String PASS = "6074";
+    
+//    private static final String URL = "jdbc:postgresql://localhost:5432/RestauranteAppEscritorio";
+//    private static final String USER = "postgres";
+//    private static final String PASS = "eaadmin76rag19$";
 
     public static Connection getConnection() throws Exception {
         return DriverManager.getConnection(URL, USER, PASS);
