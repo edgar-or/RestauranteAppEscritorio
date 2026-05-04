@@ -13,7 +13,11 @@ import java.sql.DriverManager;
  */
 public class Conexion {
 
+<<<<<<< HEAD
      private static final String URL = "jdbc:postgresql://localhost:5432/restaurante";
+=======
+    private static final String URL = "jdbc:postgresql://localhost:5432/RESTAURANTEAPPESC";
+>>>>>>> e6d8b6c9e74152442158920f8ed5e8b100944fc9
     private static final String USER = "postgres";
     private static final String PASS = "6074";
     
