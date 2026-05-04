@@ -13,10 +13,10 @@ modelo\ModeloCorreo.class
 modelo\ModeloArea_Produccion.class
 modelo\ModeloProducto_Pedido.class
 vista\VistaCocina.class
+vista\VistaMesas.class
 controlador\ControladorMesero.class
 modelo\ModeloPedido.class
 dao\conexion\Conexion.class
-modelo\AreaProduccionModelo.class
 vista\VistaPanaderia.class
 controlador\ControladorBar.class
 vista\VistaBar.class
@@ -30,4 +30,5 @@ controlador\ControladorCocina.class
 vista\VistaLogin.class
 dao\UsuarioDao.class
 modelo\ModeloTelefono.class
+modelo\AreaProduccionModelo.class
 modelo\ModeloMesa.class
