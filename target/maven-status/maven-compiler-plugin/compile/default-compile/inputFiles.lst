@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorBar.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorCocina.java
@@ -8,6 +7,10 @@ C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\jav
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\LoginControlador.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\conexion\Conexion.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\dto\LoginResultadoDTO.java
+C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\dto\PedidoBarDto.java
+C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\dto\PedidoPanaderiaDto.java
+C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\PedidoBarDao.java
+C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\PedidoPanaderiaDao.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\UsuarioDao.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\modelo\AreaProduccionModelo.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\modelo\ModeloArea_Produccion.java
@@ -30,38 +33,3 @@ C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\jav
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaPanaderia.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaPrincipalAdministrador.java
 C:\Users\Emilio\Documents\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaPrincipalMesero.java
-=======
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\ControladorBar.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\ControladorCocina.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\ControladorMesero.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\ControladorPanaderia.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\ControladorPrincipal.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\LoginControlador.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\conexion\Conexion.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\dto\LoginResultadoDTO.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\dto\PedidoBarDto.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\PedidoBarDao.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\UsuarioDao.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\AreaProduccionModelo.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloArea_Produccion.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloCorreo.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloEmpleado.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloMenu.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloMesa.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloPedido.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloProducto.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloProducto_Menu.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloProducto_Pedido.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloRecibo.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\ModeloTelefono.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\RolModelo.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\UsuarioModelo.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\vista\VistaBar.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\vista\VistaCocina.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\vista\VistaLogin.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\vista\VistaMesas.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\vista\VistaPanaderia.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\vista\VistaPrincipalAdministrador.java
-C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\vista\VistaPrincipalMesero.java
->>>>>>> 2293194e6490b86fcef458463b6ef8790100cc0f

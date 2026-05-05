@@ -4,6 +4,7 @@ vista\VistaPrincipalAdministrador.class
 controlador\ControladorPanaderia.class
 modelo\RolModelo.class
 vista\VistaLogin$1.class
+dao\PedidoPanaderiaDao.class
 modelo\ModeloRecibo.class
 controlador\LoginControlador.class
 dao\dto\LoginResultadoDTO.class
@@ -30,6 +31,7 @@ modelo\ModeloProducto.class
 modelo\ModeloProducto_Menu.class
 controlador\ControladorCocina.class
 vista\VistaLogin.class
+dao\dto\PedidoPanaderiaDto.class
 dao\UsuarioDao.class
 modelo\ModeloTelefono.class
 modelo\AreaProduccionModelo.class
