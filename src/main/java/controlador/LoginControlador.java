@@ -14,7 +14,7 @@ import vista.VistaBar;
 import vista.VistaCocina;
 import vista.VistaLogin;
 import vista.VistaPanaderia;
-//import vista.VistaPrincipalAdministrador;
+import vista.VistaPrincipal;
 import vista.VistaPrincipalMesero;
 
 /**
@@ -24,7 +24,7 @@ import vista.VistaPrincipalMesero;
 public class LoginControlador {
 
     private final VistaLogin loginVista;
-   // private VistaPrincipalAdministrador vista;
+    private VistaPrincipal vista;
     private UsuarioModelo loginModelo;
     private ControladorCocina controladorCocina;
     private ControladorBar controladorBar;
@@ -65,8 +65,8 @@ public class LoginControlador {
 
             System.out.println("ROL -> '" + rol.getRol() + "'");
             if (rol.getIdRol()==1) {
-                //vista = new VistaPrincipalAdministrador();
-                //controladorPrincipal = new ControladorPrincipal(vista);
+                vista = new VistaPrincipal();
+                controladorPrincipal = new ControladorPrincipal(vista);
                 controladorPrincipal.iniciar();
                 cerrar();
 
@@ -119,8 +119,8 @@ public class LoginControlador {
     }
 
     private void cerrarSesion() {
-        //vista.dispose();
-        //vista = null;
+        vista.dispose();
+        vista = null;
 
         loginVista.txtUsuario.setText("");
         loginVista.txtcontrasenia.setText("");
