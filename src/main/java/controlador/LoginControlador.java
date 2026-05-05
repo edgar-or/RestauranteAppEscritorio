@@ -82,10 +82,11 @@ public class LoginControlador {
                     controladorCocina = new ControladorCocina(visCocina);
                     controladorCocina.iniciar();
                     cerrar();
-                } else if (area.getNombre().equalsIgnoreCase("bar")) {
+                } else if (area.getNombre().equalsIgnoreCase("Bar")) {
                     visBar = new VistaBar();
                     controladorBar = new ControladorBar(visBar);
                     controladorBar.iniciar();
+                    controladorBar.cargarTabla();
                     cerrar();
                 } else if (area.getNombre().equalsIgnoreCase("panaderia")) {
                     visPan = new VistaPanaderia();

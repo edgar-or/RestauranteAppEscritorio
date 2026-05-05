@@ -31,7 +31,7 @@ public class VistaBar extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaBar = new javax.swing.JTable();
         btnAgregarMerito2 = new javax.swing.JButton();
         btnCerrarsesion = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -42,7 +42,7 @@ public class VistaBar extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaBar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +53,7 @@ public class VistaBar extends javax.swing.JFrame {
                 "Producto", "Cantidad", "Descripcion", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaBar);
 
         btnAgregarMerito2.setText("Terminado");
         btnAgregarMerito2.addActionListener(this::btnAgregarMerito2ActionPerformed);
@@ -186,6 +186,6 @@ public class VistaBar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable tablaBar;
     // End of variables declaration//GEN-END:variables
 }

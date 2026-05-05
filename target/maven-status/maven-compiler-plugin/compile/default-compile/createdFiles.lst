@@ -1,3 +1,4 @@
+dao\dto\PedidoBarDto.class
 modelo\ModeloEmpleado.class
 vista\VistaPrincipalAdministrador.class
 controlador\ControladorPanaderia.class
@@ -14,6 +15,7 @@ modelo\ModeloArea_Produccion.class
 modelo\ModeloProducto_Pedido.class
 vista\VistaCocina.class
 vista\VistaMesas.class
+dao\PedidoBarDao.class
 controlador\ControladorMesero.class
 modelo\ModeloPedido.class
 dao\conexion\Conexion.class
