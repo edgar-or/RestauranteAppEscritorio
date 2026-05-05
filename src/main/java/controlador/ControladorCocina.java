@@ -4,6 +4,12 @@
  */
 package controlador;
 
+import dao.CocinaDao;
+import dao.PedidoBarDao;
+import dao.dto.PedidoBarDto;
+import dao.dto.PedidoCocinaDto;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import vista.VistaCocina;
 
 /**
@@ -11,14 +17,43 @@ import vista.VistaCocina;
  * @author ayala
  */
 public class ControladorCocina {
-    VistaCocina visCocina; 
+
+    VistaCocina visCocina;
 
     public ControladorCocina(VistaCocina visCocina) {
         this.visCocina = visCocina;
+        cargarTabla();
     }
-    
-    public void iniciar(){
+
+    public void iniciar() {
         visCocina.setVisible(true);
     }
-    
+
+    public void cargarTabla() {
+
+        try {
+            CocinaDao dao = new CocinaDao();
+            List<PedidoCocinaDto> lista = dao.listar();
+
+            DefaultTableModel modelo = new DefaultTableModel();
+
+            modelo.addColumn("Producto");
+            modelo.addColumn("Descripción");
+            modelo.addColumn("Estado");
+
+            for (PedidoCocinaDto p : lista) {
+                modelo.addRow(new Object[]{
+                    p.getNombreProducto(),
+                    p.getDescripcion(),
+                    p.isEstado()
+                });
+            }
+
+            visCocina.tablaCocina.setModel(modelo);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

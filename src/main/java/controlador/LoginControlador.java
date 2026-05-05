@@ -14,7 +14,7 @@ import vista.VistaBar;
 import vista.VistaCocina;
 import vista.VistaLogin;
 import vista.VistaPanaderia;
-import vista.VistaPrincipalAdministrador;
+//import vista.VistaPrincipalAdministrador;
 import vista.VistaPrincipalMesero;
 
 /**
@@ -24,7 +24,7 @@ import vista.VistaPrincipalMesero;
 public class LoginControlador {
 
     private final VistaLogin loginVista;
-    private VistaPrincipalAdministrador vista;
+   // private VistaPrincipalAdministrador vista;
     private UsuarioModelo loginModelo;
     private ControladorCocina controladorCocina;
     private ControladorBar controladorBar;
@@ -41,7 +41,7 @@ public class LoginControlador {
 
         this.loginVista = new VistaLogin();
         this.loginModelo = new UsuarioModelo();
-        this.vista = null;
+        //this.vista = null;
         ;
 
         //Para boton Enter
@@ -55,7 +55,7 @@ public class LoginControlador {
         UsuarioDao dao = new UsuarioDao();
 
         String usuario = loginVista.txtUsuario.getText();
-        String contra = loginVista.txtContraseña.getText();
+        String contra = loginVista.txtcontrasenia.getText();
 
         LoginResultadoDTO res = dao.validar(usuario, contra);
 
@@ -65,8 +65,8 @@ public class LoginControlador {
 
             System.out.println("ROL -> '" + rol.getRol() + "'");
             if (rol.getIdRol()==1) {
-                vista = new VistaPrincipalAdministrador();
-                controladorPrincipal = new ControladorPrincipal(vista);
+                //vista = new VistaPrincipalAdministrador();
+                //controladorPrincipal = new ControladorPrincipal(vista);
                 controladorPrincipal.iniciar();
                 cerrar();
 
@@ -82,10 +82,11 @@ public class LoginControlador {
                     controladorCocina = new ControladorCocina(visCocina);
                     controladorCocina.iniciar();
                     cerrar();
-                } else if (area.getNombre().equalsIgnoreCase("bar")) {
+                } else if (area.getNombre().equalsIgnoreCase("Bar")) {
                     visBar = new VistaBar();
                     controladorBar = new ControladorBar(visBar);
                     controladorBar.iniciar();
+                    controladorBar.cargarTabla();
                     cerrar();
                 } else if (area.getNombre().equalsIgnoreCase("panaderia")) {
                     visPan = new VistaPanaderia();
@@ -118,12 +119,11 @@ public class LoginControlador {
     }
 
     private void cerrarSesion() {
-        vista.dispose();
-        vista = null;
-        iniciar();
+        //vista.dispose();
+        //vista = null;
 
         loginVista.txtUsuario.setText("");
-        loginVista.txtContraseña.setText("");
+        loginVista.txtcontrasenia.setText("");
         loginVista.txtUsuario.requestFocus();
     }
 
