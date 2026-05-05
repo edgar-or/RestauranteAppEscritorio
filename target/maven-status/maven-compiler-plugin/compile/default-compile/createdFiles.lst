@@ -4,6 +4,7 @@ vista\VistaPrincipalAdministrador.class
 controlador\ControladorPanaderia.class
 modelo\RolModelo.class
 vista\VistaLogin$1.class
+dao\PedidoPanaderiaDao.class
 modelo\ModeloRecibo.class
 controlador\LoginControlador.class
 dao\dto\LoginResultadoDTO.class
@@ -30,7 +31,11 @@ modelo\ModeloProducto.class
 modelo\ModeloProducto_Menu.class
 controlador\ControladorCocina.class
 vista\VistaLogin.class
+<<<<<<< HEAD
 dao\dto\PedidoCocinaDto.class
+=======
+dao\dto\PedidoPanaderiaDto.class
+>>>>>>> 9d723ccec6fee315e634cec176226fe454abfd8f
 dao\UsuarioDao.class
 modelo\ModeloTelefono.class
 dao\CocinaDao.class
