@@ -18,6 +18,7 @@ vista\VistaPanaderia.class
 vista\VistaBar$1.class
 vista\VistaBar.class
 vista\VistaPrincipalMesero.class
+vista\VistaLogin$2.class
 modelo\ModeloProducto.class
 vista\VistaPanaderia$2.class
 controlador\ControladorCocina.class

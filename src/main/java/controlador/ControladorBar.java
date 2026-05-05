@@ -9,6 +9,7 @@ import dao.dto.PedidoBarDto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import vista.VistaBar;
+import vista.VistaLogin;
 
 /**
  *
@@ -20,6 +21,7 @@ public class ControladorBar {
     public ControladorBar(VistaBar visBar) {
         this.visBar = visBar;
         cargarTabla();
+        evento();
         
     }
     
@@ -55,5 +57,14 @@ public class ControladorBar {
 }
     
     
-    
+
+    private void evento() {
+         visBar.btnCerrarsesion.addActionListener(e->{
+        visBar.dispose();
+        
+        VistaLogin login= new VistaLogin();
+        LoginControlador ctrl= new LoginControlador();
+        ctrl.iniciar();
+        });
+    }
 }

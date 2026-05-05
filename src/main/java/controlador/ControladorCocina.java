@@ -11,6 +11,7 @@ import dao.dto.PedidoCocinaDto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import vista.VistaCocina;
+import vista.VistaLogin;
 
 /**
  *
@@ -19,15 +20,19 @@ import vista.VistaCocina;
 public class ControladorCocina {
 
     VistaCocina visCocina;
-
+    VistaLogin visLogin;
+    LoginControlador loginContro;
     public ControladorCocina(VistaCocina visCocina) {
         this.visCocina = visCocina;
         cargarTabla();
+        eventos();
     }
 
     public void iniciar() {
         visCocina.setVisible(true);
     }
+    
+   
 
     public void cargarTabla() {
 
@@ -56,4 +61,16 @@ public class ControladorCocina {
         }
 
     }
+
+    private void eventos() {
+        visCocina.btnCerrarsesion.addActionListener(e->{
+        visCocina.dispose();
+        
+        VistaLogin login= new VistaLogin();
+        LoginControlador ctrl= new LoginControlador();
+        ctrl.iniciar();
+        });
+        
+    }
+    
 }

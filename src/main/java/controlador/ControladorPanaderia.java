@@ -10,6 +10,7 @@ import dao.dto.PedidoBarDto;
 import dao.dto.PedidoPanaderiaDto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import vista.VistaLogin;
 import vista.VistaPanaderia;
 
 
@@ -24,6 +25,7 @@ public class ControladorPanaderia {
     public ControladorPanaderia(VistaPanaderia visPanaderia) {
         this.visPanaderia = visPanaderia;
         cargarTabla();
+        eventos();
     }
     
     public void iniciar(){
@@ -58,5 +60,15 @@ public class ControladorPanaderia {
         e.printStackTrace();
     }
 }
+
+    private void eventos() {
+         visPanaderia.btnCerrarsesion.addActionListener(e->{
+        visPanaderia.dispose();
+        
+        VistaLogin login= new VistaLogin();
+        LoginControlador ctrl= new LoginControlador();
+        ctrl.iniciar();
+        });
+    }
     
 }
