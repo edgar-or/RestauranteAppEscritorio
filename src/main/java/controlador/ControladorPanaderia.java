@@ -52,7 +52,7 @@ public class ControladorPanaderia {
             });
         }
 
-        visPanaderia.tabPanaderia.setModel(modelo);
+        visPanaderia.tablaPanaderia.setModel(modelo);
 
     } catch (Exception e) {
         e.printStackTrace();

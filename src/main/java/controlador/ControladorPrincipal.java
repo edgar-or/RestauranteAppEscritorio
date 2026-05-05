@@ -4,23 +4,23 @@
  */
 package controlador;
 
-import vista.VistaPrincipalAdministrador;
+//import vista.VistaPrincipalAdministrador;
 
 /**
  *
  * @author estud
  */
 public class ControladorPrincipal {
-  VistaPrincipalAdministrador vista;
+  //VistaPrincipalAdministrador vista;
  LoginControlador logingControlador; 
 
-    public ControladorPrincipal(VistaPrincipalAdministrador vista) {
-        this.vista =  vista;
+    public ControladorPrincipal() {
+        //this.vista =  vista;
         
     }
     
     public void iniciar(){
-        vista.setVisible(true);
+        //vista.setVisible(true);
     }
  
     
