@@ -30,7 +30,9 @@ modelo\ModeloProducto.class
 modelo\ModeloProducto_Menu.class
 controlador\ControladorCocina.class
 vista\VistaLogin.class
+dao\dto\PedidoCocinaDto.class
 dao\UsuarioDao.class
 modelo\ModeloTelefono.class
+dao\CocinaDao.class
 modelo\AreaProduccionModelo.class
 modelo\ModeloMesa.class

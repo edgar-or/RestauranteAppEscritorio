@@ -31,7 +31,7 @@ public class VistaCocina extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaCocina = new javax.swing.JTable();
         btnAgregarDemerito = new javax.swing.JButton();
         btnAgregarMerito2 = new javax.swing.JButton();
         btnCerrarsesion = new javax.swing.JButton();
@@ -42,7 +42,7 @@ public class VistaCocina extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCocina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,13 +53,12 @@ public class VistaCocina extends javax.swing.JFrame {
                 "Producto", "Cantidad", "Descripcion", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaCocina);
 
         btnAgregarDemerito.setText("No Terminado");
         btnAgregarDemerito.addActionListener(this::btnAgregarDemeritoActionPerformed);
 
         btnAgregarMerito2.setText("Terminado");
-        btnAgregarMerito2.setActionCommand("Terminado");
         btnAgregarMerito2.addActionListener(this::btnAgregarMerito2ActionPerformed);
 
         btnCerrarsesion.setText("Cerrar Sesion");
@@ -192,6 +191,6 @@ public class VistaCocina extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable tablaCocina;
     // End of variables declaration//GEN-END:variables
 }

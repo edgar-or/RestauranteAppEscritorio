@@ -5,9 +5,11 @@ C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\Controlado
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\ControladorPanaderia.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\ControladorPrincipal.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\controlador\LoginControlador.java
+C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\CocinaDao.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\conexion\Conexion.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\dto\LoginResultadoDTO.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\dto\PedidoBarDto.java
+C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\dto\PedidoCocinaDto.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\PedidoBarDao.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\dao\UsuarioDao.java
 C:\AppDeEscritorio\RestauranteAppEscritorio\src\main\java\modelo\AreaProduccionModelo.java
