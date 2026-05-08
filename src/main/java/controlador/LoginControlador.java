@@ -64,7 +64,7 @@ public class LoginControlador {
             AreaProduccionModelo area = res.getArea();
 
             System.out.println("ROL -> '" + rol.getRol() + "'");
-            if (rol.getIdRol()==1) {
+            if (rol.getRol().equalsIgnoreCase("Administrador")) {
                 vista = new VistaPrincipal();
                 controladorPrincipal = new ControladorPrincipal(vista);
                 controladorPrincipal.iniciar();

@@ -25,6 +25,9 @@ public class ModeloEmpleado {
         this.idRol = idRol;
     }
 
+    public ModeloEmpleado() {
+    }
+
     public String getIdEmpleado() {
         return idEmpleado;
     }

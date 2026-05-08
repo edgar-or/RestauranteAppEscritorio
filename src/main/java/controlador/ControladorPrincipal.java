@@ -15,10 +15,20 @@ import vista.VistaPrincipal;
  */
 public class ControladorPrincipal {
   VistaPrincipal vista;
- LoginControlador logingControlador; 
+ LoginControlador logingControlador;
+ControladorEmpleado cntrlEmpleado;  
 
     public ControladorPrincipal(VistaPrincipal vista) {
         this.vista = vista;
+        
+        this.cntrlEmpleado = new ControladorEmpleado(vista); 
+        
+        vista.btnEmpleados.addActionListener(e-> {
+            cntrlEmpleado.abrirVistaEmpleados();
+            
+        });
+        
+        
     }
 
 

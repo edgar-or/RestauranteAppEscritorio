@@ -24,12 +24,10 @@ public class UsuarioDao {
         LoginResultadoDTO resultado = null;
         String consulta = "SELECT u.*, r.idRol, r.rol AS nombreRol, ap.nombre as nombreArea"
                 + " FROM usuario u"
-                + " INNER JOIN empleado e ON u.idUsuario = e.idUsuario"
-                + " INNER JOIN rol r ON e.idRol = r.idRol"
-                + " Inner join area_produccion ap ON e.idproduccion = ap.idproduccion"
+                + " LEFT JOIN empleado e ON u.idUsuario = e.idUsuario"
+                + " LEFT JOIN rol r ON e.idRol = r.idRol"
+                + " LEFT join area_produccion ap ON e.idproduccion = ap.idproduccion"
                 + " WHERE u.usuario = ? AND u.contrasena = ?";
-
-        System.out.println(consulta);
 
         try {
             Connection con = Conexion.getConnection();
