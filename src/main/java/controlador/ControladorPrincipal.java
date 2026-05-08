@@ -6,6 +6,7 @@ package controlador;
 
 //import vista.VistaPrincipalAdministrador;
 
+import javax.swing.JFrame;
 import vista.VistaPrincipal;
 
 
@@ -34,6 +35,8 @@ ControladorEmpleado cntrlEmpleado;
 
     
     public void iniciar(){
+        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
         vista.setVisible(true);
     }
  

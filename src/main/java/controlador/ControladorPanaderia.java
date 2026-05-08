@@ -9,6 +9,7 @@ import dao.PedidoPanaderiaDao;
 import dao.dto.PedidoBarDto;
 import dao.dto.PedidoPanaderiaDto;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import vista.VistaLogin;
 import vista.VistaPanaderia;
@@ -29,6 +30,8 @@ public class ControladorPanaderia {
     }
     
     public void iniciar(){
+        visPanaderia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        visPanaderia.setExtendedState(JFrame.MAXIMIZED_BOTH);
         visPanaderia.setVisible(true);
     }
     
