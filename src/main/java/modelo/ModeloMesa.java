@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author renec
@@ -13,6 +15,15 @@ public class ModeloMesa {
     private int  numeroMesa;
     private boolean estado;
     private int capacidad;
+    private static ArrayList<ModeloPedido> arrayPedido   = new ArrayList<>();
+
+    public static ArrayList<ModeloPedido> getArrayPedido() {
+        return arrayPedido;
+    }
+
+    public static void setArrayPedido(ArrayList<ModeloPedido> arrayPedido) {
+        ModeloMesa.arrayPedido = arrayPedido;
+    }
 
     public ModeloMesa(String idMesa, int numeroMesa, boolean estado, int capacidad) {
         this.idMesa = idMesa;

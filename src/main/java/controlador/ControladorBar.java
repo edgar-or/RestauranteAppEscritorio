@@ -7,6 +7,7 @@ package controlador;
 import dao.PedidoBarDao;
 import dao.dto.PedidoBarDto;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import vista.VistaBar;
 import vista.VistaLogin;
@@ -26,6 +27,8 @@ public class ControladorBar {
     }
     
     public void iniciar(){
+        visBar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        visBar.setExtendedState(JFrame.MAXIMIZED_BOTH);
         visBar.setVisible(true);
     }
     

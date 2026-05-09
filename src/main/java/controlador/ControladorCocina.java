@@ -9,6 +9,7 @@ import dao.PedidoBarDao;
 import dao.dto.PedidoBarDto;
 import dao.dto.PedidoCocinaDto;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import vista.VistaCocina;
 import vista.VistaLogin;
@@ -29,6 +30,8 @@ public class ControladorCocina {
     }
 
     public void iniciar() {
+        visCocina.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        visCocina.setExtendedState(JFrame.MAXIMIZED_BOTH);
         visCocina.setVisible(true);
     }
     

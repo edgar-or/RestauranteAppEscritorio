@@ -4,16 +4,37 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author renec
  */
 public class ModeloProducto {
+
     private String idProducto;
     private String nombre;
     private String descripcion;
     private double precio;
     private String idProduccion;
+    private static ArrayList<ModeloProducto_Menu> arrayProducto_Menu = new ArrayList<>();
+    private static ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido = new ArrayList<>();
+
+    public static ArrayList<ModeloProducto_Menu> getArrayProducto_Menu() {
+        return arrayProducto_Menu;
+    }
+
+    public static void setArrayProducto_Menu(ArrayList<ModeloProducto_Menu> arrayProducto_Menu) {
+        ModeloProducto.arrayProducto_Menu = arrayProducto_Menu;
+    }
+
+    public static ArrayList<ModeloProducto_Pedido> getArrayProducto_Pedido() {
+        return arrayProducto_Pedido;
+    }
+
+    public static void setArrayProducto_Pedido(ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido) {
+        ModeloProducto.arrayProducto_Pedido = arrayProducto_Pedido;
+    }
 
     public ModeloProducto(String idProducto, String nombre, String descripcion, double precio, String idProduccion) {
         this.idProducto = idProducto;
@@ -62,6 +83,5 @@ public class ModeloProducto {
     public void setIdProduccion(String idProduccion) {
         this.idProduccion = idProduccion;
     }
-    
-    
+
 }

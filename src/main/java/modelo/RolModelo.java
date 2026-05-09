@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ayala
@@ -11,7 +13,25 @@ package modelo;
 public class RolModelo {
     private int idRol; 
     private String rol; 
+    private static ArrayList<ModeloEmpleado> arrayEmpleado = new ArrayList<>();
+    private static ArrayList<ModeloProducto> arrayProducto = new ArrayList<>();
 
+    public static ArrayList<ModeloEmpleado> getArrayEmpleado() {
+        return arrayEmpleado;
+    }
+
+    public static void setArrayEmpleado(ArrayList<ModeloEmpleado> arrayEmpleado) {
+        RolModelo.arrayEmpleado = arrayEmpleado;
+    }
+
+    public static ArrayList<ModeloProducto> getArrayProducto() {
+        return arrayProducto;
+    }
+
+    public static void setArrayProducto(ArrayList<ModeloProducto> arrayProducto) {
+        RolModelo.arrayProducto = arrayProducto;
+    }
+    
     public RolModelo() {
     }
 
