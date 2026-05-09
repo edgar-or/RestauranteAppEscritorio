@@ -17,6 +17,14 @@ public class ModeloMesa {
     private int capacidad;
     private static ArrayList<ModeloPedido> arrayPedido   = new ArrayList<>();
 
+    public static ArrayList<ModeloPedido> getArrayPedido() {
+        return arrayPedido;
+    }
+
+    public static void setArrayPedido(ArrayList<ModeloPedido> arrayPedido) {
+        ModeloMesa.arrayPedido = arrayPedido;
+    }
+
     public ModeloMesa(String idMesa, int numeroMesa, boolean estado, int capacidad) {
         this.idMesa = idMesa;
         this.numeroMesa = numeroMesa;

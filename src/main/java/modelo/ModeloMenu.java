@@ -16,6 +16,14 @@ public class ModeloMenu {
     private String descrpcion;
     private static ArrayList<ModeloProducto_Menu> arrayProducto_Menu = new ArrayList<>();
 
+    public static ArrayList<ModeloProducto_Menu> getArrayProducto_Menu() {
+        return arrayProducto_Menu;
+    }
+
+    public static void setArrayProducto_Menu(ArrayList<ModeloProducto_Menu> arrayProducto_Menu) {
+        ModeloMenu.arrayProducto_Menu = arrayProducto_Menu;
+    }
+
     public ModeloMenu(String idMenu, String descrpcion) {
         this.idMenu = idMenu;
         this.descrpcion = descrpcion;

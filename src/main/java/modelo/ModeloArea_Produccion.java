@@ -19,6 +19,14 @@ public class ModeloArea_Produccion {
     private String idEmpleado;
     private static ArrayList<ModeloProducto> arrayProducto = new ArrayList<>();
 
+    public static ArrayList<ModeloProducto> getArrayProducto() {
+        return arrayProducto;
+    }
+
+    public static void setArrayProducto(ArrayList<ModeloProducto> arrayProducto) {
+        ModeloArea_Produccion.arrayProducto = arrayProducto;
+    }
+
     public ModeloArea_Produccion(String idProduccion, String nombre, String descripcion, String especializacion, String idEmpleado) {
         this.idProduccion = idProduccion;
         this.nombre = nombre;

@@ -20,6 +20,30 @@ public class ModeloEmpleado {
     private static ArrayList<ModeloTelefono> arrayTelefono = new ArrayList<>();
     private static ArrayList<ModeloCorreo>  arrayCorreo = new ArrayList<>();
     private static ArrayList<ModeloPedido>  arrayPedido = new ArrayList<>();
+
+    public static ArrayList<ModeloTelefono> getArrayTelefono() {
+        return arrayTelefono;
+    }
+
+    public static void setArrayTelefono(ArrayList<ModeloTelefono> arrayTelefono) {
+        ModeloEmpleado.arrayTelefono = arrayTelefono;
+    }
+
+    public static ArrayList<ModeloCorreo> getArrayCorreo() {
+        return arrayCorreo;
+    }
+
+    public static void setArrayCorreo(ArrayList<ModeloCorreo> arrayCorreo) {
+        ModeloEmpleado.arrayCorreo = arrayCorreo;
+    }
+
+    public static ArrayList<ModeloPedido> getArrayPedido() {
+        return arrayPedido;
+    }
+
+    public static void setArrayPedido(ArrayList<ModeloPedido> arrayPedido) {
+        ModeloEmpleado.arrayPedido = arrayPedido;
+    }
     
 
     public ModeloEmpleado(String idEmpleado, String dui, String nombre, String apellido, String idUsuario, String idRol) {

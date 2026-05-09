@@ -21,6 +21,22 @@ public class ModeloPedido {
     private String idEmpleado;
     private static ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido = new ArrayList<>();
 
+    public String getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(String idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public static ArrayList<ModeloProducto_Pedido> getArrayProducto_Pedido() {
+        return arrayProducto_Pedido;
+    }
+
+    public static void setArrayProducto_Pedido(ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido) {
+        ModeloPedido.arrayProducto_Pedido = arrayProducto_Pedido;
+    }
+
     public ModeloPedido(String idPedido, LocalDate fecha, double total, boolean estado, String idMesa, String idEmpleado) {
         this.idPedido = idPedido;
         this.fecha = fecha;

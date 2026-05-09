@@ -11,12 +11,21 @@ import java.util.ArrayList;
  * @author ayala
  */
 public class AreaProduccionModelo {
-    private int idProduccion; 
-    private String nombre; 
-    private String descripcion; 
-    private String especializacion; 
-    private int idEmpleado; 
+
+    private int idProduccion;
+    private String nombre;
+    private String descripcion;
+    private String especializacion;
+    private int idEmpleado;
     private static ArrayList<ModeloEmpleado> arrayEmpleado = new ArrayList<>();
+
+    public static ArrayList<ModeloEmpleado> getArrayEmpleado() {
+        return arrayEmpleado;
+    }
+
+    public static void setArrayEmpleado(ArrayList<ModeloEmpleado> arrayEmpleado) {
+        AreaProduccionModelo.arrayEmpleado = arrayEmpleado;
+    }
 
     public AreaProduccionModelo() {
     }
@@ -60,7 +69,5 @@ public class AreaProduccionModelo {
     public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
-    
-    
-    
+
 }
