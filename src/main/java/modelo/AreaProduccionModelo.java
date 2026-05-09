@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ayala
@@ -14,6 +16,7 @@ public class AreaProduccionModelo {
     private String descripcion; 
     private String especializacion; 
     private int idEmpleado; 
+    private static ArrayList<ModeloEmpleado> arrayEmpleado = new ArrayList<>();
 
     public AreaProduccionModelo() {
     }

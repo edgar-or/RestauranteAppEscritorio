@@ -4,13 +4,17 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author renec
  */
 public class ModeloMenu {
+
     private String idMenu;
     private String descrpcion;
+    private static ArrayList<ModeloProducto_Menu> arrayProducto_Menu = new ArrayList<>();
 
     public ModeloMenu(String idMenu, String descrpcion) {
         this.idMenu = idMenu;
@@ -32,6 +36,5 @@ public class ModeloMenu {
     public void setDescrpcion(String descrpcion) {
         this.descrpcion = descrpcion;
     }
-    
-    
+
 }

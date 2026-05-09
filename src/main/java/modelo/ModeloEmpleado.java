@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author renec
@@ -15,6 +17,10 @@ public class ModeloEmpleado {
     private String apellido;
     private String idUsuario;
     private String idRol;
+    private static ArrayList<ModeloTelefono> arrayTelefono = new ArrayList<>();
+    private static ArrayList<ModeloCorreo>  arrayCorreo = new ArrayList<>();
+    private static ArrayList<ModeloPedido>  arrayPedido = new ArrayList<>();
+    
 
     public ModeloEmpleado(String idEmpleado, String dui, String nombre, String apellido, String idUsuario, String idRol) {
         this.idEmpleado = idEmpleado;

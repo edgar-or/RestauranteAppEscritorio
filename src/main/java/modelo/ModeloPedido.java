@@ -5,18 +5,21 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author renec
  */
 public class ModeloPedido {
+
     private String idPedido;
     private LocalDate fecha;
     private double total;
     private boolean estado;
     private String idMesa;
     private String idEmpleado;
+    private static ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido = new ArrayList<>();
 
     public ModeloPedido(String idPedido, LocalDate fecha, double total, boolean estado, String idMesa, String idEmpleado) {
         this.idPedido = idPedido;
@@ -24,7 +27,7 @@ public class ModeloPedido {
         this.total = total;
         this.estado = estado;
         this.idMesa = idMesa;
-        this.idEmpleado=idEmpleado;
+        this.idEmpleado = idEmpleado;
     }
 
     public String getIdPedido() {
@@ -66,6 +69,5 @@ public class ModeloPedido {
     public void setIdMesa(String idMesa) {
         this.idMesa = idMesa;
     }
-    
-    
+
 }

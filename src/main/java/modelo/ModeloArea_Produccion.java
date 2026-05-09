@@ -4,17 +4,20 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author renec
  */
 public class ModeloArea_Produccion {
-    
+
     private String idProduccion;
     private String nombre;
     private String descripcion;
     private String especializacion;
     private String idEmpleado;
+    private static ArrayList<ModeloProducto> arrayProducto = new ArrayList<>();
 
     public ModeloArea_Produccion(String idProduccion, String nombre, String descripcion, String especializacion, String idEmpleado) {
         this.idProduccion = idProduccion;
@@ -63,6 +66,5 @@ public class ModeloArea_Produccion {
     public void setIdEmpleado(String idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
-    
-    
+
 }
