@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import vista.VistaAgregarPedido;
 import vista.VistaLogin;
 import vista.VistaPrincipalMesero;
+import vista.VistaVerPedido;
 
 /**
  *
@@ -44,6 +45,12 @@ public class ControladorMesero {
         VistaLogin login= new VistaLogin();
         LoginControlador ctrl= new LoginControlador();
         ctrl.iniciar();
+        });
+        
+        vistaPricipal.btnVerPedido.addActionListener(e->{
+            VistaVerPedido vista = new VistaVerPedido();
+            new ControladorVerPedido(vista);
+        
         });
     }
     

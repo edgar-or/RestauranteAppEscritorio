@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import vista.VistaAgregarPedido;
 import vista.VistaLogin;
 import vista.VistaPrincipalMesero;
+import vista.VistaProductos;
 
 /**
  *
@@ -18,6 +19,7 @@ public class ControladorAgregarPedido {
 
     private VistaAgregarPedido vistaAgregar;
     private VistaPrincipalMesero principal;
+    private VistaProductos visProducto;
 
     public ControladorAgregarPedido(VistaPrincipalMesero principal) {
         this.principal = principal;
@@ -28,14 +30,30 @@ public class ControladorAgregarPedido {
     
 
      public void iniciar(){
+         vistaAgregar.setLocationRelativeTo(null);
         vistaAgregar.setVisible(true);
+                
+
     }
     private void eventos() {
+        
+        vistaAgregar.btnProductos.addActionListener(e -> {
+
+            // Evita que se abran múltiples ventanas
+            if (visProducto == null || !visProducto.isDisplayable()) {
+                visProducto = new VistaProductos();
+            }
+
+            visProducto.setLocationRelativeTo(null);
+            visProducto.setVisible(true);
+        });
+
         vistaAgregar.btnCerrar.addActionListener(e->{
         vistaAgregar.dispose();
     
         });
 
     }
+    
 
 }
