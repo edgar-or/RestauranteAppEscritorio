@@ -45,10 +45,12 @@ vista\VistaCocina.class
 modelo\ModeloPedido.class
 vista\VistaCocina$3.class
 vista\VistaVerPedido.class
+dao\GenerarPedidoDao.class
 dao\conexion\Conexion.class
 dao\EmpleadoDao.class
 controlador\ControladorBar.class
 vista\VistaCocina$1.class
+vista\VistaProductos.class
 vista\VistaGestionMenu.class
 controlador\ControladorPrincipal.class
 modelo\UsuarioModelo.class
@@ -56,6 +58,5 @@ modelo\ModeloProducto_Menu.class
 vista\VistaLogin.class
 controlador\ControladorEmpleado.class
 dao\dto\PedidoPanaderiaDto.class
-vista\VistaPrincipalMesero$1.class
 dao\UsuarioDao.class
 modelo\ModeloTelefono.class

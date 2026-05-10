@@ -4,8 +4,11 @@
  */
 package controlador;
 
+import dao.GenerarPedidoDao;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import modelo.ModeloMesa;
 import vista.VistaAgregarPedido;
 import vista.VistaLogin;
 import vista.VistaPrincipalMesero;
@@ -17,6 +20,7 @@ import vista.VistaPrincipalMesero;
 public class ControladorMesero {
     private VistaPrincipalMesero vistaPricipal; 
     private ControladorAgregarPedido controlAgregarPedido;
+    
 
     public ControladorMesero(VistaPrincipalMesero vistaPrincipal) {
         this.vistaPricipal = vistaPrincipal;
@@ -46,5 +50,8 @@ public class ControladorMesero {
         ctrl.iniciar();
         });
     }
+    
+    
+     
     
 }

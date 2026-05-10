@@ -4,8 +4,11 @@
  */
 package controlador;
 
+import dao.GenerarPedidoDao;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import modelo.ModeloMesa;
 import vista.VistaAgregarPedido;
 import vista.VistaLogin;
 import vista.VistaPrincipalMesero;
@@ -18,24 +21,45 @@ public class ControladorAgregarPedido {
 
     private VistaAgregarPedido vistaAgregar;
     private VistaPrincipalMesero principal;
+    private GenerarPedidoDao genPedido;
 
     public ControladorAgregarPedido(VistaPrincipalMesero principal) {
+        this.genPedido = new GenerarPedidoDao();
+
         this.principal = principal;
         this.vistaAgregar = new VistaAgregarPedido();
         eventos();
     }
 
-    
-
-     public void iniciar(){
+    public void iniciar() {
         vistaAgregar.setVisible(true);
+        llenarComboMesas(); 
     }
+
     private void eventos() {
-        vistaAgregar.btnCerrar.addActionListener(e->{
-        vistaAgregar.dispose();
-    
+        vistaAgregar.btnCerrar.addActionListener(e -> {
+            vistaAgregar.dispose();
+
         });
 
+    }
+
+    public void llenarComboMesas() {
+
+        try {
+
+            ArrayList<ModeloMesa> listaMesas = genPedido.llenarComboMesa();
+            vistaAgregar.comboMesa.removeAllItems();
+
+            for (ModeloMesa mesa : listaMesas) {
+
+                vistaAgregar.comboMesa.addItem(mesa);
+               
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

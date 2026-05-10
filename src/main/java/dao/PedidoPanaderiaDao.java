@@ -17,12 +17,19 @@ import java.util.List;
  */
 public class PedidoPanaderiaDao {
 
-    private static final String SELECT_PEDIDOS_BAR
-            = "select producto.nombre as nombreProducto, producto_pedido.cantidad as cantidad, producto.descripcion as descripcion, producto_pedido.estado as estado "
-            + "from producto "
-            + "inner join producto_pedido on producto_pedido.idproducto  = producto.idproducto "
-            + "inner join area_produccion on area_produccion.idproduccion = producto.idproduccion "
-            + "where area_produccion.nombre = 'Panaderia' and producto_pedido.estado = false ";
+//    private static final String SELECT_PEDIDOS_BAR
+//            = "select producto.nombre as nombreProducto, producto_pedido.cantidad as cantidad, producto.descripcion as descripcion, producto_pedido.estado as estado "
+//            + "from producto "
+//            + "inner join producto_pedido on producto_pedido.idproducto  = producto.idproducto "
+//            + "inner join area_produccion on area_produccion.idproduccion = producto.idproduccion "
+//            +" inner join pedido on pedido.idpedido = producto_pedido.idpedido "
+//            + "where area_produccion.nombre = 'Panaderia' and pedido.estado = false ";
+    private static String SELECT_PEDIDOS_BAR = "select producto.nombre as nombreProducto, producto.descripcion as descripcion, pedido.estado as estado"
+            + " from producto "
+            + " inner join producto_pedido on producto_pedido.idproducto  = producto.idproducto "
+            + " inner join area_produccion on area_produccion.idproduccion = producto.idproduccion "
+            + " inner join pedido on pedido.idpedido = producto_pedido.idpedido "
+            + " where area_produccion.nombre = 'Panaderia' and pedido.estado = false ";
 
     public List<PedidoPanaderiaDto> listar() throws Exception {
 
@@ -37,7 +44,7 @@ public class PedidoPanaderiaDao {
                 PedidoPanaderiaDto dto = new PedidoPanaderiaDto();
 
                 dto.setNombreProducto(rs.getString("nombreProducto"));
-                dto.setCantidad(rs.getInt("cantidad"));
+                dto.setCantidad(4);
                 dto.setDescripcion(rs.getString("descripcion"));
                 dto.setEstado(rs.getBoolean("estado"));
 
