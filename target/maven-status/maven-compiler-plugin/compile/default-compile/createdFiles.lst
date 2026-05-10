@@ -46,6 +46,7 @@ vista\VistaCocina.class
 modelo\ModeloPedido.class
 vista\VistaCocina$3.class
 vista\VistaVerPedido.class
+dao\GenerarPedidoDao.class
 dao\conexion\Conexion.class
 dao\EmpleadoDao.class
 controlador\ControladorBar.class

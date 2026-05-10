@@ -20,18 +20,26 @@ public class Conexion {
 //    private static final String URL = "jdbc:postgresql://localhost:5432/RestauranteAppEscritorio";
 //    private static final String USER = "postgres";
 //    private static final String PASS = "eaadmin76rag19$";
+<<<<<<< HEAD
 //IRVIN
 //    private static final String URL = "jdbc:postgresql://localhost:5432/restaurante";
 //    private static final String USER = "postgres";
 //    private static final String PASS = "6074";
     
+=======
+////IRVIN
+//    private static final String URL = "jdbc:postgresql://localhost:5432/restaurante";
+//    private static final String USER = "postgres";
+//    private static final String PASS = "6074";
+//    
+>>>>>>> 875fe59f69adddb4a823db55dc798a4795a4e3e5
 //    private static final String URL = "jdbc:postgresql://localhost:5432/RestauranteAppEscritorio";
 //    private static final String USER = "postgres";
 //    private static final String PASS = "eaadmin76rag19$";
 
-//    private static final String URL = "jdbc:postgresql://localhost:5432/RESTAURANTEAPPESC";
-//    private static final String USER = "postgres";
-//    private static final String PASS = "eaadmin76rag19$";
+    private static final String URL = "jdbc:postgresql://localhost:5432/RESTAURANTEAPPESC";
+    private static final String USER = "postgres";
+    private static final String PASS = "eaadmin76rag19$";
     
     //Emilio
 //    private static final String URL = "jdbc:postgresql://localhost:5432/APE";
