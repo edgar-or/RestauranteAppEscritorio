@@ -74,7 +74,7 @@ public class LoginControlador {
 
                 if (area.getNombre().equalsIgnoreCase("mesero")) {
                     visMesero = new VistaPrincipalMesero();
-                    controladorMesero = new ControladorMesero(visMesero);
+                    controladorMesero = new ControladorMesero(visMesero, res.getEmpleado());
                     controladorMesero.iniciar();
                     cerrar();
                 } else if (area.getNombre().equalsIgnoreCase("cocina")) {
