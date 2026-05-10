@@ -39,6 +39,7 @@ vista\VistaPanaderia$3.class
 modelo\ModeloRecibo.class
 controlador\LoginControlador.class
 com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.class
+controlador\ControladorVerPedido.class
 vista\VistaAgregarPedido.class
 modelo\ModeloCorreo.class
 vista\VistaCocina.class
