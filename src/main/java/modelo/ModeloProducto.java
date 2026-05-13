@@ -24,6 +24,11 @@ public class ModeloProducto {
         return arrayProducto_Menu;
     }
 
+    public ModeloProducto() {
+    }
+    
+    
+
     public static void setArrayProducto_Menu(ArrayList<ModeloProducto_Menu> arrayProducto_Menu) {
         ModeloProducto.arrayProducto_Menu = arrayProducto_Menu;
     }

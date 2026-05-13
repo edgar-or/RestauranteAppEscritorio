@@ -29,6 +29,8 @@ public class ControladorAgregarPedido {
 
     private GenerarPedidoDao genPedido;
     private ModeloEmpleado empleado;
+    
+    private ControladorAgregarProductos contrlAgregarProduct;
 
 
     public ControladorAgregarPedido(VistaPrincipalMesero principal, ModeloEmpleado empleado) {
@@ -57,6 +59,9 @@ public class ControladorAgregarPedido {
             // Evita que se abran múltiples ventanas
             if (visProducto == null || !visProducto.isDisplayable()) {
                 visProducto = new VistaProductos();
+                
+                ControladorAgregarProductos controlerAgregar = new ControladorAgregarProductos(visProducto); 
+                
             }
 
             visProducto.setLocationRelativeTo(null);

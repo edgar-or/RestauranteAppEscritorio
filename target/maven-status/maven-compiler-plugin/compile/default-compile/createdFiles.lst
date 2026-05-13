@@ -39,6 +39,7 @@ vista\VistaPanaderia$3.class
 modelo\ModeloRecibo.class
 controlador\LoginControlador.class
 com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.class
+dao\ProductosParaPedidosDao.class
 controlador\ControladorVerPedido.class
 vista\VistaAgregarPedido.class
 modelo\ModeloCorreo.class
@@ -60,4 +61,6 @@ vista\VistaLogin.class
 controlador\ControladorEmpleado.class
 dao\dto\PedidoPanaderiaDto.class
 dao\UsuarioDao.class
+vista\VistaProductos$1.class
 modelo\ModeloTelefono.class
+controlador\ControladorAgregarProductos.class
