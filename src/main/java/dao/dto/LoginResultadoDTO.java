@@ -5,6 +5,7 @@
 package dao.dto;
 
 import modelo.AreaProduccionModelo;
+import modelo.ModeloEmpleado;
 import modelo.RolModelo;
 import modelo.UsuarioModelo;
 
@@ -16,6 +17,15 @@ public class LoginResultadoDTO {
      private UsuarioModelo usuario;
     private RolModelo rol;
     private AreaProduccionModelo area; 
+    private ModeloEmpleado empleado; 
+
+    public ModeloEmpleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(ModeloEmpleado empleado) {
+        this.empleado = empleado;
+    }
 
     public UsuarioModelo getUsuario() {
         return usuario;

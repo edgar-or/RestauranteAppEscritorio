@@ -43,11 +43,18 @@ controlador\mesero\ControladorTodosPedidos.class
 modelo\ModeloRecibo.class
 controlador\LoginControlador.class
 com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.class
+dao\ProductosParaPedidosDao.class
+controlador\ControladorVerPedido.class
 vista\VistaAgregarPedido.class
 modelo\ModeloCorreo.class
 vista\VistaCocina.class
 modelo\ModeloPedido.class
 vista\VistaCocina$3.class
+<<<<<<< HEAD
+=======
+vista\VistaVerPedido.class
+dao\GenerarPedidoDao.class
+>>>>>>> adabbeaeb84176d6c423824d43c09b6d0904257f
 dao\conexion\Conexion.class
 dao\EmpleadoDao.class
 controlador\ControladorBar.class
@@ -61,7 +68,13 @@ modelo\ModeloProducto_Menu.class
 vista\VistaLogin.class
 controlador\ControladorEmpleado.class
 dao\dto\PedidoPanaderiaDto.class
+<<<<<<< HEAD
 vista\VistaGenerarPago.class
 dao\UsuarioDao.class
 vista\VistaTodosPedidos.class
+=======
+dao\UsuarioDao.class
+vista\VistaProductos$1.class
+>>>>>>> adabbeaeb84176d6c423824d43c09b6d0904257f
 modelo\ModeloTelefono.class
+controlador\ControladorAgregarProductos.class

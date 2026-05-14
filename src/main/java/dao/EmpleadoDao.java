@@ -17,10 +17,17 @@ import java.util.List;
  * @author ayala
  */
 public class EmpleadoDao {
+        private static String INSERT_USUARIO = "INSERT INTO usuario(usuario, contrasena) VALUES (?, ?) RETURNING idusuario"; 
+        private static String INSERT_EMPLEADO =  "INSERT INTO empleado(dui, nombre, apellido, idusuario, idrol) VALUES (?, ?, ?, ?, ?)"; 
+        private static   String LISTAR_EMPLEADOS =
+        "SELECT e.idempleado, e.dui, e.nombre, e.apellido, u.idusuario, u.usuario, u.contrasena, r.idrol, r.rol FROM empleado e"
+                + " INNER JOIN usuario u ON e.idusuario = u.idusuario INNER JOIN rol r ON e.idrol = r.idrol";
+        
 
     public boolean insertar(EmpleadoDTO dto) throws Exception {
 
         Connection conn = Conexion.getConnection();
+        
 
         try {
             conn.setAutoCommit(false);
@@ -32,7 +39,7 @@ public class EmpleadoDao {
 
             //Insertar usuario
             PreparedStatement psUser = conn.prepareStatement(
-                    "INSERT INTO usuario(usuario, contrasena) VALUES (?, ?) RETURNING idusuario"
+                    INSERT_USUARIO
             );
 
             psUser.setString(1, usuarioGen);
@@ -50,7 +57,7 @@ public class EmpleadoDao {
 
             //Insertar empleado
             PreparedStatement psEmp = conn.prepareStatement(
-                    "INSERT INTO empleado(dui, nombre, apellido, idusuario, idrol) VALUES (?, ?, ?, ?, ?)"
+                    INSERT_EMPLEADO
             );
 
             psEmp.setString(1, dto.getEmpleado().getDui());
@@ -92,16 +99,10 @@ public class EmpleadoDao {
     List<EmpleadoDTO> lista = new ArrayList<>();
     Connection conn = Conexion.getConnection();
 
-    String sql =
-        "SELECT e.idempleado, e.dui, e.nombre, e.apellido, " +
-        "u.idusuario, u.usuario, u.contrasena, " +
-        "r.idrol, r.rol " +
-        "FROM empleado e " +
-        "INNER JOIN usuario u ON e.idusuario = u.idusuario " +
-        "INNER JOIN rol r ON e.idrol = r.idrol";
+  
 
     try {
-        PreparedStatement ps = conn.prepareStatement(sql);
+        PreparedStatement ps = conn.prepareStatement(LISTAR_EMPLEADOS);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {

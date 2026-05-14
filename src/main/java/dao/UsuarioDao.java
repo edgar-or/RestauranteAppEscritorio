@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import modelo.AreaProduccionModelo;
+import modelo.ModeloEmpleado;
 import modelo.RolModelo;
 import modelo.UsuarioModelo;
 
@@ -22,7 +23,7 @@ public class UsuarioDao {
     public LoginResultadoDTO validar(String usuario, String password) {
         UsuarioModelo u = null;
         LoginResultadoDTO resultado = null;
-        String consulta = "SELECT u.*, r.idRol, r.rol AS nombreRol, ap.nombre as nombreArea"
+        String consulta = "SELECT u.*, r.idRol, r.rol AS nombreRol, ap.nombre as nombreArea, e.idempleado as idEmpleado"
                 + " FROM usuario u"
                 + " LEFT JOIN empleado e ON u.idUsuario = e.idUsuario"
                 + " LEFT JOIN rol r ON e.idRol = r.idRol"
@@ -51,9 +52,14 @@ public class UsuarioDao {
                 AreaProduccionModelo area = new AreaProduccionModelo(); 
                 area.setNombre(rs.getString("nombreArea"));
                 
+                ModeloEmpleado empleado = new ModeloEmpleado(); 
+                
+                empleado.setIdEmpleado(rs.getString("idEmpleado"));
+                
                 resultado.setUsuario(u);
                 resultado.setRol(rol);
                 resultado.setArea(area);
+                resultado.setEmpleado(empleado);
 
             }
 

@@ -25,6 +25,11 @@ public class ModeloMesa {
         ModeloMesa.arrayPedido = arrayPedido;
     }
 
+    public ModeloMesa() {
+    }
+    
+    
+
     public ModeloMesa(String idMesa, int numeroMesa, boolean estado, int capacidad) {
         this.idMesa = idMesa;
         this.numeroMesa = numeroMesa;
@@ -63,5 +68,12 @@ public class ModeloMesa {
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
+
+    @Override
+    public String toString() {
+        return "Mesa: " + numeroMesa;
+    }
+    
+    
     
 }
