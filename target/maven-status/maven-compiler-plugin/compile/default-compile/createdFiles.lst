@@ -6,11 +6,8 @@ vista\VistaAgregarPedido$1.class
 vista\VistaLogin$1.class
 controlador\mesero\ControladorMesero.class
 dao\PedidoPanaderiaDao.class
-<<<<<<< HEAD
-vista\VistaProductos$3.class
-=======
 vista\VistaVerDetallePedido$1.class
->>>>>>> aba91e324f6db85bc3a3d550b75a877cfda42aa5
+vista\VistaProductos$3.class
 dao\dto\LoginResultadoDTO.class
 modelo\ModeloMenu.class
 vista\VistaPanaderia$1.class
@@ -55,6 +52,7 @@ modelo\ModeloCorreo.class
 vista\VistaCocina.class
 modelo\ModeloPedido.class
 vista\VistaCocina$3.class
+vista\VistaVerPedido.class
 dao\GenerarPedidoDao.class
 dao\conexion\Conexion.class
 dao\EmpleadoDao.class
@@ -62,11 +60,8 @@ controlador\ControladorBar.class
 vista\VistaCocina$1.class
 vista\VistaProductos.class
 vista\VistaGestionMenu.class
-<<<<<<< HEAD
 vista\VistaProductos$4.class
-=======
 controlador\mesero\ControladorVerDetallePedido.class
->>>>>>> aba91e324f6db85bc3a3d550b75a877cfda42aa5
 controlador\ControladorPrincipal.class
 modelo\UsuarioModelo.class
 modelo\ModeloProducto_Menu.class
