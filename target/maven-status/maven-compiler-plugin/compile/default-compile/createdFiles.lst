@@ -5,6 +5,7 @@ modelo\RolModelo.class
 vista\VistaAgregarPedido$1.class
 vista\VistaLogin$1.class
 dao\PedidoPanaderiaDao.class
+vista\VistaProductos$3.class
 dao\dto\LoginResultadoDTO.class
 modelo\ModeloMenu.class
 vista\VistaPanaderia$1.class
@@ -26,6 +27,7 @@ controlador\ControladorAgregarPedido.class
 controlador\ControladorCocina.class
 vista\VistaGestionUsuarios$1.class
 vista\VistaPrincipal.class
+vista\VistaProductos$2.class
 dao\dto\PedidoCocinaDto.class
 vista\VistaGestionUsuarios.class
 vista\VistaGestionEmpleados.class
@@ -39,6 +41,7 @@ vista\VistaPanaderia$3.class
 modelo\ModeloRecibo.class
 controlador\LoginControlador.class
 com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.class
+dao\ProductosParaPedidosDao.class
 controlador\ControladorVerPedido.class
 vista\VistaAgregarPedido.class
 modelo\ModeloCorreo.class
@@ -53,6 +56,7 @@ controlador\ControladorBar.class
 vista\VistaCocina$1.class
 vista\VistaProductos.class
 vista\VistaGestionMenu.class
+vista\VistaProductos$4.class
 controlador\ControladorPrincipal.class
 modelo\UsuarioModelo.class
 modelo\ModeloProducto_Menu.class
@@ -60,4 +64,6 @@ vista\VistaLogin.class
 controlador\ControladorEmpleado.class
 dao\dto\PedidoPanaderiaDto.class
 dao\UsuarioDao.class
+vista\VistaProductos$1.class
 modelo\ModeloTelefono.class
+controlador\ControladorAgregarProductos.class

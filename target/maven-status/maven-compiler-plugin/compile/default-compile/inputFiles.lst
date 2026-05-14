@@ -1,5 +1,6 @@
 C:\RestauranteAppEscritorio\src\main\java\com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.java
 C:\RestauranteAppEscritorio\src\main\java\controlador\ControladorAgregarPedido.java
+C:\RestauranteAppEscritorio\src\main\java\controlador\ControladorAgregarProductos.java
 C:\RestauranteAppEscritorio\src\main\java\controlador\ControladorBar.java
 C:\RestauranteAppEscritorio\src\main\java\controlador\ControladorCocina.java
 C:\RestauranteAppEscritorio\src\main\java\controlador\ControladorEmpleado.java
@@ -19,6 +20,7 @@ C:\RestauranteAppEscritorio\src\main\java\dao\EmpleadoDao.java
 C:\RestauranteAppEscritorio\src\main\java\dao\GenerarPedidoDao.java
 C:\RestauranteAppEscritorio\src\main\java\dao\PedidoBarDao.java
 C:\RestauranteAppEscritorio\src\main\java\dao\PedidoPanaderiaDao.java
+C:\RestauranteAppEscritorio\src\main\java\dao\ProductosParaPedidosDao.java
 C:\RestauranteAppEscritorio\src\main\java\dao\UsuarioDao.java
 C:\RestauranteAppEscritorio\src\main\java\modelo\AreaProduccionModelo.java
 C:\RestauranteAppEscritorio\src\main\java\modelo\ModeloArea_Produccion.java

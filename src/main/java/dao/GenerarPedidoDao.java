@@ -19,7 +19,8 @@ import modelo.ModeloMesa;
  */
 public class GenerarPedidoDao {
     
-    private static String LISTAR_MESAS = "select numeromesa from mesa m"; 
+    private static String LISTAR_MESAS = "select idmesa, numeromesa from mesa m"; 
+    private static String INSERTAR_PEDIDO = "INSERT INTO public.pedido (fecha, total, estado, idmesa, idempleado) VALUES( CURRENT_DATE, 0, false, ?, ?)"; 
     
     public ArrayList<ModeloMesa> llenarComboMesa () throws Exception{
                 List<ModeloMesa> listaMesas = new ArrayList<>();
@@ -32,6 +33,7 @@ public class GenerarPedidoDao {
             while (rs.next()) {
                 ModeloMesa mesa = new ModeloMesa();
 
+                mesa.setIdMesa(rs.getString("idmesa"));
                 mesa.setNumeroMesa(rs.getInt("numeromesa"));
                 
 
@@ -48,5 +50,28 @@ public class GenerarPedidoDao {
         
         
     }
+    
+    public boolean registrarPedido(int idMesa, int idEmpleado) throws Exception {
+
+    Connection conn = Conexion.getConnection();
+
+    try {
+
+        PreparedStatement ps = conn.prepareStatement(INSERTAR_PEDIDO);
+
+        ps.setInt(1, idMesa);
+        ps.setInt(2, idEmpleado);
+
+        int filasAfectadas = ps.executeUpdate();
+
+        ps.close();
+
+        return filasAfectadas > 0;
+
+    } finally {
+
+        conn.close();
+    }
+}
     
 }

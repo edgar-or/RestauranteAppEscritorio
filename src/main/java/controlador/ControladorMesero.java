@@ -8,6 +8,7 @@ import dao.GenerarPedidoDao;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import modelo.ModeloEmpleado;
 import modelo.ModeloMesa;
 import vista.VistaAgregarPedido;
 import vista.VistaLogin;
@@ -19,36 +20,39 @@ import vista.VistaVerPedido;
  * @author ayala
  */
 public class ControladorMesero {
-    private VistaPrincipalMesero vistaPricipal; 
-    private ControladorAgregarPedido controlAgregarPedido;
-    
 
-    public ControladorMesero(VistaPrincipalMesero vistaPrincipal) {
+    private VistaPrincipalMesero vistaPricipal;
+    private ControladorAgregarPedido controlAgregarPedido;
+    private ModeloEmpleado empleadoModelo;
+
+    public ControladorMesero(VistaPrincipalMesero vistaPrincipal, ModeloEmpleado empleado) {
         this.vistaPricipal = vistaPrincipal;
-        this.controlAgregarPedido = new ControladorAgregarPedido(vistaPrincipal);
-        vistaPrincipal.btnAgregarPedido.addActionListener(e ->{
+        this.empleadoModelo = empleado;
+
+        this.controlAgregarPedido = new ControladorAgregarPedido(vistaPrincipal, empleado );
+        vistaPrincipal.btnAgregarPedido.addActionListener(e -> {
             controlAgregarPedido.iniciar();
         });
         eventos();
     }
-    
-    public void iniciar(){
+
+    public void iniciar() {
         vistaPricipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         vistaPricipal.setExtendedState(JFrame.MAXIMIZED_BOTH);
         vistaPricipal.setVisible(true);
-        
+
         
         
     }
 
     private void eventos() {
-             
-        vistaPricipal.btnCerrarSesion.addActionListener(e->{
-        vistaPricipal.dispose();
-        
-        VistaLogin login= new VistaLogin();
-        LoginControlador ctrl= new LoginControlador();
-        ctrl.iniciar();
+
+        vistaPricipal.btnCerrarSesion.addActionListener(e -> {
+            vistaPricipal.dispose();
+
+            VistaLogin login = new VistaLogin();
+            LoginControlador ctrl = new LoginControlador();
+            ctrl.iniciar();
         });
         
         vistaPricipal.btnVerPedido.addActionListener(e->{
@@ -57,7 +61,7 @@ public class ControladorMesero {
         
         });
     }
-    
+
     
      
     
