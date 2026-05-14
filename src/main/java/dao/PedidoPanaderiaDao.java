@@ -24,7 +24,8 @@ public class PedidoPanaderiaDao {
 //            + "inner join area_produccion on area_produccion.idproduccion = producto.idproduccion "
 //            +" inner join pedido on pedido.idpedido = producto_pedido.idpedido "
 //            + "where area_produccion.nombre = 'Panaderia' and pedido.estado = false ";
-    private static String SELECT_PEDIDOS_BAR = "select producto.nombre as nombreProducto, producto.descripcion as descripcion, pedido.estado as estado"
+    
+    private static String SELECT_PEDIDOS_PANA = "select producto.nombre as nombreProducto, producto.descripcion as descripcion, pedido.estado as estado"
             + " from producto "
             + " inner join producto_pedido on producto_pedido.idproducto  = producto.idproducto "
             + " inner join area_produccion on area_produccion.idproduccion = producto.idproduccion "
@@ -37,7 +38,7 @@ public class PedidoPanaderiaDao {
         Connection conn = Conexion.getConnection();
 
         try {
-            PreparedStatement ps = conn.prepareStatement(SELECT_PEDIDOS_BAR);
+            PreparedStatement ps = conn.prepareStatement(SELECT_PEDIDOS_PANA);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

@@ -19,7 +19,8 @@ import modelo.ModeloProducto;
 public class ProductosParaPedidosDao {
     
     private static String LISTAR_BEBIDAS = "select p.nombre as nombre , p.descripcion as descripcion , p.precio  as precio from producto p where p.idproduccion = 3"; 
-    
+    private static String LISTAR_POSTRES="SELECT nombre, descripcion,precio FROM producto WHERE idproduccion = 2";
+    private static String LISTAR_PLATILLOS="SELECT nombre, descripcion,precio FROM producto WHERE idproduccion = 1";
     public List<ModeloProducto> listarBebidas() throws Exception {
 
         List<ModeloProducto> lista = new ArrayList<>();
@@ -47,8 +48,65 @@ public class ProductosParaPedidosDao {
         }
 
         return lista;
+        
+        
     }
     
-    
-    
+     public List<ModeloProducto> listarPostres() throws Exception {
+
+        List<ModeloProducto> lista = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(LISTAR_POSTRES);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ModeloProducto postre = new ModeloProducto();
+
+                postre.setNombre(rs.getString("nombre"));
+                postre.setDescripcion(rs.getString("descripcion"));
+                postre.setPrecio(rs.getDouble("precio"));
+
+                lista.add(postre);
+            }
+
+            rs.close();
+            ps.close();
+
+        } finally {
+            conn.close();
+        }
+
+        return lista;
+     }
+     
+     public List<ModeloProducto> listarPlatillos() throws Exception {
+
+        List<ModeloProducto> lista = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(LISTAR_PLATILLOS);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ModeloProducto platillos = new ModeloProducto();
+
+                platillos.setNombre(rs.getString("nombre"));
+                platillos.setDescripcion(rs.getString("descripcion"));
+                platillos.setPrecio(rs.getDouble("precio"));
+
+                lista.add(platillos);
+            }
+
+            rs.close();
+            ps.close();
+
+        } finally {
+            conn.close();
+        }
+
+        return lista;
+     }
 }

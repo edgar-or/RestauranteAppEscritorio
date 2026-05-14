@@ -25,13 +25,12 @@ public class ControladorAgregarPedido {
 
     private VistaAgregarPedido vistaAgregar;
     private VistaPrincipalMesero principal;
-
     private VistaProductos visProducto;
-
     private GenerarPedidoDao genPedido;
     private ModeloEmpleado empleado;
 
     private ControladorAgregarProductos contrlAgregarProduct;
+
 
     public ControladorAgregarPedido(VistaPrincipalMesero principal, ModeloEmpleado empleado) {
         this.genPedido = new GenerarPedidoDao();
@@ -40,18 +39,35 @@ public class ControladorAgregarPedido {
         this.principal = principal;
         this.vistaAgregar = new VistaAgregarPedido();
         eventos();
+        onEvento();
     }
 
-    public void iniciar() {
-        vistaAgregar.setLocationRelativeTo(null);
-        vistaAgregar.setVisible(true);
+    
 
-        llenarComboMesas();
+                
+
+
+    public void iniciar() {
+        
+    
+        vistaAgregar.setVisible(true);
+                vistaAgregar.setLocationRelativeTo(null);
+
+        llenarComboMesas(); 
 
     }
 
     private void eventos() {
 
+        llenarComboMesas(); 
+
+
+    }
+
+
+    private void onEvento() {
+
+        
         vistaAgregar.btnProductos.addActionListener(e -> {
 
             // Evita que se abran múltiples ventanas
@@ -69,6 +85,10 @@ public class ControladorAgregarPedido {
         vistaAgregar.btnCerrar.addActionListener(e -> {
             vistaAgregar.dispose();
         });
+
+    
+
+        
 
         vistaAgregar.btnCerrar.addActionListener(e -> {
             vistaAgregar.dispose();

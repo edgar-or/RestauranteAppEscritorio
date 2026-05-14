@@ -26,6 +26,9 @@ public class ControladorAgregarProductos {
         this.dao = new ProductosParaPedidosDao();
         
         mostrarTablaBebidas();
+        mostrarTablaPostres();
+        mostrarTablaPlatillos();
+
     }
 
     public void mostrarTablaBebidas() {
@@ -54,11 +57,66 @@ public class ControladorAgregarProductos {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
     
+    public void mostrarTablaPostres() {
+
+        try {
+
+            List<ModeloProducto> lista = dao.listarPostres();
+
+            DefaultTableModel modeloTabla =
+                    (DefaultTableModel) visProduct.tablaPostres.getModel();
+
+            // limpiar tabla
+            modeloTabla.setRowCount(0);
+
+            for (ModeloProducto postre : lista) {
+
+                Object[] fila = {
+                    postre.getNombre(),
+                    postre.getDescripcion(),
+                    postre.getPrecio()
+                };
+
+                modeloTabla.addRow(fila);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     
     
+    }
+    public void mostrarTablaPlatillos() {
+
+        try {
+
+            List<ModeloProducto> lista = dao.listarPlatillos();
+
+            DefaultTableModel modeloTabla =
+                    (DefaultTableModel) visProduct.tablaPlatillos.getModel();
+
+            // limpiar tabla
+            modeloTabla.setRowCount(0);
+
+            for (ModeloProducto platillos : lista) {
+
+                Object[] fila = {
+                    platillos.getNombre(),
+                    platillos.getDescripcion(),
+                    platillos.getPrecio()
+                };
+
+                modeloTabla.addRow(fila);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     
     
+    }
     
 }
