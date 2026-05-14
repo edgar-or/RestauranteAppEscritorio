@@ -7,6 +7,7 @@ vista\VistaLogin$1.class
 controlador\mesero\ControladorMesero.class
 dao\PedidoPanaderiaDao.class
 vista\VistaVerDetallePedido$1.class
+vista\VistaProductos$3.class
 dao\dto\LoginResultadoDTO.class
 modelo\ModeloMenu.class
 vista\VistaPanaderia$1.class
@@ -28,6 +29,7 @@ vista\VistaPanaderia$2.class
 controlador\ControladorCocina.class
 vista\VistaGestionUsuarios$1.class
 vista\VistaPrincipal.class
+vista\VistaProductos$2.class
 dao\dto\PedidoCocinaDto.class
 vista\VistaGestionUsuarios.class
 vista\VistaGestionEmpleados.class
@@ -57,6 +59,7 @@ controlador\ControladorBar.class
 vista\VistaCocina$1.class
 vista\VistaProductos.class
 vista\VistaGestionMenu.class
+vista\VistaProductos$4.class
 controlador\mesero\ControladorVerDetallePedido.class
 controlador\ControladorPrincipal.class
 modelo\UsuarioModelo.class

@@ -30,71 +30,71 @@ public class ControladorAgregarPedido {
 
     private GenerarPedidoDao genPedido;
     private ModeloEmpleado empleado;
-    
-    private ControladorAgregarProductos contrlAgregarProduct;
 
+    private ControladorAgregarProductos contrlAgregarProduct;
 
     public ControladorAgregarPedido(VistaPrincipalMesero principal, ModeloEmpleado empleado) {
         this.genPedido = new GenerarPedidoDao();
         this.empleado = empleado;
-
+        this.visProducto = new VistaProductos();
         this.principal = principal;
         this.vistaAgregar = new VistaAgregarPedido();
         eventos();
     }
 
-    
-
-     public void iniciar(){
-         vistaAgregar.setLocationRelativeTo(null);
+    public void iniciar() {
+        vistaAgregar.setLocationRelativeTo(null);
         vistaAgregar.setVisible(true);
-                
-        llenarComboMesas(); 
 
-     }
+        llenarComboMesas();
+
+    }
 
     private void eventos() {
-        
+
         vistaAgregar.btnProductos.addActionListener(e -> {
 
             // Evita que se abran múltiples ventanas
             if (visProducto == null || !visProducto.isDisplayable()) {
                 visProducto = new VistaProductos();
-                
-                ControladorAgregarProductos controlerAgregar = new ControladorAgregarProductos(visProducto); 
-                
+
+                ControladorAgregarProductos controlerAgregar = new ControladorAgregarProductos(visProducto);
+
             }
 
             visProducto.setLocationRelativeTo(null);
             visProducto.setVisible(true);
         });
 
-        vistaAgregar.btnCerrar.addActionListener(e->{
-        vistaAgregar.dispose();
+        vistaAgregar.btnCerrar.addActionListener(e -> {
+            vistaAgregar.dispose();
         });
-    
+
         vistaAgregar.btnCerrar.addActionListener(e -> {
             vistaAgregar.dispose();
 
         });
 
-          vistaAgregar.btnProductos.addActionListener(e -> {
+        vistaAgregar.btnProductos.addActionListener(e -> {
 
-        try {
+            try {
 
-            registrarPedido();
+                registrarPedido();
 
-        } catch (Exception ex) {
+            } catch (Exception ex) {
 
-            ex.printStackTrace();
+                ex.printStackTrace();
 
-        }    });
-
+            }
+        });
         
-        
+        //CERRAR VENTANA
+        visProducto.btnCerrar.addActionListener(e -> {
+            visProducto.dispose();
+
+        });
+
     }
-
-    
 
     public void llenarComboMesas() {
 
@@ -119,11 +119,8 @@ public class ControladorAgregarPedido {
         ModeloMesa mesa
                 = (ModeloMesa) vistaAgregar.comboMesa.getSelectedItem();
 
-        boolean insertado = genPedido.registrarPedido(Integer.parseInt(mesa.getIdMesa()) ,Integer.parseInt(empleado.getIdEmpleado()) );
+        boolean insertado = genPedido.registrarPedido(Integer.parseInt(mesa.getIdMesa()), Integer.parseInt(empleado.getIdEmpleado()));
 
-}
-    
-
-
+    }
 
 }
