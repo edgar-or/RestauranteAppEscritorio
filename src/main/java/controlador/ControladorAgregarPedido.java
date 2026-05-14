@@ -22,11 +22,9 @@ public class ControladorAgregarPedido {
 
     private VistaAgregarPedido vistaAgregar;
     private VistaPrincipalMesero principal;
-<<<<<<< HEAD
     private VistaProductos visProducto;
-=======
+
     private GenerarPedidoDao genPedido;
->>>>>>> 875fe59f69adddb4a823db55dc798a4795a4e3e5
 
     public ControladorAgregarPedido(VistaPrincipalMesero principal) {
         this.genPedido = new GenerarPedidoDao();
@@ -36,23 +34,19 @@ public class ControladorAgregarPedido {
         eventos();
     }
 
-<<<<<<< HEAD
     
 
-     public void iniciar(){
-         vistaAgregar.setLocationRelativeTo(null);
-        vistaAgregar.setVisible(true);
                 
 
-=======
+
     public void iniciar() {
         vistaAgregar.setVisible(true);
         llenarComboMesas(); 
->>>>>>> 875fe59f69adddb4a823db55dc798a4795a4e3e5
+
     }
 
     private void eventos() {
-<<<<<<< HEAD
+
         
         vistaAgregar.btnProductos.addActionListener(e -> {
 
@@ -68,11 +62,8 @@ public class ControladorAgregarPedido {
         vistaAgregar.btnCerrar.addActionListener(e->{
         vistaAgregar.dispose();
     
-=======
-        vistaAgregar.btnCerrar.addActionListener(e -> {
-            vistaAgregar.dispose();
 
->>>>>>> 875fe59f69adddb4a823db55dc798a4795a4e3e5
+        
         });
 
     }
