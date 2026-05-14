@@ -1,12 +1,15 @@
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\com\mycompany\restauranteappescritorio\RestauranteAppEscritorio.java
-C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorAgregarPedido.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorBar.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorCocina.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorEmpleado.java
-C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorMesero.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorPanaderia.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\ControladorPrincipal.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\LoginControlador.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\mesero\ControladorAgregarPedido.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\mesero\ControladorGenerarPago.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\mesero\ControladorMesero.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\mesero\ControladorTodosPedidos.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\controlador\mesero\ControladorVerDetallePedido.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\CocinaDao.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\conexion\Conexion.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\dao\dto\EmpleadoDTO.java
@@ -35,6 +38,7 @@ C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaAgregarPedido.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaBar.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaCocina.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaGenerarPago.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaGestionCategorias.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaGestionEmpleados.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaGestionMenu.java
@@ -44,4 +48,6 @@ C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaPanaderia.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaPrincipal.java
 C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaPrincipalMesero.java
-C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaVerPedido.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaProductos.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaTodosPedidos.java
+C:\Users\estud\OneDrive\Documentos\NetBeansProjects\RestauranteAppEscritorio\src\main\java\vista\VistaVerDetallePedido.java
