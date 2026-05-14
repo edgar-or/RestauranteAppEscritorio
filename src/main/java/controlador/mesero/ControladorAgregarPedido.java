@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controlador;
+package controlador.mesero;
 
+import controlador.ControladorAgregarProductos;
 import dao.GenerarPedidoDao;
 import dao.dto.LoginResultadoDTO;
 import java.awt.Dimension;

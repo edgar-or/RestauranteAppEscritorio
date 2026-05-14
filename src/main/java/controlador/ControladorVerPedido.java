@@ -4,17 +4,18 @@
  */
 package controlador;
 
-import vista.VistaVerPedido;
+import vista.VistaVerDetallePedido;
+
 
 /**
  *
  * @author renec
  */
 public class ControladorVerPedido {
-    private VistaVerPedido visVerPedidos;
+    private VistaVerDetallePedido vistaVerPedidos;
 
-    public ControladorVerPedido(VistaVerPedido visVerPedidos) {
-        this.visVerPedidos = visVerPedidos;
+    public ControladorVerPedido(VistaVerDetallePedido vistaVerDetallePedidos) {
+        this.vistaVerPedidos = vistaVerDetallePedidos;
         iniciarVista();
         onEvento();
         
@@ -23,13 +24,13 @@ public class ControladorVerPedido {
     }
 
     private void iniciarVista() {
-        visVerPedidos.setLocationRelativeTo(null);
-        visVerPedidos.setVisible(true);
+        vistaVerPedidos.setLocationRelativeTo(null);
+        vistaVerPedidos.setVisible(true);
     }
 
     private void onEvento() {
-        visVerPedidos.btnCerrar.addActionListener(e->{
-        visVerPedidos.dispose();
+        vistaVerPedidos.btnCerrar.addActionListener(e->{
+        vistaVerPedidos.dispose();
         });
     }
     
