@@ -31,6 +31,8 @@ public class ControladorVerDetallePedido {
         
         eventos();
     }
+
+   
     public void iniciar() {
         vistaVerDetallePedido.setLocationRelativeTo(null);
         vistaVerDetallePedido.setExtendedState(JFrame.MAXIMIZED_BOTH);

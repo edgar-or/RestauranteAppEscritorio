@@ -4,6 +4,7 @@
  */
 package controlador.mesero;
 
+import controlador.ControladorAgregarProductos;
 import dao.GenerarPedidoDao;
 import dao.dto.LoginResultadoDTO;
 import java.awt.Dimension;

@@ -4,12 +4,9 @@
  */
 package controlador.mesero;
 
-<<<<<<< HEAD:src/main/java/controlador/mesero/ControladorMesero.java
 import controlador.LoginControlador;
 import controlador.mesero.ControladorAgregarPedido;
-=======
 import dao.GenerarPedidoDao;
->>>>>>> adabbeaeb84176d6c423824d43c09b6d0904257f:src/main/java/controlador/ControladorMesero.java
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -18,36 +15,29 @@ import modelo.ModeloMesa;
 import vista.VistaAgregarPedido;
 import vista.VistaLogin;
 import vista.VistaPrincipalMesero;
-import vista.VistaVerPedido;
+import vista.VistaVerDetallePedido;
+
 
 /**
  *
  * @author ayala
  */
 public class ControladorMesero {
-<<<<<<< HEAD:src/main/java/controlador/mesero/ControladorMesero.java
 
     private VistaPrincipalMesero vistaPricipal;
     private ControladorAgregarPedido controlAgregarPedido;
     private ControladorTodosPedidos controlTodosPedidos;
-=======
->>>>>>> adabbeaeb84176d6c423824d43c09b6d0904257f:src/main/java/controlador/ControladorMesero.java
 
-    private VistaPrincipalMesero vistaPricipal;
-    private ControladorAgregarPedido controlAgregarPedido;
     private ModeloEmpleado empleadoModelo;
 
     public ControladorMesero(VistaPrincipalMesero vistaPrincipal, ModeloEmpleado empleado) {
         this.vistaPricipal = vistaPrincipal;
-<<<<<<< HEAD:src/main/java/controlador/mesero/ControladorMesero.java
-        this.controlAgregarPedido = new ControladorAgregarPedido(vistaPrincipal);
+        this.controlAgregarPedido = new ControladorAgregarPedido(vistaPrincipal, empleado);
         this.controlTodosPedidos = new ControladorTodosPedidos(vistaPrincipal);
-        
-=======
+
         this.empleadoModelo = empleado;
 
-        this.controlAgregarPedido = new ControladorAgregarPedido(vistaPrincipal, empleado );
->>>>>>> adabbeaeb84176d6c423824d43c09b6d0904257f:src/main/java/controlador/ControladorMesero.java
+        this.controlAgregarPedido = new ControladorAgregarPedido(vistaPrincipal, empleado);
         vistaPrincipal.btnAgregarPedido.addActionListener(e -> {
             controlAgregarPedido.iniciar();
         });
@@ -63,11 +53,6 @@ public class ControladorMesero {
         vistaPricipal.setExtendedState(JFrame.MAXIMIZED_BOTH);
         vistaPricipal.setVisible(true);
 
-<<<<<<< HEAD:src/main/java/controlador/mesero/ControladorMesero.java
-=======
-        
-        
->>>>>>> adabbeaeb84176d6c423824d43c09b6d0904257f:src/main/java/controlador/ControladorMesero.java
     }
 
     private void eventos() {
@@ -78,22 +63,7 @@ public class ControladorMesero {
             VistaLogin login = new VistaLogin();
             LoginControlador ctrl = new LoginControlador();
             ctrl.iniciar();
-<<<<<<< HEAD:src/main/java/controlador/mesero/ControladorMesero.java
         });
-    }
 
-=======
-        });
-        
-        vistaPricipal.btnVerPedido.addActionListener(e->{
-            VistaVerPedido vista = new VistaVerPedido();
-            new ControladorVerPedido(vista);
-        
-        });
     }
-
-    
-     
-    
->>>>>>> adabbeaeb84176d6c423824d43c09b6d0904257f:src/main/java/controlador/ControladorMesero.java
 }
