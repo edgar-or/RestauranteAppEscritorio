@@ -18,6 +18,7 @@ public class AreaProduccionModelo {
     private String especializacion;
     private int idEmpleado;
     private static ArrayList<ModeloEmpleado> arrayEmpleado = new ArrayList<>();
+    
 
     public static ArrayList<ModeloEmpleado> getArrayEmpleado() {
         return arrayEmpleado;

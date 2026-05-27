@@ -10,7 +10,9 @@ import dao.dto.PedidoBarDto;
 import dao.dto.PedidoCocinaDto;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import modelo.ModeloProducto_Pedido;
 import vista.VistaCocina;
 import vista.VistaLogin;
 
@@ -23,9 +25,12 @@ public class ControladorCocina {
     VistaCocina visCocina;
     VistaLogin visLogin;
     LoginControlador loginContro;
+
     public ControladorCocina(VistaCocina visCocina) {
         this.visCocina = visCocina;
+        configurarTabla();
         cargarTabla();
+        iniciarAutoRefresh();
         eventos();
     }
 
@@ -34,46 +39,64 @@ public class ControladorCocina {
         visCocina.setExtendedState(JFrame.MAXIMIZED_BOTH);
         visCocina.setVisible(true);
     }
-    
-   
+
+    private void configurarTabla() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Estado");
+
+        visCocina.tablaCocina.setModel(modelo);
+    }
 
     public void cargarTabla() {
 
         try {
+
             CocinaDao dao = new CocinaDao();
-            List<PedidoCocinaDto> lista = dao.listar();
+            List<ModeloProducto_Pedido> lista = dao.listar();
 
-            DefaultTableModel modelo = new DefaultTableModel();
+            DefaultTableModel modelo = (DefaultTableModel) visCocina.tablaCocina.getModel();
 
-            modelo.addColumn("Producto");
-            modelo.addColumn("Descripción");
-            modelo.addColumn("Estado");
+            modelo.setRowCount(0); // limpia filas
 
-            for (PedidoCocinaDto p : lista) {
+            for (ModeloProducto_Pedido orden : lista) {
+
                 modelo.addRow(new Object[]{
-                    p.getNombreProducto(),
-                    p.getDescripcion(),
-                    p.isEstado()
+                    orden.getCantidad(),
+                    orden.getProducto().getNombre(),
+                    orden.getNota(),
+                    orden.isEstadoOrden()
                 });
-            }
 
-            visCocina.tablaCocina.setModel(modelo);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private void iniciarAutoRefresh() {
+
+        Timer timer = new Timer(3000, e -> { // 3000 ms = 3 segundos
+            cargarTabla();
+        });
+
+        timer.start();
     }
 
     private void eventos() {
-        visCocina.btnCerrarsesion.addActionListener(e->{
-        visCocina.dispose();
-        
-        VistaLogin login= new VistaLogin();
-        LoginControlador ctrl= new LoginControlador();
-        ctrl.iniciar();
+        visCocina.btnCerrarsesion.addActionListener(e -> {
+            visCocina.dispose();
+
+            VistaLogin login = new VistaLogin();
+            LoginControlador ctrl = new LoginControlador();
+            ctrl.iniciar();
         });
-        
+
     }
-    
+
 }

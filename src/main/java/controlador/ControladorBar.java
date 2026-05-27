@@ -8,7 +8,9 @@ import dao.PedidoBarDao;
 import dao.dto.PedidoBarDto;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import modelo.ModeloProducto_Pedido;
 import vista.VistaBar;
 import vista.VistaLogin;
 
@@ -21,9 +23,20 @@ public class ControladorBar {
 
     public ControladorBar(VistaBar visBar) {
         this.visBar = visBar;
+        configurarTabla();
         cargarTabla();
+        iniciarAutoRefresh();
         evento();
         
+    }
+    
+      private void iniciarAutoRefresh() {
+
+        Timer timer = new Timer(3000, e -> { // 3000 ms = 3 segundos
+            cargarTabla();
+        });
+
+        timer.start();
     }
     
     public void iniciar(){
@@ -32,31 +45,42 @@ public class ControladorBar {
         visBar.setVisible(true);
     }
     
-    public void cargarTabla() {
-
-    try {
-        PedidoBarDao dao = new PedidoBarDao();
-        List<PedidoBarDto> lista = dao.listar();
+    private void configurarTabla() {
 
         DefaultTableModel modelo = new DefaultTableModel();
 
+        modelo.addColumn("Cantidad");
         modelo.addColumn("Producto");
         modelo.addColumn("Descripción");
         modelo.addColumn("Estado");
 
-        for (PedidoBarDto p : lista) {
-            modelo.addRow(new Object[]{
-                p.getNombreProducto(),
-                p.getDescripcion(),
-                p.isEstado()
-            });
-        }
-
         visBar.tablaBar.setModel(modelo);
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
+    
+    public void cargarTabla() {
+
+    try {
+        PedidoBarDao dao = new PedidoBarDao();
+        List<ModeloProducto_Pedido> lista = dao.listar();
+
+        DefaultTableModel modelo = (DefaultTableModel) visBar.tablaBar.getModel();
+
+            modelo.setRowCount(0); // limpia filas
+
+            for (ModeloProducto_Pedido orden : lista) {
+
+                modelo.addRow(new Object[]{
+                    orden.getCantidad(),
+                    orden.getProducto().getNombre(),
+                    orden.getNota(),
+                    orden.isEstadoOrden()
+                });
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 }
     
     

@@ -10,7 +10,9 @@ import dao.dto.PedidoBarDto;
 import dao.dto.PedidoPanaderiaDto;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import modelo.ModeloProducto_Pedido;
 import vista.VistaLogin;
 import vista.VistaPanaderia;
 
@@ -25,7 +27,9 @@ public class ControladorPanaderia {
 
     public ControladorPanaderia(VistaPanaderia visPanaderia) {
         this.visPanaderia = visPanaderia;
+        configurarTabla();
         cargarTabla();
+        iniciarAutoRefresh();
         eventos();
     }
     
@@ -35,34 +39,52 @@ public class ControladorPanaderia {
         visPanaderia.setVisible(true);
     }
     
+      private void configurarTabla() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Estado");
+
+        visPanaderia.tablaPanaderia.setModel(modelo);
+    }
+    
        public void cargarTabla() {
 
     try {
         PedidoPanaderiaDao dao = new PedidoPanaderiaDao();
-        List<PedidoPanaderiaDto> lista = dao.listar();
+        List<ModeloProducto_Pedido> lista = dao.listar();
 
-        DefaultTableModel modelo = new DefaultTableModel();
+         DefaultTableModel modelo = (DefaultTableModel) visPanaderia.tablaPanaderia.getModel();
 
-        modelo.addColumn("Producto");
-        modelo.addColumn("Cantidad");
-        modelo.addColumn("Descripcion");
-        modelo.addColumn("Estado");
+            modelo.setRowCount(0); // limpia filas
 
-        for (PedidoPanaderiaDto p : lista) {
-            modelo.addRow(new Object[]{
-                p.getNombreProducto(),
-                p.getCantidad(),
-                p.getDescripcion(),
-                p.isEstado()
-            });
+            for (ModeloProducto_Pedido orden : lista) {
+
+                modelo.addRow(new Object[]{
+                    orden.getCantidad(),
+                    orden.getProducto().getNombre(),
+                    orden.getNota(),
+                    orden.isEstadoOrden()
+                });
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        visPanaderia.tablaPanaderia.setModel(modelo);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
 }
+       
+         private void iniciarAutoRefresh() {
+
+        Timer timer = new Timer(3000, e -> { // 3000 ms = 3 segundos
+            cargarTabla();
+        });
+
+        timer.start();
+    }
 
     private void eventos() {
          visPanaderia.btnCerrarsesion.addActionListener(e->{

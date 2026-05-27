@@ -9,30 +9,86 @@ package modelo;
  * @author renec
  */
 public class ModeloProducto_Pedido {
-    private String idProducto;
     private String idPedido;
+    private ModeloProducto producto; 
+    private ModeloPedido pedido; 
+    private int cantidad;
+    private double subTotal; 
+    private String nota; 
+    private boolean estadoOrden; 
 
-    public ModeloProducto_Pedido(String idProducto, String idPedido) {
-        this.idProducto = idProducto;
-        this.idPedido = idPedido;
+    public boolean isEstadoOrden() {
+        return estadoOrden;
     }
 
-    public String getIdProducto() {
-        return idProducto;
+    public void setEstadoOrden(boolean estadoOrden) {
+        this.estadoOrden = estadoOrden;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    public ModeloProducto_Pedido() {
+    }
+
+    public ModeloProducto_Pedido(String idPedido, ModeloProducto producto, ModeloPedido pedido, int cantidad, double subTotal) {
+        this.idPedido = idPedido;
+        this.producto = producto;
+        this.pedido = pedido;
+        this.cantidad = cantidad;
+        this.subTotal = subTotal;
     }
 
     public String getIdPedido() {
         return idPedido;
     }
 
-    public void setIdProducto(String idProducto) {
-        this.idProducto = idProducto;
-    }
-
     public void setIdPedido(String idPedido) {
         this.idPedido = idPedido;
     }
+
+    public ModeloProducto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(ModeloProducto producto) {
+        this.producto = producto;
+    }
+
+    public ModeloPedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(ModeloPedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
     
+    
+
+   
+
+
     
     
 }
