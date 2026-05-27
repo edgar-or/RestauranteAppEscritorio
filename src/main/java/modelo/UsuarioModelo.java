@@ -15,8 +15,8 @@ public class UsuarioModelo {
     private int id_usuario;
     private String usuario;
     private String password;
-    
-    private static ArrayList<ModeloEmpleado> arrayEmpleado = new ArrayList<>();
+
+    private ModeloEmpleado empleado;
 
     public String validarCredenciales() {
         if (this.usuario == null || this.password == null) {
