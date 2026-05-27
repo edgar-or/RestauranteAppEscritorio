@@ -39,13 +39,14 @@ public class Conexion {
 //    private static final String USER = "postgres";
 //    private static final String PASS = "eaadmin76rag19$";
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/RESTAURANTEAPPESC";
-    private static final String USER = "postgres";
-    private static final String PASS = "eaadmin76rag19$";
-
-//    private static final String URL = "jdbc:postgresql://localhost:5432/APE";
+//    private static final String URL = "jdbc:postgresql://localhost:5432/RESTAURANTEAPPESC";
 //    private static final String USER = "postgres";
-//    private static final String PASS = "pasen el sepe";
+//    private static final String PASS = "eaadmin76rag19$";
+    
+        private static final String URL = "jdbc:postgresql://localhost:5432/APE";
+    private static final String USER = "postgres";
+    private static final String PASS = "pasen el sepe";
+    
     public static Connection getConnection() throws Exception {
         return DriverManager.getConnection(URL, USER, PASS);
     }
