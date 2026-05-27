@@ -17,6 +17,18 @@ public class ModeloProducto {
     private String descripcion;
     private double precio;
     private String idProduccion;
+    private AreaProduccionModelo areaProduccion; 
+    
+
+    public AreaProduccionModelo getAreaProduccion() {
+        return areaProduccion;
+    }
+
+    public void setAreaProduccion(AreaProduccionModelo areaProduccion) {
+        this.areaProduccion = areaProduccion;
+    }
+    
+    
     private static ArrayList<ModeloProducto_Menu> arrayProducto_Menu = new ArrayList<>();
     private static ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido = new ArrayList<>();
 

@@ -7,21 +7,18 @@ import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import modelo.AreaProduccionModelo;
+import modelo.ModeloProducto;
+import modelo.ModeloProducto_Pedido;
 
 public class PedidoBarDao {
 
-    private static final String SELECT_PEDIDOS_BAR =
-        "SELECT p.nombre AS nombreProducto, p.descripcion, ped.estado " +
-        "FROM producto p " +
-        "INNER JOIN producto_pedido pp ON p.idProducto = pp.idProducto " +
-        "INNER JOIN pedido ped ON pp.idPedido = ped.idPedido " +
-        "INNER JOIN empleado e ON ped.idEmpleado = e.idEmpleado " +
-        "INNER JOIN area_produccion ap ON e.idproduccion = ap.idproduccion " +
-        "WHERE ped.estado = false AND ap.nombre = 'Bar'";
+   private static final String SELECT_PEDIDOS_BAR =
+        "SELECT pp.cantidad as cantidad ,  p.nombre AS nombreProducto, pp.nota as nota, pp.estado_orden as estado  FROM producto p INNER JOIN producto_pedido pp ON p.idProducto = pp.idProducto INNER JOIN pedido ped ON pp.idPedido = ped.idPedido INNER JOIN empleado e ON ped.idEmpleado = e.idEmpleado INNER JOIN area_produccion ap ON p.idproduccion = ap.idproduccion WHERE pp.estado_orden  = false AND ap.nombre   = 'Bar'";
 
-    public List<PedidoBarDto> listar() throws Exception {
+    public List<ModeloProducto_Pedido> listar() throws Exception {
 
-        List<PedidoBarDto> lista = new ArrayList<>();
+        List<ModeloProducto_Pedido> lista = new ArrayList<>();
         Connection conn = Conexion.getConnection();
 
         try {
@@ -29,13 +26,19 @@ public class PedidoBarDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                PedidoBarDto dto = new PedidoBarDto();
 
-                dto.setNombreProducto(rs.getString("nombreProducto"));
-                dto.setDescripcion(rs.getString("descripcion"));
-                dto.setEstado(rs.getBoolean("estado"));
+                ModeloProducto_Pedido orden = new ModeloProducto_Pedido(); 
+                ModeloProducto product = new ModeloProducto(); 
+                AreaProduccionModelo area = new AreaProduccionModelo(); 
+                
+               product.setNombre(rs.getString("nombreProducto"));
+              orden.setCantidad(rs.getInt("cantidad") );
+              orden.setNota(rs.getString("nota"));
+              orden.setEstadoOrden(rs.getBoolean("estado"));
+              
+              orden.setProducto(product);
 
-                lista.add(dto);
+                lista.add(orden);
             }
 
             rs.close();

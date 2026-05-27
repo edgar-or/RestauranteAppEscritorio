@@ -9,6 +9,7 @@ import dao.dto.LoginResultadoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashSet;
 import modelo.AreaProduccionModelo;
 import modelo.ModeloEmpleado;
 import modelo.RolModelo;
@@ -20,9 +21,11 @@ import modelo.UsuarioModelo;
  */
 public class UsuarioDao {
 
-    public LoginResultadoDTO validar(String usuario, String password) {
+    public ModeloEmpleado validar(String usuario, String password) {
         UsuarioModelo u = null;
         LoginResultadoDTO resultado = null;
+        ModeloEmpleado emp = null;
+
         String consulta = "SELECT u.*, r.idRol, r.rol AS nombreRol, ap.nombre as nombreArea, e.idempleado as idEmpleado"
                 + " FROM usuario u"
                 + " LEFT JOIN empleado e ON u.idUsuario = e.idUsuario"
@@ -39,7 +42,8 @@ public class UsuarioDao {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                resultado = new LoginResultadoDTO();
+                
+                emp = new ModeloEmpleado(); 
 
                 u = new UsuarioModelo();
                 u.setUsuario(rs.getString("usuario"));
@@ -48,18 +52,14 @@ public class UsuarioDao {
                 RolModelo rol = new RolModelo();
                 rol.setIdRol(rs.getInt("idRol"));
                 rol.setRol(rs.getString("nombreRol"));
-                
-                AreaProduccionModelo area = new AreaProduccionModelo(); 
+
+                AreaProduccionModelo area = new AreaProduccionModelo();
                 area.setNombre(rs.getString("nombreArea"));
-                
-                ModeloEmpleado empleado = new ModeloEmpleado(); 
-                
-                empleado.setIdEmpleado(rs.getString("idEmpleado"));
-                
-                resultado.setUsuario(u);
-                resultado.setRol(rol);
-                resultado.setArea(area);
-                resultado.setEmpleado(empleado);
+
+                emp.setIdEmpleado(rs.getString("idEmpleado"));
+                emp.setRol(rol);
+                emp.setUsuario(u);
+                emp.setArea(area);
 
             }
 
@@ -67,7 +67,7 @@ public class UsuarioDao {
             e.printStackTrace();
         }
 
-        return resultado;
+        return emp;
     }
 
 }

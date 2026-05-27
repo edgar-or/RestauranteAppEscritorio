@@ -15,8 +15,9 @@ public class ModeloEmpleado {
     private String dui;
     private String nombre;
     private String apellido;
-    private String idUsuario;
-    private String idRol;
+    private UsuarioModelo usuario;
+    private RolModelo rol;
+    private AreaProduccionModelo area; 
     private static ArrayList<ModeloTelefono> arrayTelefono = new ArrayList<>();
     private static ArrayList<ModeloCorreo>  arrayCorreo = new ArrayList<>();
     private static ArrayList<ModeloPedido>  arrayPedido = new ArrayList<>();
@@ -24,6 +25,18 @@ public class ModeloEmpleado {
     public static ArrayList<ModeloTelefono> getArrayTelefono() {
         return arrayTelefono;
     }
+
+    public AreaProduccionModelo getArea() {
+        return area;
+    }
+
+    public void setArea(AreaProduccionModelo area) {
+        this.area = area;
+    }
+    
+    
+    
+    
 
     public static void setArrayTelefono(ArrayList<ModeloTelefono> arrayTelefono) {
         ModeloEmpleado.arrayTelefono = arrayTelefono;
@@ -44,16 +57,26 @@ public class ModeloEmpleado {
     public static void setArrayPedido(ArrayList<ModeloPedido> arrayPedido) {
         ModeloEmpleado.arrayPedido = arrayPedido;
     }
+
+    public UsuarioModelo getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModelo usuario) {
+        this.usuario = usuario;
+    }
+
+    public RolModelo getRol() {
+        return rol;
+    }
+
+    public void setRol(RolModelo rol) {
+        this.rol = rol;
+    }
+
     
 
-    public ModeloEmpleado(String idEmpleado, String dui, String nombre, String apellido, String idUsuario, String idRol) {
-        this.idEmpleado = idEmpleado;
-        this.dui = dui;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.idUsuario = idUsuario;
-        this.idRol = idRol;
-    }
+ 
 
     public ModeloEmpleado() {
     }
@@ -74,13 +97,6 @@ public class ModeloEmpleado {
         return apellido;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    public String getIdRol() {
-        return idRol;
-    }
 
     public void setIdEmpleado(String idEmpleado) {
         this.idEmpleado = idEmpleado;
@@ -97,16 +113,4 @@ public class ModeloEmpleado {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public void setIdRol(String idRol) {
-        this.idRol = idRol;
-    }
-    
-    
-    
-    
 }

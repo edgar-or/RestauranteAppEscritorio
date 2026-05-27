@@ -10,6 +10,9 @@ import dao.dto.PedidoPanaderiaDto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.AreaProduccionModelo;
+import modelo.ModeloProducto;
+import modelo.ModeloProducto_Pedido;
 
 /**
  *
@@ -17,39 +20,32 @@ import java.util.List;
  */
 public class PedidoPanaderiaDao {
 
-//    private static final String SELECT_PEDIDOS_BAR
-//            = "select producto.nombre as nombreProducto, producto_pedido.cantidad as cantidad, producto.descripcion as descripcion, producto_pedido.estado as estado "
-//            + "from producto "
-//            + "inner join producto_pedido on producto_pedido.idproducto  = producto.idproducto "
-//            + "inner join area_produccion on area_produccion.idproduccion = producto.idproduccion "
-//            +" inner join pedido on pedido.idpedido = producto_pedido.idpedido "
-//            + "where area_produccion.nombre = 'Panaderia' and pedido.estado = false ";
     
-    private static String SELECT_PEDIDOS_PANA = "select producto.nombre as nombreProducto, producto.descripcion as descripcion, pedido.estado as estado"
-            + " from producto "
-            + " inner join producto_pedido on producto_pedido.idproducto  = producto.idproducto "
-            + " inner join area_produccion on area_produccion.idproduccion = producto.idproduccion "
-            + " inner join pedido on pedido.idpedido = producto_pedido.idpedido "
-            + " where area_produccion.nombre = 'Panaderia' and pedido.estado = false ";
+    private static final String SELECT_PEDIDOS_PANADERIA =
+        "SELECT pp.cantidad as cantidad ,  p.nombre AS nombreProducto, pp.nota as nota, pp.estado_orden as estado  FROM producto p INNER JOIN producto_pedido pp ON p.idProducto = pp.idProducto INNER JOIN pedido ped ON pp.idPedido = ped.idPedido INNER JOIN empleado e ON ped.idEmpleado = e.idEmpleado INNER JOIN area_produccion ap ON p.idproduccion = ap.idproduccion WHERE pp.estado_orden  = false AND ap.nombre   = 'Panaderia'";
 
-    public List<PedidoPanaderiaDto> listar() throws Exception {
+    public List<ModeloProducto_Pedido> listar() throws Exception {
 
-        List<PedidoPanaderiaDto> lista = new ArrayList<>();
+        List<ModeloProducto_Pedido> lista = new ArrayList<>();
         Connection conn = Conexion.getConnection();
 
         try {
-            PreparedStatement ps = conn.prepareStatement(SELECT_PEDIDOS_PANA);
+            PreparedStatement ps = conn.prepareStatement(SELECT_PEDIDOS_PANADERIA);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                PedidoPanaderiaDto dto = new PedidoPanaderiaDto();
 
-                dto.setNombreProducto(rs.getString("nombreProducto"));
-                dto.setCantidad(4);
-                dto.setDescripcion(rs.getString("descripcion"));
-                dto.setEstado(rs.getBoolean("estado"));
+                ModeloProducto_Pedido orden = new ModeloProducto_Pedido(); 
+                ModeloProducto product = new ModeloProducto(); 
+                
+               product.setNombre(rs.getString("nombreProducto"));
+              orden.setCantidad(rs.getInt("cantidad") );
+              orden.setNota(rs.getString("nota"));
+              orden.setEstadoOrden(rs.getBoolean("estado"));
+              
+              orden.setProducto(product);
 
-                lista.add(dto);
+                lista.add(orden);
             }
 
             rs.close();

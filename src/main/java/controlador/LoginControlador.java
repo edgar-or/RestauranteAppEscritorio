@@ -9,6 +9,7 @@ import dao.UsuarioDao;
 import dao.dto.LoginResultadoDTO;
 import javax.swing.JOptionPane;
 import modelo.AreaProduccionModelo;
+import modelo.ModeloEmpleado;
 import modelo.RolModelo;
 import modelo.UsuarioModelo;
 import vista.VistaBar;
@@ -58,11 +59,12 @@ public class LoginControlador {
         String usuario = loginVista.txtUsuario.getText();
         String contra = loginVista.txtcontrasenia.getText();
 
-        LoginResultadoDTO res = dao.validar(usuario, contra);
+        
+        ModeloEmpleado login = dao.validar(usuario, contra);
 
-        if (res != null) {
-            RolModelo rol = res.getRol();
-            AreaProduccionModelo area = res.getArea();
+        if (login != null) {
+            RolModelo rol = login.getRol();
+            AreaProduccionModelo area = login.getArea();
 
             System.out.println("ROL -> '" + rol.getRol() + "'");
             if (rol.getRol().equalsIgnoreCase("Administrador")) {
@@ -75,7 +77,7 @@ public class LoginControlador {
 
                 if (area.getNombre().equalsIgnoreCase("mesero")) {
                     visMesero = new VistaPrincipalMesero();
-                    controladorMesero = new ControladorMesero(visMesero, res.getEmpleado());
+                    controladorMesero = new ControladorMesero(visMesero, login);
                     controladorMesero.iniciar();
                     cerrar();
                 } else if (area.getNombre().equalsIgnoreCase("cocina")) {
