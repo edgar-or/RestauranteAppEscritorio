@@ -11,12 +11,13 @@ package modelo;
 public class ModeloCorreo {
     private String idCorreo;
     private String correo;
-    private String idEmpleado;
+  
+    private ModeloEmpleado empleado;
+    
 
     public ModeloCorreo(String idCorreo, String correo, String idEmpleado) {
         this.idCorreo = idCorreo;
         this.correo = correo;
-        this.idEmpleado = idEmpleado;
     }
 
     public String getIdCorreo() {
@@ -27,9 +28,7 @@ public class ModeloCorreo {
         return correo;
     }
 
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
+
 
     public void setIdCorreo(String idCorreo) {
         this.idCorreo = idCorreo;
@@ -39,9 +38,15 @@ public class ModeloCorreo {
         this.correo = correo;
     }
 
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public ModeloEmpleado getEmpleado() {
+        return empleado;
     }
+
+    public void setEmpleado(ModeloEmpleado empleado) {
+        this.empleado = empleado;
+    }
+
+
     
     
     

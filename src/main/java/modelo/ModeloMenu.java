@@ -14,6 +14,7 @@ public class ModeloMenu {
 
     private String idMenu;
     private String descrpcion;
+    
     private static ArrayList<ModeloProducto_Menu> arrayProducto_Menu = new ArrayList<>();
 
     public static ArrayList<ModeloProducto_Menu> getArrayProducto_Menu() {

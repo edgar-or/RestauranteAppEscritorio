@@ -16,7 +16,8 @@ public class AreaProduccionModelo {
     private String nombre;
     private String descripcion;
     private String especializacion;
-    private int idEmpleado;
+    
+    private static ArrayList<ModeloProducto> arrayProducto = new ArrayList<>();
     private static ArrayList<ModeloEmpleado> arrayEmpleado = new ArrayList<>();
     
 
@@ -63,12 +64,6 @@ public class AreaProduccionModelo {
         this.especializacion = especializacion;
     }
 
-    public int getIdEmpleado() {
-        return idEmpleado;
-    }
 
-    public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
 
 }

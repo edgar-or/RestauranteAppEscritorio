@@ -15,6 +15,7 @@ public class ModeloMesa {
     private int  numeroMesa;
     private boolean estado;
     private int capacidad;
+    
     private static ArrayList<ModeloPedido> arrayPedido   = new ArrayList<>();
 
     public static ArrayList<ModeloPedido> getArrayPedido() {

@@ -11,12 +11,20 @@ package modelo;
 public class ModeloTelefono {
     private String idTelefono;
     private int telefono;
-    private String idEmpleado;
+    
+    private ModeloEmpleado empleado;
 
     public ModeloTelefono(String idTelefono, int telefono, String idEmpleado) {
         this.idTelefono = idTelefono;
         this.telefono = telefono;
-        this.idEmpleado = idEmpleado;
+    }
+
+    public ModeloEmpleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(ModeloEmpleado empleado) {
+        this.empleado = empleado;
     }
     
 
@@ -28,9 +36,6 @@ public class ModeloTelefono {
         return telefono;
     }
 
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
 
     public void setIdTelefono(String idTelefono) {
         this.idTelefono = idTelefono;
@@ -40,8 +45,6 @@ public class ModeloTelefono {
         this.telefono = telefono;
     }
 
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
+
     
 }
