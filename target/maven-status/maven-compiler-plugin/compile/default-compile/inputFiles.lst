@@ -1,5 +1,4 @@
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/com/mycompany/restauranteappescritorio/RestauranteAppEscritorio.java
-/home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/ControladorAgregarProductos.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/ControladorBar.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/ControladorCocina.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/ControladorEmpleado.java
@@ -8,10 +7,12 @@
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/ControladorVerPedido.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/LoginControlador.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/mesero/ControladorAgregarPedido.java
+/home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/mesero/ControladorAgregarProductos.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/mesero/ControladorGenerarPago.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/mesero/ControladorMesero.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/mesero/ControladorTodosPedidos.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/controlador/mesero/ControladorVerDetallePedido.java
+/home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/dao/AgregarProductoaPedido.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/dao/CocinaDao.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/dao/EmpleadoDao.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/dao/GenerarPedidoDao.java
@@ -26,7 +27,6 @@
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/dao/dto/PedidoCocinaDto.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/dao/dto/PedidoPanaderiaDto.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/modelo/AreaProduccionModelo.java
-/home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/modelo/ModeloArea_Produccion.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/modelo/ModeloCorreo.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/modelo/ModeloEmpleado.java
 /home/emilio/NetBeansProjects/RestauranteAppEscritorio/src/main/java/modelo/ModeloMenu.java
