@@ -54,5 +54,6 @@ dao/GenerarPedidoDao.class
 controlador/mesero/ControladorGenerarPago.class
 vista/VistaGestionUsuarios$1.class
 dao/UsuarioDao.class
+controlador/mesero/ControladorAgregarPedido$1.class
 vista/VistaPrincipal$1.class
 vista/VistaVerProductosCategorias$2.class
