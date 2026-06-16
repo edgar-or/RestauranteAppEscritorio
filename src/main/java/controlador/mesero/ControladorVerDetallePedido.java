@@ -4,7 +4,11 @@
  */
 package controlador.mesero;
 
+import dao.GenerarPedidoDao;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import vista.VistaPrincipalMesero;
 import vista.VistaTodosPedidos;
 import vista.VistaVerDetallePedido;
@@ -14,39 +18,63 @@ import vista.VistaVerDetallePedido;
  * @author estud
  */
 public class ControladorVerDetallePedido {
-    private VistaVerDetallePedido vistaVerDetallePedido;
-    private VistaPrincipalMesero vistaPrincipal;
-    private VistaTodosPedidos vistaTodosPedidos;
-    private ControladorGenerarPago controladorGenerarPago;
+    private final VistaVerDetallePedido vista;
+    private final GenerarPedidoDao dao;
+    private final int idPedido;
 
-    public ControladorVerDetallePedido( VistaTodosPedidos vistaTodosPedidos) {
-        this.vistaVerDetallePedido = new VistaVerDetallePedido();
-        this.vistaPrincipal = vistaPrincipal;
-        this.vistaTodosPedidos =new VistaTodosPedidos();
-        this.controladorGenerarPago= new ControladorGenerarPago(vistaVerDetallePedido);
-        
-        vistaVerDetallePedido.btngenerarPago.addActionListener(e -> {
-            controladorGenerarPago.iniciar();
-        });
-        
-        eventos();
+    // Este es el único constructor que necesitas
+    public ControladorVerDetallePedido(VistaVerDetallePedido vista, int idPedido) {
+        this.vista = vista;
+        this.dao = new GenerarPedidoDao();
+        this.idPedido = idPedido;
+
+        configurarTabla();
+        cargarDatosPedido();
+        registrarEventos();
     }
 
-   
+    private void configurarTabla() {
+        DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"ID Prod", "Producto", "Cant.", "Subtotal", "Nota"}, 0);
+        vista.tablaPedido.setModel(modelo); // Asegúrate que en VistaVerDetallePedido la tabla se llame 'tabla'
+    }
+
+    private void cargarDatosPedido() {
+try {
+            // 1. Cargar cabecera
+            Object[] cabecera = dao.obtenerPedidoCabecera(idPedido);
+            if (cabecera != null) {
+                // Posiciones según el array devuelto por tu DAO:
+                // [0]id, [1]fecha, [2]mesa, [3]mesero, [4]total, [5]estado
+                
+                vista.lblMesa.setText((String) cabecera[2]);
+                vista.lblMesero.setText((String) cabecera[3]);
+                vista.lblTotal.setText(String.format("$%.2f", (double) cabecera[4]));
+                
+                // --- AGREGA ESTAS DOS LÍNEAS ---
+                vista.lblFecha.setText(cabecera[1].toString()); 
+                vista.lblEstado.setText((boolean) cabecera[5] ? "PAGADO" : "PENDIENTE");
+                // -------------------------------
+            }
+
+            // 2. Cargar detalles
+            List<Object[]> items = dao.obtenerDetallesPedido(idPedido);
+            DefaultTableModel modelo = (DefaultTableModel) vista.tablaPedido.getModel();
+            modelo.setRowCount(0);
+            for (Object[] item : items) {
+                modelo.addRow(item);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(vista, "Error al cargar datos: " + e.getMessage());
+        }
+    }
+
     public void iniciar() {
-        vistaVerDetallePedido.setLocationRelativeTo(null);
-        vistaVerDetallePedido.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        vistaVerDetallePedido.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        vistaVerDetallePedido.setVisible(true);
+        vista.setLocationRelativeTo(null);
+        vista.setVisible(true);
     }
 
-    private void eventos() {
-        vistaVerDetallePedido.btnCerrar.addActionListener(e -> {
-            vistaVerDetallePedido.dispose();
-
-        });
-
+    private void registrarEventos() {
+        vista.btnCerrar.addActionListener(e -> vista.dispose());
     }
-    
-    
 }

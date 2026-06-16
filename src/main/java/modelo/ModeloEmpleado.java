@@ -15,9 +15,11 @@ public class ModeloEmpleado {
     private String dui;
     private String nombre;
     private String apellido;
+    
     private UsuarioModelo usuario;
     private RolModelo rol;
     private AreaProduccionModelo area; 
+    
     private static ArrayList<ModeloTelefono> arrayTelefono = new ArrayList<>();
     private static ArrayList<ModeloCorreo>  arrayCorreo = new ArrayList<>();
     private static ArrayList<ModeloPedido>  arrayPedido = new ArrayList<>();

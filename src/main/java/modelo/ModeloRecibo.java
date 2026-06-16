@@ -19,9 +19,11 @@ public class ModeloRecibo {
     private String nombre;
     private String apellido;
     private double propina;
-    private String idPedido;
+    
+    
+    private ModeloPedido pedido;
 
-    public ModeloRecibo(String idRecibo, LocalDate fecha, LocalDate hora, double total, String metodoPago, String nombre, String apellido, double propina, String idPedido) {
+    public ModeloRecibo(String idRecibo, LocalDate fecha, LocalDate hora, double total, String metodoPago, String nombre, String apellido, double propina, ModeloPedido pedido) {
         this.idRecibo = idRecibo;
         this.fecha = fecha;
         this.hora = hora;
@@ -30,8 +32,10 @@ public class ModeloRecibo {
         this.nombre = nombre;
         this.apellido = apellido;
         this.propina = propina;
-        this.idPedido = idPedido;
+        this.pedido = pedido;
     }
+
+
 
     public String getIdRecibo() {
         return idRecibo;
@@ -65,9 +69,6 @@ public class ModeloRecibo {
         return propina;
     }
 
-    public String getIdPedido() {
-        return idPedido;
-    }
 
     public void setIdRecibo(String idRecibo) {
         this.idRecibo = idRecibo;
@@ -101,9 +102,15 @@ public class ModeloRecibo {
         this.propina = propina;
     }
 
-    public void setIdPedido(String idPedido) {
-        this.idPedido = idPedido;
+    public ModeloPedido getPedido() {
+        return pedido;
     }
+
+    public void setPedido(ModeloPedido pedido) {
+        this.pedido = pedido;
+    }
+
+
     
     
 }

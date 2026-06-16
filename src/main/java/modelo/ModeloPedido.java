@@ -17,17 +17,14 @@ public class ModeloPedido {
     private LocalDate fecha;
     private double total;
     private boolean estado;
-    private String idMesa;
-    private String idEmpleado;
+    
+    private ModeloMesa mesa;
+    private ModeloEmpleado empleado;
+    
+    private static ArrayList<ModeloRecibo> arrayRecibo = new ArrayList<>();
     private static ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido = new ArrayList<>();
 
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
 
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
 
     public static ArrayList<ModeloProducto_Pedido> getArrayProducto_Pedido() {
         return arrayProducto_Pedido;
@@ -37,14 +34,16 @@ public class ModeloPedido {
         ModeloPedido.arrayProducto_Pedido = arrayProducto_Pedido;
     }
 
-    public ModeloPedido(String idPedido, LocalDate fecha, double total, boolean estado, String idMesa, String idEmpleado) {
+    public ModeloPedido(String idPedido, LocalDate fecha, double total, boolean estado, ModeloMesa mesa, ModeloEmpleado empleado) {
         this.idPedido = idPedido;
         this.fecha = fecha;
         this.total = total;
         this.estado = estado;
-        this.idMesa = idMesa;
-        this.idEmpleado = idEmpleado;
+        this.mesa = mesa;
+        this.empleado = empleado;
     }
+
+
 
     public String getIdPedido() {
         return idPedido;
@@ -62,9 +61,6 @@ public class ModeloPedido {
         return estado;
     }
 
-    public String getIdMesa() {
-        return idMesa;
-    }
 
     public void setIdPedido(String idPedido) {
         this.idPedido = idPedido;
@@ -82,8 +78,22 @@ public class ModeloPedido {
         this.estado = estado;
     }
 
-    public void setIdMesa(String idMesa) {
-        this.idMesa = idMesa;
+    public ModeloMesa getMesa() {
+        return mesa;
     }
+
+    public void setMesa(ModeloMesa mesa) {
+        this.mesa = mesa;
+    }
+
+    public ModeloEmpleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(ModeloEmpleado empleado) {
+        this.empleado = empleado;
+    }
+
+
 
 }

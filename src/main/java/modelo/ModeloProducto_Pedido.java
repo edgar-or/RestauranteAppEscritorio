@@ -9,13 +9,16 @@ package modelo;
  * @author renec
  */
 public class ModeloProducto_Pedido {
+
     private String idPedido;
-    private ModeloProducto producto; 
-    private ModeloPedido pedido; 
+
     private int cantidad;
-    private double subTotal; 
-    private String nota; 
-    private boolean estadoOrden; 
+    private double subTotal;
+    private String nota;
+    private boolean estadoOrden;
+
+    private ModeloProducto producto;
+    private ModeloPedido pedido;    
 
     public boolean isEstadoOrden() {
         return estadoOrden;
@@ -83,12 +86,5 @@ public class ModeloProducto_Pedido {
     public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
     }
-    
-    
 
-   
-
-
-    
-    
 }

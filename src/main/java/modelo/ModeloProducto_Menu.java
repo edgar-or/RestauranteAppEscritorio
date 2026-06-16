@@ -9,30 +9,34 @@ package modelo;
  * @author renec
  */
 public class ModeloProducto_Menu {
-    private String idProducto;
-    private String idMenu;
-
-    public ModeloProducto_Menu(String idProducto, String idMenu) {
-        this.idProducto = idProducto;
-        this.idMenu = idMenu;
-    }
-
-    public void setIdProducto(String idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public void setIdMenu(String idMenu) {
-        this.idMenu = idMenu;
-    }
-
-    public String getIdProducto() {
-        return idProducto;
-    }
-
-    public String getIdMenu() {
-        return idMenu;
-    }
     
+
+    
+    private ModeloProducto producto;
+    private ModeloMenu menu;
+
+    public ModeloProducto_Menu(ModeloProducto producto, ModeloMenu menu) {
+        this.producto = producto;
+        this.menu = menu;
+    }
+
+    public ModeloProducto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(ModeloProducto producto) {
+        this.producto = producto;
+    }
+
+    public ModeloMenu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(ModeloMenu menu) {
+        this.menu = menu;
+    }
+
+
     
     
 }

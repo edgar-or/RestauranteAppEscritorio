@@ -16,8 +16,11 @@ public class ModeloProducto {
     private String nombre;
     private String descripcion;
     private double precio;
-    private String idProduccion;
+    
     private AreaProduccionModelo areaProduccion; 
+    
+    private ModeloProducto_Pedido productoPedido;
+    private ModeloProducto_Menu productoMenu;
     
 
     public AreaProduccionModelo getAreaProduccion() {
@@ -53,13 +56,15 @@ public class ModeloProducto {
         ModeloProducto.arrayProducto_Pedido = arrayProducto_Pedido;
     }
 
-    public ModeloProducto(String idProducto, String nombre, String descripcion, double precio, String idProduccion) {
+    public ModeloProducto(String idProducto, String nombre, String descripcion, double precio, AreaProduccionModelo areaProduccion) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.idProduccion = idProduccion;
+        this.areaProduccion = areaProduccion;
     }
+
+
 
     public String getIdProducto() {
         return idProducto;
@@ -77,9 +82,7 @@ public class ModeloProducto {
         return precio;
     }
 
-    public String getIdProduccion() {
-        return idProduccion;
-    }
+
 
     public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
@@ -97,8 +100,6 @@ public class ModeloProducto {
         this.precio = precio;
     }
 
-    public void setIdProduccion(String idProduccion) {
-        this.idProduccion = idProduccion;
-    }
+
 
 }
