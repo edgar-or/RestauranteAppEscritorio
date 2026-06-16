@@ -139,7 +139,7 @@ public class ControladorAgregarPedido {
         ModeloMesa mesa
                 = (ModeloMesa) vistaAgregar.comboMesa.getSelectedItem();
 
-        boolean insertado = genPedido.registrarPedido(Integer.parseInt(mesa.getIdMesa()), Integer.parseInt(empleado.getIdEmpleado()));
+        boolean insertado = genPedido.registrarPedido(Integer.parseInt(mesa.getIdMesa()),empleado.getIdEmpleado());
 
     }
 

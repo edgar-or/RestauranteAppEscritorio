@@ -25,7 +25,11 @@ ControladorEmpleado cntrlEmpleado;
         this.cntrlEmpleado = new ControladorEmpleado(vista); 
         
         vista.btnEmpleados.addActionListener(e-> {
-            cntrlEmpleado.abrirVistaEmpleados();
+            try {
+                cntrlEmpleado.abrirVistaEmpleados();
+            } catch (Exception ex) {
+                System.getLogger(ControladorPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
             
         });
         

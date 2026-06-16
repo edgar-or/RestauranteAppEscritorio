@@ -71,4 +71,10 @@ public class AreaProduccionModelo {
         this.idEmpleado = idEmpleado;
     }
 
+    public String toString() {
+        return nombre;
+    }
+    
+    
+
 }
