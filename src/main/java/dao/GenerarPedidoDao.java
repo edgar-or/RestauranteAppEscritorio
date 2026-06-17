@@ -250,6 +250,38 @@ public class GenerarPedidoDao {
         }
         return null;
     }
-    
-    
+
+    public boolean eliminarPedidoCompleto(int idPedido) throws Exception {
+        String sqlDetalles = "DELETE FROM public.producto_pedido WHERE idpedido = ?";
+        String sqlPedido = "DELETE FROM public.pedido WHERE idpedido = ?";
+
+        Connection conn = Conexion.getConnection();
+        conn.setAutoCommit(false);
+
+        try {
+            // 1. Limpiamos cualquier rastro en la tabla detalle
+            try (PreparedStatement psDetalles = conn.prepareStatement(sqlDetalles)) {
+                psDetalles.setInt(1, idPedido);
+                psDetalles.executeUpdate();
+            }
+
+            // 2. Eliminamos definitivamente la cabecera del pedido
+            int filasAfectadas = 0;
+            try (PreparedStatement psPedido = conn.prepareStatement(sqlPedido)) {
+                psPedido.setInt(1, idPedido);
+                filasAfectadas = psPedido.executeUpdate();
+            }
+
+            conn.commit();
+            return filasAfectadas > 0;
+
+        } catch (Exception e) {
+            conn.rollback();
+            throw e;
+        } finally {
+            conn.setAutoCommit(true);
+            conn.close();
+        }
+    }
+
 }
