@@ -66,4 +66,10 @@ public class AreaProduccionModelo {
 
 
 
+    public String toString() {
+        return nombre;
+    }
+    
+    
+
 }

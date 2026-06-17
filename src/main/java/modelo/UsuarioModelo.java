@@ -52,4 +52,12 @@ public class UsuarioModelo {
         this.password = password;
     }
 
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
 }

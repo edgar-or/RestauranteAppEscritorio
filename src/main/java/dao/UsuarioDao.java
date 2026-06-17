@@ -56,7 +56,7 @@ public class UsuarioDao {
                 AreaProduccionModelo area = new AreaProduccionModelo();
                 area.setNombre(rs.getString("nombreArea"));
 
-                emp.setIdEmpleado(rs.getString("idEmpleado"));
+                emp.setIdEmpleado(rs.getInt("idEmpleado"));
                 emp.setRol(rol);
                 emp.setUsuario(u);
                 emp.setArea(area);

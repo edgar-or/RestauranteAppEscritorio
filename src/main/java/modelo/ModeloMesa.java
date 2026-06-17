@@ -72,7 +72,7 @@ public class ModeloMesa {
 
     @Override
     public String toString() {
-        return "Mesa: " + numeroMesa;
+        return "Mesa: " + numeroMesa + " - " + capacidad + " Personas ";
     }
     
     

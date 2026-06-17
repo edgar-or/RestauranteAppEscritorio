@@ -4,10 +4,12 @@
  */
 package controlador;
 
+import dao.CocinaDao;
 import dao.PedidoBarDao;
 import dao.dto.PedidoBarDto;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import modelo.ModeloProducto_Pedido;
@@ -20,6 +22,8 @@ import vista.VistaLogin;
  */
 public class ControladorBar {
     VistaBar visBar; 
+        private List<ModeloProducto_Pedido> listaPedidos;
+
 
     public ControladorBar(VistaBar visBar) {
         this.visBar = visBar;
@@ -30,14 +34,13 @@ public class ControladorBar {
         
     }
     
-      private void iniciarAutoRefresh() {
-
-        Timer timer = new Timer(3000, e -> { // 3000 ms = 3 segundos
+private void iniciarAutoRefresh() {
+    Timer timer = new Timer(6000, e -> {
             cargarTabla();
-        });
-
-        timer.start();
-    }
+        
+    });
+    timer.start();
+}
     
     public void iniciar(){
         visBar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,19 +64,20 @@ public class ControladorBar {
 
     try {
         PedidoBarDao dao = new PedidoBarDao();
-        List<ModeloProducto_Pedido> lista = dao.listar();
+        //List<ModeloProducto_Pedido> lista = dao.listar();
+            listaPedidos = dao.listar();
 
         DefaultTableModel modelo = (DefaultTableModel) visBar.tablaBar.getModel();
 
             modelo.setRowCount(0); // limpia filas
 
-            for (ModeloProducto_Pedido orden : lista) {
+            for (ModeloProducto_Pedido orden : listaPedidos) {
 
                 modelo.addRow(new Object[]{
                     orden.getCantidad(),
                     orden.getProducto().getNombre(),
                     orden.getNota(),
-                    orden.isEstadoOrden()
+                    orden.isEstadoOrden() ? "Terminado" : "Pendiente"
                 });
 
             }
@@ -92,6 +96,52 @@ public class ControladorBar {
         VistaLogin login= new VistaLogin();
         LoginControlador ctrl= new LoginControlador();
         ctrl.iniciar();
+        });
+         
+         visBar.btnTerminado.addActionListener(e -> {
+            int fila = visBar.tablaBar.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(visBar, "Seleccione una Bebida");
+                return;
+            }
+            try {
+                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+
+                PedidoBarDao dao = new PedidoBarDao();
+                dao.actualizarEstado(pedido.getIdPedido(),
+                        pedido.getProducto().getIdProducto(), true);
+
+                cargarTabla();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+         
+          visBar.btnNoTermnadao.addActionListener(e -> {
+            int fila = visBar.tablaBar.getSelectedRow();
+
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(
+                        visBar, "Seleccione un platillo");
+                return;
+            }
+
+            try {
+
+                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+
+                PedidoBarDao dao = new PedidoBarDao();
+
+                dao.actualizarEstado(pedido.getIdPedido(),
+                        pedido.getProducto().getIdProducto(),
+                        false);
+
+                cargarTabla();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
         });
     }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author renec
  */
 public class ModeloEmpleado {
-    private String idEmpleado;
+    private int  idEmpleado;
     private String dui;
     private String nombre;
     private String apellido;
@@ -83,7 +83,7 @@ public class ModeloEmpleado {
     public ModeloEmpleado() {
     }
 
-    public String getIdEmpleado() {
+    public int getIdEmpleado() {
         return idEmpleado;
     }
 
@@ -100,7 +100,7 @@ public class ModeloEmpleado {
     }
 
 
-    public void setIdEmpleado(String idEmpleado) {
+    public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 

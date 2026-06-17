@@ -84,12 +84,13 @@ public class ControladorCocina {
 
     private void iniciarAutoRefresh() {
 
-        Timer timer = new Timer(5000, e -> { // 3000 ms = 3 segundos
-            cargarTabla();
-        });
+    Timer timer = new Timer(6000, e -> {
+        cargarTabla();
+    });
 
-        timer.start();
-    }
+    timer.start();
+}
+
 
     private void eventos() {
         visCocina.btnCerrarsesion.addActionListener(e -> {
@@ -109,9 +110,7 @@ public class ControladorCocina {
             try {
                 ModeloProducto_Pedido pedido = listaPedidos.get(fila);
 
-                CocinaDao dao = new CocinaDao();
-                dao.actualizarEstado(pedido.getIdPedido(),
-                        pedido.getProducto().getIdProducto(), true);
+                CocinaDao dao = new CocinaDao(); dao.actualizarEstado(pedido.getIdPedido(),pedido.getProducto().getIdProducto(), true);
 
                 cargarTabla();
             } catch (Exception ex) {
