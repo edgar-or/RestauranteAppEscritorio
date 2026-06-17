@@ -9,16 +9,20 @@ package modelo;
  * @author renec
  */
 public class ModeloTelefono {
-    private String idTelefono;
-    private int telefono;
+    private int idTelefono;
+    private String telefono;
     
     private ModeloEmpleado empleado;
 
-    public ModeloTelefono(String idTelefono, int telefono, String idEmpleado) {
+    public ModeloTelefono(int idTelefono, String telefono, String idEmpleado) {
         this.idTelefono = idTelefono;
         this.telefono = telefono;
     }
 
+    public ModeloTelefono() {
+    }
+
+    
     public ModeloEmpleado getEmpleado() {
         return empleado;
     }
@@ -28,20 +32,20 @@ public class ModeloTelefono {
     }
     
 
-    public String getIdTelefono() {
+    public int getIdTelefono() {
         return idTelefono;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
 
-    public void setIdTelefono(String idTelefono) {
+    public void setIdTelefono(int idTelefono) {
         this.idTelefono = idTelefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

@@ -81,7 +81,7 @@ public class ControladorCocina {
 
     private void iniciarAutoRefresh() {
 
-        Timer timer = new Timer(3000, e -> { // 3000 ms = 3 segundos
+        Timer timer = new Timer(6000, e -> { 
             cargarTabla();
         });
 

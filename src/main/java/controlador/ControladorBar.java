@@ -30,14 +30,13 @@ public class ControladorBar {
         
     }
     
-      private void iniciarAutoRefresh() {
-
-        Timer timer = new Timer(3000, e -> { // 3000 ms = 3 segundos
+private void iniciarAutoRefresh() {
+    Timer timer = new Timer(6000, e -> {
             cargarTabla();
-        });
-
-        timer.start();
-    }
+        
+    });
+    timer.start();
+}
     
     public void iniciar(){
         visBar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

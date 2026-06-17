@@ -66,11 +66,11 @@ public class ControladorAgregarProductos {
     private void registrarEventos() {
  
         // --- BEBIDAS ---
-        visProduct.btnBuscar.addActionListener(e ->
-            buscar(ID_BEBIDAS, visProduct.jTextField1.getText().trim(),
+        visProduct.btnBuscarB.addActionListener(e ->
+            buscar(ID_BEBIDAS, visProduct.txtbuscarB.getText().trim(),
                    visProduct.tablaBebidas));
  
-        visProduct.btnAgregar.addActionListener(e -> agregar(visProduct.tablaBebidas));
+        visProduct.btnBuscarB.addActionListener(e -> agregar(visProduct.tablaBebidas));
  
         // --- PLATILLOS ---
         visProduct.btnBuscarPlatillos.addActionListener(e ->

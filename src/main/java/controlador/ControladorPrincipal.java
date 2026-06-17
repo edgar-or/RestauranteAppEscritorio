@@ -18,6 +18,8 @@ public class ControladorPrincipal {
   VistaPrincipal vista;
  LoginControlador logingControlador;
 ControladorEmpleado cntrlEmpleado;  
+ControladorGestionMenu gestionMenu; 
+ControladorMesa contrlMesa;
 
     public ControladorPrincipal(VistaPrincipal vista) {
         this.vista = vista;
@@ -33,6 +35,22 @@ ControladorEmpleado cntrlEmpleado;
             
         });
         
+        vista.btnCerrarSesion.addActionListener(e->{ cerrarSesion();});
+        
+        vista.btnMenu.addActionListener(e-> { try {
+            gestionMenu = new ControladorGestionMenu();
+            } catch (Exception ex) {
+                System.getLogger(ControladorPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+});
+        
+        vista.btnMesas.addActionListener(e-> { try {
+            contrlMesa = new ControladorMesa();
+            } catch (Exception ex) {
+                System.getLogger(ControladorPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+});
+        
         
     }
 
@@ -42,6 +60,15 @@ ControladorEmpleado cntrlEmpleado;
         vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
         vista.setVisible(true);
+    }
+    
+     private void cerrarSesion(){
+        
+        vista.dispose();
+        LoginControlador log = new LoginControlador(); 
+        
+        log.iniciar();
+        
     }
  
     

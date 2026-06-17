@@ -48,14 +48,14 @@ public class ControladorTodosPedidos {
     }
 
    private void abrirDetalle() {
-    int fila = vistaTodosPedidos.jTable1.getSelectedRow();
+    int fila = vistaTodosPedidos.tablaPedidos.getSelectedRow();
     if (fila == -1) {
         JOptionPane.showMessageDialog(vistaTodosPedidos, "Seleccione un pedido");
         return;
     }
 
     // Obtenemos el ID de la primera columna
-    int idPedido = (int) vistaTodosPedidos.jTable1.getValueAt(fila, 0);
+    int idPedido = (int) vistaTodosPedidos.tablaPedidos.getValueAt(fila, 0);
 
     // Abrimos la vista y le pasamos el ID al nuevo controlador
     VistaVerDetallePedido vistaDetalle = new VistaVerDetallePedido();
@@ -66,13 +66,13 @@ public class ControladorTodosPedidos {
     private void configurarTabla() {
         DefaultTableModel modelo = new DefaultTableModel(
                 new String[]{"ID", "Fecha", "Mesa", "Total", "Estado"}, 0);
-        vistaTodosPedidos.jTable1.setModel(modelo);
+        vistaTodosPedidos.tablaPedidos.setModel(modelo);
     }
 
     private void cargarDatosEnTabla() {
         try {
             List<Object[]> pedidos = dao.listarTodosLosPedidos(); // Método que creamos arriba
-            DefaultTableModel modelo = (DefaultTableModel) vistaTodosPedidos.jTable1.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) vistaTodosPedidos.tablaPedidos.getModel();
             modelo.setRowCount(0); // Limpiar tabla antes de cargar
 
             for (Object[] fila : pedidos) {

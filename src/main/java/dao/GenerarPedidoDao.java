@@ -19,7 +19,7 @@ import modelo.ModeloMesa;
 public class GenerarPedidoDao {
 
     private static final String LISTAR_MESAS
-            = "SELECT idmesa, numeromesa FROM mesa";
+            = "SELECT idmesa, numeromesa, capacidad FROM mesa where estado = TRUE";
 
     private static final String INSERTAR_PEDIDO
             = "INSERT INTO public.pedido (fecha, total, estado, idmesa, idempleado) "
@@ -41,6 +41,7 @@ public class GenerarPedidoDao {
 
                 // ¡AQUÍ ESTABA EL ERROR! Cambiamos getString por getInt
                 m.setNumeroMesa(rs.getInt("numeromesa"));
+                m.setCapacidad(rs.getInt("capacidad"));
 
                 lista.add(m);
             }
