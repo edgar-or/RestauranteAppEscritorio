@@ -26,15 +26,13 @@ public class ControladorAgregarPedido {
     private GenerarPedidoDao genPedido;
     private ModeloEmpleado empleado;
 
-    // Guarda únicamente las filas agregadas en la sesión actual
     private List<int[]> detallesNuevos = new ArrayList<>();
     private List<String> notasNuevas = new ArrayList<>();
 
     private double totalAcumulado = 0.0;
-    private int idPedidoActual = -1; // -1 significa pedido nuevo, de lo contrario guarda el ID activo
-    private int cantidadItemsExistentes = 0; // Controla cuáles filas pertenecen a la BD
+    private int idPedidoActual = -1; 
+    private int cantidadItemsExistentes = 0; 
 
-    // Estado del producto seleccionado transitoriamente
     private int idProductoSeleccionado = -1;
     private String nombreProductoSeleccionado = "";
     private double precioProductoSeleccionado = 0.0;
@@ -49,7 +47,6 @@ public class ControladorAgregarPedido {
         llenarComboMesas();
         registrarEventos();
 
-        // Carga inicial automática de la primera mesa que aparezca seleccionada
         cargarPedidoDeMesaSeleccionada();
     }
 
@@ -77,7 +74,6 @@ public class ControladorAgregarPedido {
 
     public void llenarComboMesas() {
         try {
-            // Limpieza preventiva antes de consultar la base de datos
             vistaAgregar.comboMesa.removeAllItems();
             ArrayList<ModeloMesa> lista = genPedido.llenarComboMesa();
             for (ModeloMesa m : lista) {
@@ -92,9 +88,7 @@ public class ControladorAgregarPedido {
     }
 
     private void registrarEventos() {
-        // Escucha cambios en el JComboBox de mesas
         vistaAgregar.comboMesa.addActionListener(e -> cargarPedidoDeMesaSeleccionada());
-
         vistaAgregar.btnProductos.addActionListener(e -> abrirVistaProductos());
         vistaAgregar.btnAgregarItem.addActionListener(e -> agregarItemDesdeVista());
         vistaAgregar.btnQuitarItem.addActionListener(e -> quitarItem());
@@ -103,18 +97,15 @@ public class ControladorAgregarPedido {
         vistaAgregar.btnCerrar.addActionListener(e -> vistaAgregar.dispose());
     }
 
-    // Consulta la BD y rellena la UI según la mesa seleccionada
     private void cargarPedidoDeMesaSeleccionada() {
         Object item = vistaAgregar.comboMesa.getSelectedItem();
 
-        // CONTROL ANTICRASHEO: Filtra nulos y cadenas de texto residuales de NetBeans
         if (item == null || !(item instanceof ModeloMesa)) {
             return;
         }
 
         ModeloMesa mesa = (ModeloMesa) item;
 
-        // Reset completo de la interfaz de forma limpia
         ((DefaultTableModel) vistaAgregar.tablaItems.getModel()).setRowCount(0);
         detallesNuevos.clear();
         notasNuevas.clear();
@@ -158,8 +149,6 @@ public class ControladorAgregarPedido {
             e.printStackTrace();
         }
     }
-
-
 
     private void abrirVistaProductos() {
         VistaProductos visProducto = new VistaProductos();
@@ -213,9 +202,10 @@ public class ControladorAgregarPedido {
         totalAcumulado += subtotal;
         vistaAgregar.lblTotal.setText(String.format("$%.2f", totalAcumulado));
 
+        // Reseteo seguro de variables temporales
         idProductoSeleccionado = -1;
         vistaAgregar.txtPrecio.setText("");
-        vistaAgregar.spinnerCantidad.setValue(0);
+        vistaAgregar.spinnerCantidad.setValue(1); // CORREGIDO: Se cambia a 1 por usabilidad estándar
         vistaAgregar.txtDescripcion.setText("");
     }
 
@@ -229,7 +219,19 @@ public class ControladorAgregarPedido {
         }
 
         int idProducto = (int) vistaAgregar.tablaItems.getValueAt(fila, 0);
-        String subtotalStr = vistaAgregar.tablaItems.getValueAt(fila, 4).toString().replace("$", "").replace(",", ".");
+        
+        // CORREGIDO: Parseo robusto del subtotal inmune a configuraciones regionales (puntos y comas)
+        String subtotalStr = vistaAgregar.tablaItems.getValueAt(fila, 4).toString()
+                .replace("$", "")
+                .replace(" ", "")
+                .trim();
+        
+        if (subtotalStr.contains(",") && subtotalStr.contains(".")) {
+            subtotalStr = subtotalStr.replace(",", ""); // Remueve separador de miles si existen ambos
+        } else if (subtotalStr.contains(",")) {
+            subtotalStr = subtotalStr.replace(",", "."); // Convierte coma decimal a punto decimal
+        }
+        
         double subtotalFila = Double.parseDouble(subtotalStr);
 
         totalAcumulado -= subtotalFila;
@@ -272,7 +274,7 @@ public class ControladorAgregarPedido {
                 }
                 int idPedido = genPedido.guardarPedidoCompleto(
                         Integer.parseInt(mesa.getIdMesa()),
-                        empleado.getIdEmpleado(),totalAcumulado, detallesNuevos, notasNuevas);
+                        empleado.getIdEmpleado(), totalAcumulado, detallesNuevos, notasNuevas);
                 if (idPedido > 0) {
                     JOptionPane.showMessageDialog(vistaAgregar, "Pedido #" + idPedido + " generado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     cargarPedidoDeMesaSeleccionada();

@@ -117,7 +117,7 @@ private void iniciarAutoRefresh() {
             }
         });
          
-          visBar.btnNoTermnadao.addActionListener(e -> {
+          visBar.btnNoTerminado.addActionListener(e -> {
             int fila = visBar.tablaBar.getSelectedRow();
 
             if (fila == -1) {
