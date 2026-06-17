@@ -10,6 +10,7 @@ import dao.dto.PedidoBarDto;
 import dao.dto.PedidoCocinaDto;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import modelo.ModeloProducto_Pedido;
@@ -22,9 +23,10 @@ import vista.VistaLogin;
  */
 public class ControladorCocina {
 
-    VistaCocina visCocina;
-    VistaLogin visLogin;
-    LoginControlador loginContro;
+    private VistaCocina visCocina;
+    private VistaLogin visLogin;
+    private LoginControlador loginContro;
+    private List<ModeloProducto_Pedido> listaPedidos;
 
     public ControladorCocina(VistaCocina visCocina) {
         this.visCocina = visCocina;
@@ -57,19 +59,20 @@ public class ControladorCocina {
         try {
 
             CocinaDao dao = new CocinaDao();
-            List<ModeloProducto_Pedido> lista = dao.listar();
+            // List<ModeloProducto_Pedido> lista = dao.listar();
+            listaPedidos = dao.listar();
 
             DefaultTableModel modelo = (DefaultTableModel) visCocina.tablaCocina.getModel();
 
             modelo.setRowCount(0); // limpia filas
 
-            for (ModeloProducto_Pedido orden : lista) {
+            for (ModeloProducto_Pedido orden : listaPedidos) {
 
                 modelo.addRow(new Object[]{
                     orden.getCantidad(),
                     orden.getProducto().getNombre(),
                     orden.getNota(),
-                    orden.isEstadoOrden()
+                    orden.isEstadoOrden() ? "Terminado" : "Pendiente"
                 });
 
             }
@@ -81,7 +84,7 @@ public class ControladorCocina {
 
     private void iniciarAutoRefresh() {
 
-        Timer timer = new Timer(3000, e -> { // 3000 ms = 3 segundos
+        Timer timer = new Timer(5000, e -> { // 3000 ms = 3 segundos
             cargarTabla();
         });
 
@@ -97,6 +100,51 @@ public class ControladorCocina {
             ctrl.iniciar();
         });
 
+        visCocina.btnTerminado.addActionListener(e -> {
+            int fila = visCocina.tablaCocina.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(visCocina, "Seleccione un Platillo");
+                return;
+            }
+            try {
+                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+
+                CocinaDao dao = new CocinaDao();
+                dao.actualizarEstado(pedido.getIdPedido(),
+                        pedido.getProducto().getIdProducto(), true);
+
+                cargarTabla();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        visCocina.btnNoTerminado.addActionListener(e -> {
+            int fila = visCocina.tablaCocina.getSelectedRow();
+
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(
+                        visCocina, "Seleccione un platillo");
+                return;
+            }
+
+            try {
+
+                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+
+                CocinaDao dao = new CocinaDao();
+
+                dao.actualizarEstado(pedido.getIdPedido(),
+                        pedido.getProducto().getIdProducto(),
+                        false);
+
+                cargarTabla();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        });
     }
 
 }

@@ -21,9 +21,17 @@ import modelo.ModeloProducto_Pedido;
  * @author ayala
  */
 public class CocinaDao {
-    
-     private static final String SELECT_PEDIDOS_COCINA =
-        "SELECT pp.cantidad as cantidad ,  p.nombre AS nombreProducto, pp.nota as nota, pp.estado_orden as estado  FROM producto p INNER JOIN producto_pedido pp ON p.idProducto = pp.idProducto INNER JOIN pedido ped ON pp.idPedido = ped.idPedido INNER JOIN empleado e ON ped.idEmpleado = e.idEmpleado INNER JOIN area_produccion ap ON p.idproduccion = ap.idproduccion WHERE pp.estado_orden  = false AND ap.nombre   = 'Cocina'";
+
+    private static final String SELECT_PEDIDOS_COCINA= "SELECT pp.idpedido, pp.idproducto, pp.cantidad as cantidad, "
+            + "p.nombre AS nombreProducto, "
+            + "pp.nota as nota, "
+            + "pp.estado_orden as estado "
+            + "FROM producto p "
+            + "INNER JOIN producto_pedido pp ON p.idProducto = pp.idProducto "
+            + "INNER JOIN pedido ped ON pp.idPedido = ped.idPedido "
+            + "INNER JOIN empleado e ON ped.idEmpleado = e.idEmpleado "
+            + "INNER JOIN area_produccion ap ON p.idproduccion = ap.idproduccion "
+            + "WHERE ap.nombre = 'Cocina'";
 
     public List<ModeloProducto_Pedido> listar() throws Exception {
 
@@ -36,16 +44,20 @@ public class CocinaDao {
 
             while (rs.next()) {
 
-                ModeloProducto_Pedido orden = new ModeloProducto_Pedido(); 
-                ModeloProducto product = new ModeloProducto(); 
-                AreaProduccionModelo area = new AreaProduccionModelo(); 
-                
-               product.setNombre(rs.getString("nombreProducto"));
-              orden.setCantidad(rs.getInt("cantidad") );
-              orden.setNota(rs.getString("nota"));
-              orden.setEstadoOrden(rs.getBoolean("estado"));
-              
-              orden.setProducto(product);
+                ModeloProducto_Pedido orden = new ModeloProducto_Pedido();
+                ModeloProducto product = new ModeloProducto();
+                AreaProduccionModelo area = new AreaProduccionModelo();
+
+// se le vas a egregar esas dos campos al dao //idpedido 
+                orden.setIdPedido(rs.getString("idpedido"));
+                product.setIdProducto(rs.getString("idproducto"));
+//
+                product.setNombre(rs.getString("nombreProducto"));
+                orden.setCantidad(rs.getInt("cantidad"));
+                orden.setNota(rs.getString("nota"));
+                orden.setEstadoOrden(rs.getBoolean("estado"));
+
+                orden.setProducto(product);
 
                 lista.add(orden);
             }
@@ -59,5 +71,32 @@ public class CocinaDao {
 
         return lista;
     }
-    
+
+    public void actualizarEstado(String idPedido, String idProducto, boolean estado) throws Exception {
+
+        String sql = "UPDATE producto_pedido "
+                + "SET estado_orden = ? "
+                + "WHERE idpedido = ? "
+                + "AND idproducto = ?";
+
+        Connection conn = Conexion.getConnection();
+
+        try {
+
+            PreparedStatement ps
+                    = conn.prepareStatement(sql);
+
+            ps.setBoolean(1, estado);
+            ps.setInt(2, Integer.parseInt(idPedido));
+            ps.setInt(3, Integer.parseInt(idProducto));
+
+            ps.executeUpdate();
+
+            ps.close();
+
+        } finally {
+            conn.close();
+        }
+    }
+
 }
