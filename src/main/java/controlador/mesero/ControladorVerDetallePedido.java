@@ -11,6 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import vista.VistaProductos; // Importamos la vista del menú de productos
 import vista.VistaVerDetallePedido;
@@ -34,6 +35,7 @@ public class ControladorVerDetallePedido {
         configurarTabla();
         cargarDatosPedido();
         registrarEventos();
+        iniciarAutoRefresh();
     }
 
     /**
@@ -55,11 +57,21 @@ public class ControladorVerDetallePedido {
             Object[] cabecera = dao.obtenerPedidoCabecera(idPedido);
             if (cabecera != null) {
                 // Posiciones del array según tu consulta: [0]id, [1]fecha, [2]mesa, [3]mesero, [4]total, [5]estado
-                vista.lblMesa.setText((String) cabecera[2]);
-                vista.lblMesero.setText((String) cabecera[3]);
-                vista.lblTotal.setText(String.format("$%.2f", (double) cabecera[4]));
-                vista.lblFecha.setText(cabecera[1].toString());
-                vista.lblEstado.setText((boolean) cabecera[5] ? "PAGADO" : "PENDIENTE");
+                if (cabecera != null) {
+
+                    vista.lblMesa.setText((String) cabecera[2]);
+                    vista.lblMesero.setText((String) cabecera[3]);
+                    vista.lblFecha.setText(cabecera[1].toString());
+                    vista.lblEstado.setText((boolean) cabecera[5] ? "PAGADO" : "PENDIENTE");
+
+                    double subtotal = (double) cabecera[4];
+                    double propina = subtotal * 0.10;
+                    double totalFinal = subtotal + propina;
+
+                    vista.lblSubtotal.setText(String.format("$%.2f", subtotal));
+                    vista.lblPropina.setText(String.format("$%.2f", propina));
+                    vista.lblTotal.setText(String.format("$%.2f", totalFinal));
+                };
             }
 
             // 2. Cargar las líneas de producto en la JTable
@@ -218,5 +230,18 @@ public class ControladorVerDetallePedido {
                 // Aquí mandas a llamar tus métodos de impresión térmica
             }
         });
+        vista.btnActualizar.addActionListener(e -> {
+            cargarDatosPedido();
+
+        });
+    }
+
+    private void iniciarAutoRefresh() {
+
+        Timer timer = new Timer(3000, e -> {
+            cargarDatosPedido();
+        });
+
+        timer.start();
     }
 }

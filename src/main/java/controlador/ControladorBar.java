@@ -21,8 +21,8 @@ import vista.VistaLogin;
  * @author ayala
  */
 public class ControladorBar {
-    VistaBar visBar; 
-        private List<ModeloProducto_Pedido> listaPedidos;
+    private VistaBar visBar; 
+    private List<ModeloProducto_Pedido> listaPedidos;
 
 
     public ControladorBar(VistaBar visBar) {
@@ -117,7 +117,7 @@ private void iniciarAutoRefresh() {
             }
         });
          
-          visBar.btnNoTerminado.addActionListener(e -> {
+          visBar.btnNoTermnadao.addActionListener(e -> {
             int fila = visBar.tablaBar.getSelectedRow();
 
             if (fila == -1) {
