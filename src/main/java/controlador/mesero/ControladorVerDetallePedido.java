@@ -36,6 +36,7 @@ public class ControladorVerDetallePedido {
         cargarDatosPedido();
         registrarEventos();
         iniciarAutoRefresh();
+        recargar();
     }
 
     /**
@@ -234,6 +235,11 @@ public class ControladorVerDetallePedido {
             cargarDatosPedido();
 
         });
+
+    }
+
+    public void recargar() {
+        cargarDatosPedido();
     }
 
     private void iniciarAutoRefresh() {

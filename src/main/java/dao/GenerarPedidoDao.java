@@ -2,6 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+ /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package dao;
 
 import dao.conexion.Conexion;
@@ -19,7 +23,7 @@ import modelo.ModeloMesa;
 public class GenerarPedidoDao {
 
     private static final String LISTAR_MESAS
-            = "SELECT idmesa, numeromesa, capacidad FROM mesa where estado = TRUE";
+            = "SELECT idmesa, numeromesa FROM mesa";
 
     private static final String INSERTAR_PEDIDO
             = "INSERT INTO public.pedido (fecha, total, estado, idmesa, idempleado) "
@@ -27,7 +31,10 @@ public class GenerarPedidoDao {
 
     private static final String INSERTAR_DETALLE
             = "INSERT INTO public.producto_pedido (idproducto, idpedido, cantidad, sub_total, nota) "
-            + "VALUES (?, ?, ?, ?, ?)";
+            + "VALUES (?, ?, ?, ?, ?) "
+            + "ON CONFLICT (idproducto, idpedido) DO UPDATE SET "
+            + "cantidad = producto_pedido.cantidad + EXCLUDED.cantidad, "
+            + "sub_total = producto_pedido.sub_total + EXCLUDED.sub_total";
 
     public ArrayList<ModeloMesa> llenarComboMesa() throws Exception {
         ArrayList<ModeloMesa> lista = new ArrayList<>();
@@ -39,9 +46,7 @@ public class GenerarPedidoDao {
                 ModeloMesa m = new ModeloMesa();
                 m.setIdMesa(rs.getString("idmesa"));
 
-                // ¡AQUÍ ESTABA EL ERROR! Cambiamos getString por getInt
                 m.setNumeroMesa(rs.getInt("numeromesa"));
-                m.setCapacidad(rs.getInt("capacidad"));
 
                 lista.add(m);
             }
@@ -96,10 +101,53 @@ public class GenerarPedidoDao {
         }
     }
 
-    // =================================================================
-    // NUEVOS MÉTODOS PARA COMPORTAMIENTO DINÁMICO POR MESA
-    // =================================================================
-    // Busca si la mesa tiene un pedido abierto (estado = false)
+    public boolean eliminarPedidoCompleto(int idPedido) throws Exception {
+        String sqlDetalles = "DELETE FROM public.producto_pedido WHERE idpedido = ?";
+        String sqlPedido = "DELETE FROM public.pedido WHERE idpedido = ?";
+
+        Connection conn = Conexion.getConnection();
+        conn.setAutoCommit(false);
+
+        try {
+            // 1. Limpiamos cualquier rastro en la tabla detalle
+            try (PreparedStatement psDetalles = conn.prepareStatement(sqlDetalles)) {
+                psDetalles.setInt(1, idPedido);
+                psDetalles.executeUpdate();
+            }
+
+            // 2. Eliminamos definitivamente la cabecera del pedido
+            int filasAfectadas = 0;
+            try (PreparedStatement psPedido = conn.prepareStatement(sqlPedido)) {
+                psPedido.setInt(1, idPedido);
+                filasAfectadas = psPedido.executeUpdate();
+            }
+
+            conn.commit();
+            return filasAfectadas > 0;
+
+        } catch (Exception e) {
+            conn.rollback();
+            throw e;
+        } finally {
+            conn.setAutoCommit(true);
+            conn.close();
+        }
+    }
+
+    public boolean registrarPedido(int idMesa, int idEmpleado) throws Exception {
+        Connection conn = Conexion.getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(INSERTAR_PEDIDO)) {
+            ps.setDouble(1, 0.0);
+            ps.setInt(2, idMesa);
+            ps.setInt(3, idEmpleado);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } finally {
+            conn.close();
+        }
+    }
+
     public int obtenerIdPedidoActivo(int idMesa) throws Exception {
         String sql = "SELECT idpedido FROM public.pedido WHERE idmesa = ? AND estado = false LIMIT 1";
         try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -110,10 +158,27 @@ public class GenerarPedidoDao {
                 }
             }
         }
-        return -1; // No existe pedido activo
+        return -1;
     }
 
-    // Obtiene todos los productos asociados a ese pedido activo
+    public void insertarLineaDetalle(int idPedido, int idProducto, int cantidad, double subtotal, String nota) throws Exception {
+
+        String sql = "INSERT INTO producto_pedido "
+                + "(idproducto,idpedido,cantidad,sub_total,nota) "
+                + "VALUES (?,?,?,?,?)";
+
+        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idProducto);
+            ps.setInt(2, idPedido);
+            ps.setInt(3, cantidad);
+            ps.setDouble(4, subtotal);
+            ps.setString(5, nota);
+
+            ps.executeUpdate();
+        }
+    }
+
     public List<Object[]> obtenerDetallesPedido(int idPedido) throws Exception {
         List<Object[]> lista = new ArrayList<>();
         String sql = "SELECT pp.idproducto, p.nombre, pp.cantidad, pp.sub_total, pp.nota "
@@ -137,7 +202,6 @@ public class GenerarPedidoDao {
         return lista;
     }
 
-    // Agrega nuevos ítems a un pedido existente y actualiza su total global
     public boolean guardarItemsEnPedidoExistente(int idPedido, double totalFinal, List<int[]> detallesNuevos, List<String> notasNuevas) throws Exception {
         Connection conn = Conexion.getConnection();
         conn.setAutoCommit(false);
@@ -175,7 +239,6 @@ public class GenerarPedidoDao {
         }
     }
 
-    // Elimina un producto específico de la base de datos si se quita de la tabla
     public void eliminarProductoDePedido(int idPedido, int idProducto, double nuevoTotal) throws Exception {
         Connection conn = Conexion.getConnection();
         conn.setAutoCommit(false);
@@ -224,7 +287,6 @@ public class GenerarPedidoDao {
         return lista;
     }
 
-    // Obtiene los datos generales (cabecera) para la VistaVerDetallePedido
     public Object[] obtenerPedidoCabecera(int idPedido) throws Exception {
         String sql = "SELECT p.idpedido, p.fecha, m.numeromesa, e.nombre AS mesero, p.total, p.estado "
                 + "FROM public.pedido p "
@@ -251,54 +313,58 @@ public class GenerarPedidoDao {
         return null;
     }
 
-    public boolean eliminarPedidoCompleto(int idPedido) throws Exception {
-        String sqlDetalles = "DELETE FROM public.producto_pedido WHERE idpedido = ?";
-        String sqlPedido = "DELETE FROM public.pedido WHERE idpedido = ?";
+    public boolean marcarPedidoPagado(int idPedido) throws Exception {
+        String sql = "UPDATE public.pedido SET estado = true WHERE idpedido = ?";
+        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idPedido);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    public boolean existeReciboPedido(int idPedido) throws Exception {
+        String sql = "SELECT 1 FROM public.recibo WHERE idpedido = ? LIMIT 1";
+        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idPedido);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
+    public boolean registrarPago(int idPedido, double total, String metodoPago,
+            String nombre, String apellido, double propina) throws Exception {
+        String sqlRecibo = "INSERT INTO public.recibo "
+                + "(fecha, hora, total, metodopago, nombre, apellido, propina, idpedido) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlPedido = "UPDATE public.pedido SET estado = true WHERE idpedido = ?";
 
         Connection conn = Conexion.getConnection();
         conn.setAutoCommit(false);
-
         try {
-            // 1. Limpiamos cualquier rastro en la tabla detalle
-            try (PreparedStatement psDetalles = conn.prepareStatement(sqlDetalles)) {
-                psDetalles.setInt(1, idPedido);
-                psDetalles.executeUpdate();
+            try (PreparedStatement ps = conn.prepareStatement(sqlRecibo)) {
+                long ahora = System.currentTimeMillis();
+                ps.setDate(1, new java.sql.Date(ahora));
+                ps.setTime(2, new java.sql.Time(ahora));
+                ps.setDouble(3, total);
+                ps.setString(4, metodoPago);
+                ps.setString(5, nombre);
+                ps.setString(6, apellido);
+                ps.setDouble(7, propina);
+                ps.setInt(8, idPedido);
+                ps.executeUpdate();
             }
-
-            // 2. Eliminamos definitivamente la cabecera del pedido
-            int filasAfectadas = 0;
-            try (PreparedStatement psPedido = conn.prepareStatement(sqlPedido)) {
-                psPedido.setInt(1, idPedido);
-                filasAfectadas = psPedido.executeUpdate();
+            try (PreparedStatement ps = conn.prepareStatement(sqlPedido)) {
+                ps.setInt(1, idPedido);
+                ps.executeUpdate();
             }
-
             conn.commit();
-            return filasAfectadas > 0;
-
+            return true;
         } catch (Exception e) {
             conn.rollback();
             throw e;
         } finally {
             conn.setAutoCommit(true);
             conn.close();
-        }
-    }
-
-    public void insertarLineaDetalle(int idPedido, int idProducto, int cantidad, double subtotal, String nota) throws Exception {
-
-        String sql = "INSERT INTO producto_pedido "
-                + "(idproducto,idpedido,cantidad,sub_total,nota) "
-                + "VALUES (?,?,?,?,?)";
-
-        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, idProducto);
-            ps.setInt(2, idPedido);
-            ps.setInt(3, cantidad);
-            ps.setDouble(4, subtotal);
-            ps.setString(5, nota);
-
-            ps.executeUpdate();
         }
     }
 
@@ -321,4 +387,5 @@ public class GenerarPedidoDao {
             ps.executeUpdate();
         }
     }
+
 }

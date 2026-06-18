@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
-import vistas.VistaReportee;
+import vista.VistaReportee;
 
 /**
  * 
@@ -18,7 +18,7 @@ import vistas.VistaReportee;
  */
 public class ControladorReporte {
 
-    private final VistaReportee vista;
+    private  VistaReportee vista;
 
     public ControladorReporte(VistaReportee vista) {
         this.vista = vista;

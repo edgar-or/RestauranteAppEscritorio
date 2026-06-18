@@ -7,6 +7,7 @@ package controlador;
 //import vista.VistaPrincipalAdministrador;
 import javax.swing.JFrame;
 import vista.VistaPrincipal;
+import vista.VistaReportee;
 
 /**
  *
@@ -49,6 +50,16 @@ public class ControladorPrincipal {
         vista.btnMesas.addActionListener(e -> {
             try {
                 contrlMesa = new ControladorMesa();
+            } catch (Exception ex) {
+                System.getLogger(ControladorPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        });
+        
+        vista.btnReportes.addActionListener(e -> {
+            try {
+                VistaReportee vistaReporte = new VistaReportee();
+                ControladorReporte cntrlReporte = new ControladorReporte(vistaReporte);
+                cntrlReporte.iniciar();
             } catch (Exception ex) {
                 System.getLogger(ControladorPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
