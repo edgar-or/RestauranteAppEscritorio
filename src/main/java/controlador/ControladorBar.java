@@ -116,6 +116,7 @@ public class ControladorBar {
         });
 
         visBar.btnNoTerminado.addActionListener(e -> {
+
             int fila = visBar.tablaBar.getSelectedRow();
 
             if (fila == -1) {

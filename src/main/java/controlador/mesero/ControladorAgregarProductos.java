@@ -5,23 +5,24 @@
 package controlador.mesero;
 
 import dao.ProductosParaPedidosDao;
-import dao.GenerarPedidoDao; 
+import dao.GenerarPedidoDao;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ModeloProducto;
 import vista.VistaProductos;
+
 /**
  *
  * @author ayala
  */
 public class ControladorAgregarProductos {
 
-    private final VistaProductos visProduct;
-    private final ControladorAgregarPedido controlPedido; 
-    private final ProductosParaPedidosDao dao;
+    private  VistaProductos visProduct;
+    private  ControladorAgregarPedido controlPedido;
+    private  ProductosParaPedidosDao dao;
 
-    private int idPedidoExistente = -1; 
+    private int idPedidoExistente = -1;
 
     private static final int ID_PLATILLOS = 1;
     private static final int ID_POSTRES = 2;
@@ -42,8 +43,8 @@ public class ControladorAgregarProductos {
     // CONSTRUCTOR 2: Editar Pedido Existente
     public ControladorAgregarProductos(VistaProductos visProduct, int idPedidoExistente) {
         this.visProduct = visProduct;
-        this.controlPedido = null; 
-        this.idPedidoExistente = idPedidoExistente; 
+        this.controlPedido = null;
+        this.idPedidoExistente = idPedidoExistente;
         this.dao = new ProductosParaPedidosDao();
 
         configurarTablas(); // <-- Inicializa la estructura correcta de las tablas
@@ -108,8 +109,8 @@ public class ControladorAgregarProductos {
     private void registrarEventos() {
 
         // --- BEBIDAS ---
-        visProduct.btnBuscarB.addActionListener(e
-                -> buscar(ID_BEBIDAS, visProduct.txtbuscarB.getText().trim(),
+        visProduct.btnBuscar.addActionListener(e
+                -> buscar(ID_BEBIDAS, visProduct.txtbuscar.getText().trim(),
                         visProduct.tablaBebidas));
 
         visProduct.btnAgregarBebidas.addActionListener(e -> agregar(visProduct.tablaBebidas));
@@ -154,50 +155,113 @@ public class ControladorAgregarProductos {
     }
 
     private void agregar(javax.swing.JTable tabla) {
+
         int fila = tabla.getSelectedRow();
+
         if (fila < 0) {
-            JOptionPane.showMessageDialog(visProduct, "Selecciona un producto de la tabla.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    visProduct,
+                    "Selecciona un producto de la tabla.",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
-        
-        // Control de nulidad seguro para evitar fallos de parseo si el ID viene vacío
+
         Object idObj = modelo.getValueAt(fila, 0);
+
         int idProducto = 0;
+
         if (idObj != null && !idObj.toString().trim().isEmpty()) {
             idProducto = Integer.parseInt(idObj.toString().trim());
         }
-        
+
         String nombre = modelo.getValueAt(fila, 1).toString();
-        double precio = Double.parseDouble(modelo.getValueAt(fila, 3).toString()); // <-- Ahora el índice 3 es seguro
+        double precio = Double.parseDouble(modelo.getValueAt(fila, 3).toString());
 
         if (this.controlPedido != null) {
-            // MODO PEDIDO NUEVO / EDICIÓN DESDE CONTROLADOR PRINCIPAL
-            controlPedido.setProductoSeleccionado(idProducto, nombre, precio);
-            JOptionPane.showMessageDialog(visProduct, "\"" + nombre + "\" seleccionado.\nAgrega la cantidad y notas en la ventana principal.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            // MODO NUEVO PEDIDO
+            controlPedido.setProductoSeleccionado(
+                    idProducto,
+                    nombre,
+                    precio);
+
+            JOptionPane.showMessageDialog(
+                    visProduct,
+                    "\"" + nombre + "\" seleccionado.\nAgrega la cantidad y notas en la ventana principal.",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
+
         } else if (this.idPedidoExistente > 0) {
-            // MODO EDICIÓN DIRECTA EN BD (Constructor 2)
+
+            // MODO EDITAR PEDIDO EXISTENTE
             try {
-                String cantStr = JOptionPane.showInputDialog(visProduct, "Ingrese la cantidad para " + nombre + ":", "1");
+
+                String cantStr = JOptionPane.showInputDialog(
+                        visProduct,
+                        "Ingrese la cantidad para " + nombre + ":",
+                        "1");
+
                 if (cantStr == null || cantStr.trim().isEmpty()) {
-                    return; 
+                    return;
                 }
+
                 int cantidad = Integer.parseInt(cantStr);
-                String nota = JOptionPane.showInputDialog(visProduct, "Nota u observación (opcional):", "");
+
+                String nota = JOptionPane.showInputDialog(
+                        visProduct,
+                        "Nota u observación (opcional):",
+                        "");
+
                 if (nota == null) {
                     nota = "";
                 }
 
-                GenerarPedidoDao detalleDao = new GenerarPedidoDao();
-                // detalleDao.insertarLineaDetalle(idPedidoExistente, idProducto, cantidad, precio, nota);
+                // CALCULAR SUBTOTAL
+                double subtotal = cantidad * precio;
 
-                JOptionPane.showMessageDialog(visProduct, "Producto añadido correctamente al Pedido #" + idPedidoExistente, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                GenerarPedidoDao detalleDao = new GenerarPedidoDao();
+
+                // INSERTAR PRODUCTO AL PEDIDO
+                detalleDao.insertarLineaDetalle(
+                        idPedidoExistente,
+                        idProducto,
+                        cantidad,
+                        subtotal,
+                        nota);
+
+                // RECALCULAR TOTAL DEL PEDIDO
+                detalleDao.actualizarTotalPedido(idPedidoExistente);
+
+                JOptionPane.showMessageDialog(
+                        visProduct,
+                        "Producto añadido correctamente al Pedido #"
+                        + idPedidoExistente,
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE);
+
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(visProduct, "Cantidad no válida.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                JOptionPane.showMessageDialog(
+                        visProduct,
+                        "Cantidad no válida.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+
                 return;
+
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(visProduct, "Error al guardar en la base de datos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+                JOptionPane.showMessageDialog(
+                        visProduct,
+                        "Error al guardar en la base de datos: "
+                        + ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                ex.printStackTrace();
                 return;
             }
         }

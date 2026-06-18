@@ -1,24 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package controlador;
+
+import dao.conexion.Conexion;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import vistas.VistaReportee;
 
 /**
  *
- * @author The following has evaluated to null or missing:
-==> renec  [in template "Templates/Classes/Class.java" at line 24, column 14]
-
-----
-Tip: If the failing expression is known to legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
-----
-
-----
-FTL stack trace ("~" means nesting-related):
-	- Failed at: ${renec}  [in template "Templates/Classes/Class.java" at line 24, column 12]
-----
+ *
+ * @author mendo
  */
 public class ControladoReportes {
 
+    private final VistaReportee vista;
+
+    public ControladoReportes(VistaReportee vista) {
+        this.vista = vista;
+        registrarEventos();
+    }
+
+    public void iniciar() {
+        vista.setLocationRelativeTo(null);
+        vista.setVisible(true);
+    }
+
+    private void registrarEventos() {
+        vista.btnR1.addActionListener(evt -> abrirReporte("R1_IngresosPorArea.jasper"));
+        vista.btnR2.addActionListener(evt -> abrirReporte("R2_ListadoProductos.jasper"));
+        vista.btnR4.addActionListener(evt -> abrirReporte("R4_ConsolidadoSemestral.jasper"));
+        vista.btnCerrar.addActionListener(event -> { vista.dispose();});
+    }
+
+    private void abrirReporte(String nombreReporte) {
+        try {
+            Connection cn = Conexion.getConnection();
+            if (cn == null) {
+                JOptionPane.showMessageDialog(vista,
+                        "No se pudo establecer conexión con la base de datos.",
+                        "Error de conexión", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            InputStream archivo = getClass().getResourceAsStream("/" + nombreReporte);
+            if (archivo == null) {
+                JOptionPane.showMessageDialog(vista,
+                        "No se encontró el reporte: " + nombreReporte,
+                        "Reporte no encontrado", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            JasperPrint jp = JasperFillManager.fillReport(archivo, new HashMap<>(), cn);
+            JasperViewer viewer = new JasperViewer(jp, false);
+            viewer.setVisible(true);
+        } catch (Exception e) {
+            StringBuilder sb = new StringBuilder("Error al abrir reporte:\n");
+            Throwable t = e;
+            while (t != null) {
+                sb.append("\n• ").append(t.getClass().getSimpleName())
+                        .append(": ").append(t.getMessage());
+                t = t.getCause();
+            }
+            JOptionPane.showMessageDialog(vista, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 }

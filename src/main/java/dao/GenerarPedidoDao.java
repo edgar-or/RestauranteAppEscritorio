@@ -284,4 +284,41 @@ public class GenerarPedidoDao {
         }
     }
 
+    public void insertarLineaDetalle(int idPedido, int idProducto, int cantidad, double subtotal, String nota) throws Exception {
+
+        String sql = "INSERT INTO producto_pedido "
+                + "(idproducto,idpedido,cantidad,sub_total,nota) "
+                + "VALUES (?,?,?,?,?)";
+
+        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idProducto);
+            ps.setInt(2, idPedido);
+            ps.setInt(3, cantidad);
+            ps.setDouble(4, subtotal);
+            ps.setString(5, nota);
+
+            ps.executeUpdate();
+        }
+    }
+
+    public void actualizarTotalPedido(int idPedido) throws Exception {
+
+        String sql = """
+        UPDATE pedido
+        SET total = (
+            SELECT COALESCE(SUM(sub_total),0)
+            FROM producto_pedido
+            WHERE idpedido = ?
+        )
+        WHERE idpedido = ? """;
+
+        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idPedido);
+            ps.setInt(2, idPedido);
+
+            ps.executeUpdate();
+        }
+    }
 }

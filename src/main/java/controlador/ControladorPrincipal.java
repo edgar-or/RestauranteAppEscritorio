@@ -65,6 +65,7 @@ public class ControladorPrincipal {
             }
         });
 
+
     }
 
     public void iniciar() {
@@ -82,6 +83,4 @@ public class ControladorPrincipal {
 
     }
 
-    
-
-    }
+}
