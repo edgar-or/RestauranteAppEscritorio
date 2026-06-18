@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="R4_ConsolidadoSemestral"
+              pageWidth="595"
+              pageHeight="842"
+              columnWidth="535"
+              leftMargin="30"
+              rightMargin="30"
+              topMargin="20"
+              bottomMargin="20"
+              uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+
+  <!-- ============================================================
+       SUBDATASET para el gráfico de pastel
+       ============================================================ -->
+  <subDataset name="dsPastel" uuid="b2c3d4e5-f6a7-8901-bcde-f12345678901">
+    <parameter name="p_anio"     class="java.lang.Integer"/>
+    <parameter name="p_semestre" class="java.lang.Integer"/>
+    <queryString language="SQL"><![CDATA[
+      SELECT
+          EXTRACT(MONTH FROM p.fecha)::integer AS mes_num,
+          TO_CHAR(p.fecha, 'Mon')              AS mes_nombre,
+          COALESCE(SUM(pp.sub_total), 0.0)     AS monto_total
+      FROM pedido p
+      JOIN producto_pedido pp ON p.idpedido = pp.idpedido
+      WHERE EXTRACT(YEAR  FROM p.fecha)::integer = $P{p_anio}
+        AND (
+            ($P{p_semestre} = 1 AND EXTRACT(MONTH FROM p.fecha)::integer BETWEEN 1 AND 6)
+            OR
+            ($P{p_semestre} = 2 AND EXTRACT(MONTH FROM p.fecha)::integer BETWEEN 7 AND 12)
+        )
+      GROUP BY EXTRACT(MONTH FROM p.fecha)::integer, TO_CHAR(p.fecha, 'Mon')
+      ORDER BY mes_num
+    ]]></queryString>
+    <field name="mes_num"     class="java.lang.Integer"/>
+    <field name="mes_nombre"  class="java.lang.String"/>
+    <field name="monto_total" class="java.lang.Double"/>
+  </subDataset>
+
+  <!-- ============================================================
+       PARÁMETROS
+       ============================================================ -->
+  <parameter name="anio" class="java.lang.Integer">
+    <defaultValueExpression><![CDATA[2026]]></defaultValueExpression>
+  </parameter>
+  <parameter name="semestre" class="java.lang.Integer">
+    <defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+  </parameter>
+
+  <!-- ============================================================
+       QUERY PRINCIPAL
+       ============================================================ -->
+  <queryString language="SQL"><![CDATA[
+    SELECT
+        EXTRACT(MONTH FROM p.fecha)::integer AS mes_num,
+        TO_CHAR(p.fecha, 'TMMonth')          AS mes_nombre,
+        COALESCE(SUM(pp.sub_total), 0.0)     AS monto_total
+    FROM pedido p
+    JOIN producto_pedido pp ON p.idpedido = pp.idpedido
+    WHERE EXTRACT(YEAR  FROM p.fecha)::integer = $P{anio}
+      AND (
+          ($P{semestre} = 1 AND EXTRACT(MONTH FROM p.fecha)::integer BETWEEN 1 AND 6)
+          OR
+          ($P{semestre} = 2 AND EXTRACT(MONTH FROM p.fecha)::integer BETWEEN 7 AND 12)
+      )
+    GROUP BY EXTRACT(MONTH FROM p.fecha)::integer, TO_CHAR(p.fecha, 'TMMonth')
+    ORDER BY mes_num
+  ]]></queryString>
+
+  <!-- ============================================================
+       FIELDS
+       ============================================================ -->
+  <field name="mes_num"     class="java.lang.Integer"/>
+  <field name="mes_nombre"  class="java.lang.String"/>
+  <field name="monto_total" class="java.lang.Double"/>
+
+  <!-- ============================================================
+       VARIABLES
+       ============================================================ -->
+  <variable name="TOTAL_SEMESTRE" class="java.lang.Double" calculation="Sum">
+    <variableExpression><![CDATA[$F{monto_total} != null ? $F{monto_total} : 0.0]]></variableExpression>
+    <initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+  </variable>
+
+  <!-- ============================================================
+       TITLE: encabezado del reporte
+       ============================================================ -->
+  <title>
+    <band height="60">
+      <staticText>
+        <reportElement x="0" y="0" width="535" height="22" forecolor="#000000"/>
+        <textElement textAlignment="Center">
+          <font size="15" isBold="true"/>
+        </textElement>
+        <text><![CDATA[Restaurante APE]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="0" y="24" width="535" height="14" forecolor="#000000"/>
+        <textElement textAlignment="Center">
+          <font size="10" isBold="true"/>
+        </textElement>
+        <text><![CDATA[Consolidado de Ventas Semestral]]></text>
+      </staticText>
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="40" width="535" height="12" forecolor="#444444"/>
+        <textElement textAlignment="Center">
+          <font size="9"/>
+        </textElement>
+        <textFieldExpression><![CDATA["Semestre " + $P{semestre} + " (" + ($P{semestre} == 1 ? "Enero - Junio" : "Julio - Diciembre") + ") · Año " + $P{anio}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="0" y="57" width="535" height="1" forecolor="#000000"/>
+      </line>
+    </band>
+  </title>
+
+  <!-- ============================================================
+       COLUMN HEADER
+       ============================================================ -->
+  <columnHeader>
+    <band height="20">
+      <staticText>
+        <reportElement x="0" y="3" width="200" height="13" forecolor="#000000"/>
+        <textElement><font size="9" isBold="true"/></textElement>
+        <text><![CDATA[Mes]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="205" y="3" width="165" height="13" forecolor="#000000"/>
+        <textElement textAlignment="Right"><font size="9" isBold="true"/></textElement>
+        <text><![CDATA[Total ventas]]></text>
+      </staticText>
+      <staticText>
+        <reportElement x="375" y="3" width="160" height="13" forecolor="#000000"/>
+        <textElement textAlignment="Right"><font size="9" isBold="true"/></textElement>
+        <text><![CDATA[% semestre]]></text>
+      </staticText>
+      <line>
+        <reportElement x="0" y="19" width="535" height="1" forecolor="#000000"/>
+      </line>
+    </band>
+  </columnHeader>
+
+  <!-- ============================================================
+       DETAIL
+       ============================================================ -->
+  <detail>
+    <band height="18" splitType="Stretch">
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="2" width="200" height="13" forecolor="#000000"/>
+        <textElement><font size="9"/></textElement>
+        <textFieldExpression><![CDATA[$F{mes_nombre}]]></textFieldExpression>
+      </textField>
+      <textField pattern="$#,##0.00" isBlankWhenNull="true">
+        <reportElement x="205" y="2" width="165" height="13" forecolor="#000000"/>
+        <textElement textAlignment="Right"><font size="9"/></textElement>
+        <textFieldExpression><![CDATA[$F{monto_total}]]></textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="375" y="2" width="160" height="13" forecolor="#000000"/>
+        <textElement textAlignment="Right"><font size="9"/></textElement>
+        <textFieldExpression><![CDATA[($V{TOTAL_SEMESTRE} != null && $V{TOTAL_SEMESTRE} > 0 && $F{monto_total} != null)
+          ? new java.text.DecimalFormat("#,##0.00").format(($F{monto_total} / $V{TOTAL_SEMESTRE}) * 100) + "%"
+          : "0.00%"]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="0" y="17" width="535" height="1" forecolor="#DDDDDD"/>
+      </line>
+    </band>
+  </detail>
+
+  <!-- ============================================================
+       PAGE FOOTER
+       ============================================================ -->
+  <pageFooter>
+    <band height="18">
+      <line>
+        <reportElement x="0" y="0" width="535" height="1" forecolor="#CCCCCC"/>
+      </line>
+      <textField>
+        <reportElement x="390" y="4" width="75" height="11" forecolor="#888888"/>
+        <textElement textAlignment="Right"><font size="7"/></textElement>
+        <textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+      </textField>
+      <textField evaluationTime="Report">
+        <reportElement x="467" y="4" width="68" height="11" forecolor="#888888"/>
+        <textElement><font size="7"/></textElement>
+        <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+      </textField>
+    </band>
+  </pageFooter>
+
+  <!-- ============================================================
+       SUMMARY: total + gráfico de pastel
+       ============================================================ -->
+  <summary>
+    <band height="320">
+
+      <!-- Línea superior -->
+      <line>
+        <reportElement x="0" y="0" width="535" height="1" forecolor="#000000"/>
+      </line>
+
+      <!-- Total semestre -->
+      <staticText>
+        <reportElement x="205" y="6" width="165" height="14" forecolor="#000000"/>
+        <textElement textAlignment="Right"><font size="10" isBold="true"/></textElement>
+        <text><![CDATA[TOTAL SEMESTRE:]]></text>
+      </staticText>
+      <textField pattern="$#,##0.00">
+        <reportElement x="375" y="6" width="160" height="14" forecolor="#000000"/>
+        <textElement textAlignment="Right"><font size="10" isBold="true"/></textElement>
+        <textFieldExpression><![CDATA[$V{TOTAL_SEMESTRE}]]></textFieldExpression>
+      </textField>
+
+      <!-- Título gráfico -->
+      <staticText>
+        <reportElement x="0" y="30" width="535" height="14" forecolor="#000000"/>
+        <textElement textAlignment="Center"><font size="10" isBold="true"/></textElement>
+        <text><![CDATA[Distribución de ventas por mes]]></text>
+      </staticText>
+
+      <!-- GRÁFICO DE PASTEL -->
+      <pieChart>
+        <chart>
+          <reportElement x="50" y="48" width="435" height="260"/>
+          <chartTitle>
+            <titleExpression><![CDATA[""]]></titleExpression>
+          </chartTitle>
+          <chartSubtitle>
+            <subtitleExpression><![CDATA[""]]></subtitleExpression>
+          </chartSubtitle>
+          <chartLegend position="Bottom"/>
+        </chart>
+        <pieDataset>
+          <dataset>
+            <datasetRun subDataset="dsPastel">
+              <datasetParameter name="p_anio">
+                <datasetParameterExpression><![CDATA[$P{anio}]]></datasetParameterExpression>
+              </datasetParameter>
+              <datasetParameter name="p_semestre">
+                <datasetParameterExpression><![CDATA[$P{semestre}]]></datasetParameterExpression>
+              </datasetParameter>
+              <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+            </datasetRun>
+          </dataset>
+          <keyExpression><![CDATA[$F{mes_nombre}]]></keyExpression>
+          <valueExpression><![CDATA[$F{monto_total}]]></valueExpression>
+          <labelExpression><![CDATA[$F{mes_nombre} + " $" + new java.text.DecimalFormat("#,##0.00").format($F{monto_total})]]></labelExpression>
+        </pieDataset>
+        <piePlot isShowLabels="true" isCircular="true">
+          <plot>
+            <seriesColor seriesOrder="0" color="#378ADD"/>
+            <seriesColor seriesOrder="1" color="#1D9E75"/>
+            <seriesColor seriesOrder="2" color="#D85A30"/>
+            <seriesColor seriesOrder="3" color="#7F77DD"/>
+            <seriesColor seriesOrder="4" color="#E8C840"/>
+            <seriesColor seriesOrder="5" color="#4CAF50"/>
+          </plot>
+          <itemLabel>
+            <font size="8"/>
+          </itemLabel>
+        </piePlot>
+      </pieChart>
+
+    </band>
+  </summary>
+
+</jasperReport>

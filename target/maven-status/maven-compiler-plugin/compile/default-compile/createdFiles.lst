@@ -1,7 +1,9 @@
-controlador/mesero/ControladorAgregarProductos$1.class
-controlador/mesero/ControladorVerDetallePedido$2.class
-controlador/mesero/ControladorVerDetallePedido$1.class
-controlador/mesero/ControladorVerDetallePedido$3.class
-controlador/mesero/ControladorVerDetallePedido$1$1.class
-controlador/mesero/ControladorVerDetallePedido$5.class
-controlador/mesero/ControladorVerDetallePedido$4.class
+controlador\mesero\ControladorAgregarProductos$1.class
+controlador\mesero\ControladorVerDetallePedido$1.class
+controlador\mesero\ControladorVerDetallePedido$4.class
+controlador\mesero\ControladorVerDetallePedido$5.class
+controlador\mesero\ControladorVerDetallePedido$1$1.class
+vista\VistaReportee.class
+controlador\ControladoReportes.class
+controlador\mesero\ControladorVerDetallePedido$3.class
+controlador\mesero\ControladorVerDetallePedido$2.class

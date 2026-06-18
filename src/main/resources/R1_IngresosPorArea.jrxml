@@ -1,0 +1,196 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="R1_IngresosPorArea" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DAbdRestauranteAPe"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<dataset name="dsGrafico" uuid="b2c3d4e5-f6a7-8901-bcde-f12345678901">
+		<parameter name="p_fecha_inicio" class="java.sql.Date"/>
+		<parameter name="p_fecha_fin" class="java.sql.Date"/>
+		<query language="SQL"><![CDATA[SELECT
+          p.fecha,
+          ap.nombre          AS area,
+          SUM(pp.sub_total)  AS monto_total
+      FROM pedido p
+      JOIN producto_pedido pp ON p.idpedido    = pp.idpedido
+      JOIN producto        pr ON pp.idproducto = pr.idproducto
+      JOIN area_produccion ap ON pr.idproduccion = ap.idproduccion
+      WHERE p.fecha BETWEEN $P{p_fecha_inicio} AND $P{p_fecha_fin}
+      GROUP BY p.fecha, ap.nombre
+      ORDER BY p.fecha, ap.nombre]]></query>
+		<field name="fecha" class="java.sql.Date"/>
+		<field name="area" class="java.lang.String"/>
+		<field name="monto_total" class="java.lang.Double"/>
+	</dataset>
+	<parameter name="fecha_inicio" class="java.sql.Date">
+		<defaultValueExpression><![CDATA[java.sql.Date.valueOf("2026-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.sql.Date">
+		<defaultValueExpression><![CDATA[java.sql.Date.valueOf("2026-12-31")]]></defaultValueExpression>
+	</parameter>
+	<query language="SQL"><![CDATA[SELECT
+        p.fecha,
+        ap.nombre          AS area,
+        SUM(pp.sub_total)  AS monto_total
+    FROM pedido p
+    JOIN producto_pedido pp ON p.idpedido    = pp.idpedido
+    JOIN producto        pr ON pp.idproducto = pr.idproducto
+    JOIN area_produccion ap ON pr.idproduccion = ap.idproduccion
+    WHERE p.fecha BETWEEN $P{fecha_inicio} AND $P{fecha_fin}
+    GROUP BY p.fecha, ap.nombre
+    ORDER BY p.fecha, ap.nombre]]></query>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="monto_total" class="java.lang.Double"/>
+	<variable name="TOTAL_PERIODO" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{monto_total} != null ? $F{monto_total} : 0.0]]></expression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<variable name="TOTAL_FECHA" resetType="Group" calculation="Sum" resetGroup="GrupoFecha" class="java.lang.Double">
+		<expression><![CDATA[$F{monto_total} != null ? $F{monto_total} : 0.0]]></expression>
+		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+	</variable>
+	<group name="GrupoFecha">
+		<expression><![CDATA[$F{fecha}]]></expression>
+		<groupHeader>
+			<band height="20">
+				<element kind="rectangle" uuid="f511bcee-57c2-4536-aa94-0402b08b34d8" mode="Transparent" x="0" y="0" width="535" height="20" forecolor="#EEEEEE" backcolor="#EEEEEE"/>
+				<element kind="textField" uuid="48221b1a-1404-4dfe-9357-97dcc5bb3f8f" x="5" y="3" width="400" height="14" forecolor="#000000" fontSize="9.0" pattern="EEEE, dd 'de' MMMM 'de' yyyy" blankWhenNull="true" bold="true">
+					<expression><![CDATA[$F{fecha}]]></expression>
+				</element>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="18">
+				<element kind="line" uuid="b1101262-4bba-4927-a47d-38e7bd78aca8" x="0" y="0" width="535" height="1" forecolor="#CCCCCC"/>
+				<element kind="staticText" uuid="45c0e0d4-709c-4865-8d1a-f76e64484f38" x="330" y="2" width="120" height="14" forecolor="#555555" fontSize="9.0" bold="true" hTextAlign="Right">
+					<text><![CDATA[Subtotal del día:]]></text>
+				</element>
+				<element kind="textField" uuid="007f55a5-858c-4788-9dd1-c7adec6cc6f1" x="455" y="2" width="80" height="14" forecolor="#555555" fontSize="9.0" pattern="$#,##0.00" bold="true" hTextAlign="Right">
+					<expression><![CDATA[$V{TOTAL_FECHA}]]></expression>
+				</element>
+			</band>
+		</groupFooter>
+	</group>
+	<title height="315" splitType="Stretch">
+		<element kind="rectangle" uuid="f71b469a-2228-437a-a374-f8609a08b481" mode="Transparent" x="0" y="0" width="535" height="65" forecolor="#333333" backcolor="#333333"/>
+		<element kind="staticText" uuid="6aa9f734-b8f0-41ec-aea3-ab57df7acbb0" x="10" y="8" width="330" height="20" forecolor="#000000" fontSize="13.0" bold="true">
+			<text><![CDATA[Restaurante APE — Ingresos por área]]></text>
+		</element>
+		<element kind="staticText" uuid="f0576992-5d85-4e0d-8e3f-4246c2c344b4" x="10" y="32" width="48" height="12" forecolor="#CCCCCC" fontSize="8.0">
+			<text><![CDATA[Período:]]></text>
+		</element>
+		<element kind="textField" uuid="7bac8c51-f0b8-4685-8cf7-1efc0e3437fc" x="58" y="32" width="70" height="12" forecolor="#000000" fontSize="8.0" pattern="dd/MM/yyyy">
+			<expression><![CDATA[$P{fecha_inicio}]]></expression>
+		</element>
+		<element kind="staticText" uuid="a74044e1-433e-4685-a944-4a327d6f0ddb" x="130" y="32" width="20" height="12" forecolor="#CCCCCC" fontSize="8.0">
+			<text><![CDATA[ al ]]></text>
+		</element>
+		<element kind="textField" uuid="063bfa27-9898-47c1-84dd-4dc56a82bc54" x="148" y="32" width="70" height="12" forecolor="#000000" fontSize="8.0" pattern="dd/MM/yyyy">
+			<expression><![CDATA[$P{fecha_fin}]]></expression>
+		</element>
+		<element kind="staticText" uuid="af9b7b27-e1f9-463a-ad14-94a87c866542" x="370" y="8" width="160" height="12" forecolor="#CCCCCC" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[Total del período]]></text>
+		</element>
+		<element kind="textField" uuid="95f9c2c2-f63e-405e-808a-b2daf8d946d5" x="355" y="22" width="175" height="22" forecolor="#000000" fontSize="15.0" evaluationTime="Report" pattern="$#,##0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$V{TOTAL_PERIODO}]]></expression>
+		</element>
+		<element kind="rectangle" uuid="2d16484a-3902-4046-a01b-fd1d8cd39159" mode="Transparent" x="0" y="65" width="535" height="18" forecolor="#555555" backcolor="#555555"/>
+		<element kind="staticText" uuid="c80f87e7-f97c-471c-a039-97f73b012242" x="10" y="68" width="450" height="12" forecolor="#CCCCCC" fontSize="8.0">
+			<text><![CDATA[Ingresos diarios agrupados por área de producción · Sistema Restaurante APE]]></text>
+		</element>
+		<element kind="staticText" uuid="66141316-9ad9-4cb1-b8c3-2e18e299e352" x="0" y="88" width="535" height="14" forecolor="#000000" fontSize="10.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Distribución de ingresos por día y área]]></text>
+		</element>
+		<element kind="chart" chartType="bar" uuid="aca7febc-a767-46af-8823-e11ef64527e6" x="0" y="104" width="535" height="200" evaluationTime="Report" legendPosition="Bottom" titlePosition="Top">
+			<titleFont fontSize="1.0"/>
+			<legendFont fontSize="8.0"/>
+			<titleExpression><![CDATA[""]]></titleExpression>
+			<subtitleExpression><![CDATA[""]]></subtitleExpression>
+			<dataset kind="category">
+				<datasetRun uuid="21393d9c-4680-4b23-b224-42e07cc89286" subDataset="dsGrafico">
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<parameter name="p_fecha_inicio">
+						<expression><![CDATA[$P{fecha_inicio}]]></expression>
+					</parameter>
+					<parameter name="p_fecha_fin">
+						<expression><![CDATA[$P{fecha_fin}]]></expression>
+					</parameter>
+				</datasetRun>
+				<series>
+					<seriesExpression><![CDATA[$F{area}]]></seriesExpression>
+					<categoryExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM").format($F{fecha})]]></categoryExpression>
+					<valueExpression><![CDATA[$F{monto_total}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot showLabels="true">
+				<categoryAxisLabelExpression><![CDATA["Fecha"]]></categoryAxisLabelExpression>
+				<categoryAxisLabelFont fontSize="8.0" bold="true"/>
+				<categoryAxisTickLabelFont fontSize="7.0"/>
+				<valueAxisLabelExpression><![CDATA["Monto ($)"]]></valueAxisLabelExpression>
+				<valueAxisLabelFont fontSize="8.0" bold="true"/>
+				<valueAxisTickLabelFont fontSize="7.0"/>
+				<itemLabel>
+					<font fontSize="7.0"/>
+				</itemLabel>
+				<seriesColor order="0" color="#1D9E75"/>
+				<seriesColor order="1" color="#378ADD"/>
+				<seriesColor order="2" color="#7F77DD"/>
+				<seriesColor order="3" color="#D85A30"/>
+			</plot>
+		</element>
+	</title>
+	<columnHeader height="22">
+		<element kind="rectangle" uuid="e23f3240-ea47-4b3c-bad9-095472cb0ce8" mode="Transparent" x="0" y="0" width="535" height="22" forecolor="#333333" backcolor="#333333"/>
+		<element kind="staticText" uuid="4eaf6f80-61d6-4c05-a5b3-a82d8180b615" x="5" y="4" width="160" height="14" forecolor="#000000" fontSize="9.0" bold="true">
+			<text><![CDATA[Fecha]]></text>
+		</element>
+		<element kind="staticText" uuid="b42b5579-0cf1-43df-96d9-30cb765ea2bc" x="200" y="4" width="220" height="14" forecolor="#000000" fontSize="9.0" bold="true">
+			<text><![CDATA[Área de producción]]></text>
+		</element>
+		<element kind="staticText" uuid="8a237194-50ce-40f4-be28-cdb94e17eda7" x="420" y="4" width="110" height="14" forecolor="#000000" fontSize="9.0" bold="true" hTextAlign="Right">
+			<text><![CDATA[Monto total]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<element kind="rectangle" uuid="ebcc42ef-abf4-46e5-8e2d-59767bff5366" mode="Transparent" x="0" y="0" width="535" height="16" backcolor="#F5F5F5">
+				<printWhenExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></printWhenExpression>
+			</element>
+			<element kind="textField" uuid="3d818f01-df6d-4501-80dd-27fc08a34c5e" x="5" y="1" width="160" height="14" forecolor="#999999" fontSize="9.0" pattern="dd/MM/yyyy" blankWhenNull="true">
+				<expression><![CDATA[$F{fecha}]]></expression>
+			</element>
+			<element kind="textField" uuid="021c1d5c-7dda-4ec3-8349-e3196b377f70" x="200" y="1" width="220" height="14" forecolor="#000000" fontSize="9.0" blankWhenNull="true">
+				<expression><![CDATA[$F{area}]]></expression>
+			</element>
+			<element kind="textField" uuid="c694ca40-c107-4fa0-9075-90b9239af5b0" x="420" y="1" width="110" height="14" forecolor="#000000" fontSize="9.0" pattern="$#,##0.00" blankWhenNull="true" hTextAlign="Right">
+				<expression><![CDATA[$F{monto_total}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<pageFooter height="20">
+		<element kind="line" uuid="54d84840-78f4-4851-b5b4-6d9ee94de269" x="0" y="1" width="535" height="1" forecolor="#CCCCCC"/>
+		<element kind="staticText" uuid="0d08f3b8-a117-4f7d-a0d7-e325a7c9dd67" x="0" y="5" width="220" height="12" forecolor="#666666" fontSize="8.0">
+			<text><![CDATA[Confidencial — Solo para el propietario]]></text>
+		</element>
+		<element kind="textField" uuid="43e252f2-3673-4688-876d-51895086636a" x="400" y="5" width="65" height="12" forecolor="#666666" fontSize="8.0" hTextAlign="Right">
+			<expression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></expression>
+		</element>
+		<element kind="textField" uuid="867d18d4-6a81-4d36-a05b-2135654ac251" x="465" y="5" width="70" height="12" forecolor="#666666" fontSize="8.0" evaluationTime="Report">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="65">
+		<element kind="line" uuid="349a5508-1656-4c01-bb1c-95901cd35436" x="0" y="2" width="535" height="1" forecolor="#333333"/>
+		<element kind="staticText" uuid="320c5ace-e283-4815-a7b0-d3bb3dcac003" x="300" y="12" width="150" height="16" forecolor="#000000" fontSize="11.0" bold="true" hTextAlign="Right">
+			<text><![CDATA[TOTAL DEL PERÍODO:]]></text>
+		</element>
+		<element kind="textField" uuid="c4aa72cf-d75e-4e0e-b734-646971968e71" x="455" y="12" width="80" height="16" forecolor="#000000" fontSize="11.0" pattern="$#,##0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$V{TOTAL_PERIODO}]]></expression>
+		</element>
+		<element kind="staticText" uuid="647f7c5b-2ee4-41a1-a873-39352c9497bd" x="0" y="40" width="280" height="12" forecolor="#666666" fontSize="8.0">
+			<text><![CDATA[Sistema Restaurante APE · Reporte confidencial para propietario]]></text>
+		</element>
+		<element kind="textField" uuid="0ba683bd-5503-4ce3-8c84-deb5e2aa9e7b" x="395" y="40" width="140" height="12" forecolor="#666666" fontSize="8.0" pattern="dd/MM/yyyy HH:mm" hTextAlign="Right">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</summary>
+</jasperReport>

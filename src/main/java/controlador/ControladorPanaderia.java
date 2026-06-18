@@ -25,7 +25,7 @@ import vista.VistaPanaderia;
  * @author ayala
  */
 public class ControladorPanaderia {
-    VistaPanaderia visPanaderia; 
+   private VistaPanaderia visPanaderia; 
     private List<ModeloProducto_Pedido> listaPedidos;
 
 
