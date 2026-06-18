@@ -1,4 +1,3 @@
-
 package controlador;
 
 import dao.conexion.Conexion;
@@ -12,7 +11,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import vista.VistaReportee;
 
 /**
- * 
+ *
  *
  * @author mendo
  */
@@ -20,7 +19,7 @@ public class ControladorReporte {
 
     private  VistaReportee vista;
 
-    public ControladorReporte(VistaReportee vista) {
+    public ControladorReporte(VistaReportee vista) { 
         this.vista = vista;
         registrarEventos();
     }
@@ -34,6 +33,7 @@ public class ControladorReporte {
         vista.btnR1.addActionListener(evt -> abrirReporte("R1_IngresosPorArea.jasper"));
         vista.btnR2.addActionListener(evt -> abrirReporte("R2_ListadoProductos.jasper"));
         vista.btnR4.addActionListener(evt -> abrirReporte("R4_ConsolidadoSemestral.jasper"));
+        vista.btnCerrar.addActionListener(evet ->{ vista.dispose();});
     }
 
     private void abrirReporte(String nombreReporte) {
@@ -62,7 +62,7 @@ public class ControladorReporte {
             Throwable t = e;
             while (t != null) {
                 sb.append("\n• ").append(t.getClass().getSimpleName())
-                  .append(": ").append(t.getMessage());
+                        .append(": ").append(t.getMessage());
                 t = t.getCause();
             }
             JOptionPane.showMessageDialog(vista, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);

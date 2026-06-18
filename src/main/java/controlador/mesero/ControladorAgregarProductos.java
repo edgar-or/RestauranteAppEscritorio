@@ -18,9 +18,9 @@ import vista.VistaProductos;
  */
 public class ControladorAgregarProductos {
 
-    private final VistaProductos visProduct;
-    private final ControladorAgregarPedido controlPedido;
-    private final ProductosParaPedidosDao dao;
+    private  VistaProductos visProduct;
+    private  ControladorAgregarPedido controlPedido;
+    private  ProductosParaPedidosDao dao;
 
     private int idPedidoExistente = -1;
 
