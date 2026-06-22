@@ -7,8 +7,7 @@ package controlador;
 import dao.CocinaDao;
 import dao.PedidoBarDao;
 import dao.PedidoPanaderiaDao;
-import dao.dto.PedidoBarDto;
-import dao.dto.PedidoPanaderiaDto;
+
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -58,7 +57,7 @@ public class ControladorPanaderia {
        public void cargarTabla() {
 
     try {
-         CocinaDao dao = new CocinaDao();
+         PedidoPanaderiaDao dao = new PedidoPanaderiaDao();
             // List<ModeloProducto_Pedido> lista = dao.listar();
             listaPedidos = dao.listar();
 

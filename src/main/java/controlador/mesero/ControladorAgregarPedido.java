@@ -30,8 +30,8 @@ public class ControladorAgregarPedido {
     private List<String> notasNuevas = new ArrayList<>();
 
     private double totalAcumulado = 0.0;
-    private int idPedidoActual = -1; 
-    private int cantidadItemsExistentes = 0; 
+    private int idPedidoActual = -1;
+    private int cantidadItemsExistentes = 0;
 
     private int idProductoSeleccionado = -1;
     private String nombreProductoSeleccionado = "";
@@ -53,6 +53,9 @@ public class ControladorAgregarPedido {
     public void iniciar() {
         vistaAgregar.setLocationRelativeTo(null);
         vistaAgregar.setVisible(true);
+
+        configurarTabla();
+        llenarComboMesas();
     }
 
     private void configurarTabla() {
@@ -219,19 +222,19 @@ public class ControladorAgregarPedido {
         }
 
         int idProducto = (int) vistaAgregar.tablaItems.getValueAt(fila, 0);
-        
+
         // CORREGIDO: Parseo robusto del subtotal inmune a configuraciones regionales (puntos y comas)
         String subtotalStr = vistaAgregar.tablaItems.getValueAt(fila, 4).toString()
                 .replace("$", "")
                 .replace(" ", "")
                 .trim();
-        
+
         if (subtotalStr.contains(",") && subtotalStr.contains(".")) {
             subtotalStr = subtotalStr.replace(",", ""); // Remueve separador de miles si existen ambos
         } else if (subtotalStr.contains(",")) {
             subtotalStr = subtotalStr.replace(",", "."); // Convierte coma decimal a punto decimal
         }
-        
+
         double subtotalFila = Double.parseDouble(subtotalStr);
 
         totalAcumulado -= subtotalFila;
@@ -277,18 +280,32 @@ public class ControladorAgregarPedido {
                         empleado.getIdEmpleado(), totalAcumulado, detallesNuevos, notasNuevas);
                 if (idPedido > 0) {
                     JOptionPane.showMessageDialog(vistaAgregar, "Pedido #" + idPedido + " generado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    cargarPedidoDeMesaSeleccionada();
+                    llenarComboMesas();
+
                 }
             } else {
                 boolean exito = genPedido.guardarItemsEnPedidoExistente(idPedidoActual, totalAcumulado, detallesNuevos, notasNuevas);
                 if (exito) {
                     JOptionPane.showMessageDialog(vistaAgregar, "Pedido #" + idPedidoActual + " actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    cargarPedidoDeMesaSeleccionada();
+                    llenarComboMesas();
+
+                    genPedido.actualizarEstadoMesa(Integer.parseInt(mesa.getIdMesa()));
+
                 }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(vistaAgregar, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void seleccionarMesaPorNumero(int numero) {
+        for (int i = 0; i < vistaAgregar.comboMesa.getItemCount(); i++) {
+            Object it = vistaAgregar.comboMesa.getItemAt(i);
+            if (it instanceof ModeloMesa && ((ModeloMesa) it).getNumeroMesa() == numero) {
+                vistaAgregar.comboMesa.setSelectedIndex(i);
+                break;
+            }
         }
     }
 

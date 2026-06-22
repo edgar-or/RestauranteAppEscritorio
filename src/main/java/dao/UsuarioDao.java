@@ -5,7 +5,6 @@
 package dao;
 
 import dao.conexion.Conexion;
-import dao.dto.LoginResultadoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +22,6 @@ public class UsuarioDao {
 
     public ModeloEmpleado validar(String usuario, String password) {
         UsuarioModelo u = null;
-        LoginResultadoDTO resultado = null;
         ModeloEmpleado emp = null;
 
         String consulta = "SELECT u.*, r.idRol, r.rol AS nombreRol, ap.nombre as nombreArea, e.idempleado as idEmpleado"

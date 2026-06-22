@@ -11,6 +11,7 @@ package controlador.mesero;
 import dao.GenerarPedidoDao;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.ModeloPedido;
 import vista.VistaGenerarPago;
 
 /**
@@ -29,8 +30,9 @@ public class ControladorGenerarPago {
     private double propina;    
     private double totalPagar; 
     private String mesero;
-
-    public ControladorGenerarPago(int idPedido, double total, String mesero, ControladorVerDetallePedido detalleControlador) {
+    private int numeroMesa; 
+    
+    public ControladorGenerarPago(int idPedido, double total, String mesero, ControladorVerDetallePedido detalleControlador,int numeroMesa) {
         this.vistaGenerarPago = new VistaGenerarPago();
         this.detalleControlador = detalleControlador;
         this.dao = new GenerarPedidoDao();
@@ -43,6 +45,12 @@ public class ControladorGenerarPago {
         prepararVista();
         eventos();
     }
+
+  
+    
+    
+    
+    
 
     public void iniciar() {
         vistaGenerarPago.setLocationRelativeTo(null);
@@ -119,6 +127,12 @@ public class ControladorGenerarPago {
                                 + "Subtotal: $%.2f%nPropina (10%%): $%.2f%nTotal: $%.2f%nCambio: $%.2f",
                                 metodo, idPedido, subtotal, propina, totalPagar, cambio),
                         "Pago exitoso", JOptionPane.INFORMATION_MESSAGE);
+                int idMesa = dao.obtenerIdMesa(idPedido); 
+                
+                dao.actualizarEstadoMesaTrue(idMesa); 
+                
+                System.out.println("mesa numero "+idMesa);
+                
                 if (detalleControlador != null) {
                     detalleControlador.recargar();
                 }

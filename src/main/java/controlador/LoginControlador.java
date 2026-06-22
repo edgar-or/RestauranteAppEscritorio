@@ -6,7 +6,6 @@ package controlador;
 
 import controlador.mesero.ControladorMesero;
 import dao.UsuarioDao;
-import dao.dto.LoginResultadoDTO;
 import javax.swing.JOptionPane;
 import modelo.AreaProduccionModelo;
 import modelo.ModeloEmpleado;
@@ -80,7 +79,7 @@ public class LoginControlador {
                     controladorMesero = new ControladorMesero(visMesero, login);
                     controladorMesero.iniciar();
                     cerrar();
-                } else if (area.getNombre().equalsIgnoreCase("cocina")) {
+                } else if (area.getNombre().equalsIgnoreCase("Cocina")) {
                     visCocina = new VistaCocina();
                     controladorCocina = new ControladorCocina(visCocina);
                     controladorCocina.iniciar();
@@ -91,7 +90,7 @@ public class LoginControlador {
                     controladorBar.iniciar();
                     controladorBar.cargarTabla();
                     cerrar();
-                } else if (area.getNombre().equalsIgnoreCase("panaderia")) {
+                } else if (area.getNombre().equalsIgnoreCase("Panaderia")) {
                     visPan = new VistaPanaderia();
                     controladorPan = new ControladorPanaderia(visPan);
                     controladorPan.iniciar();

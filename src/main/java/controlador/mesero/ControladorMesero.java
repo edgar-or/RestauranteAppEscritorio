@@ -33,7 +33,7 @@ public class ControladorMesero {
     public ControladorMesero(VistaPrincipalMesero vistaPrincipal, ModeloEmpleado empleado) {
         this.vistaPricipal = vistaPrincipal;
         this.controlAgregarPedido = new ControladorAgregarPedido(vistaPrincipal, empleado);
-        this.controlTodosPedidos = new ControladorTodosPedidos(vistaPrincipal);
+        this.controlTodosPedidos = new ControladorTodosPedidos(vistaPrincipal, empleado);
 
         this.empleadoModelo = empleado;
 

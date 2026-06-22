@@ -13,16 +13,7 @@ public class AgregarProductoaPedido {
         "INSERT INTO public.producto_pedido (idproducto, idpedido, cantidad, sub_total, nota) " +
         "VALUES (?, ?, ?, ?, ?)";
 
-    /**
-     * Agrega un producto al pedido indicado.
-     *
-     * @param idProducto  id del producto seleccionado
-     * @param idPedido    id del pedido activo
-     * @param cantidad    cantidad solicitada
-     * @param subTotal    precio * cantidad
-     * @param nota        nota opcional (puede ser null)
-     * @return true si se insertó correctamente
-     */
+  
     public boolean agregarProducto(int idProducto, int idPedido,
                                    int cantidad, double subTotal,
                                    String nota) throws Exception {

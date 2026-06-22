@@ -6,7 +6,6 @@ package controlador;
 
 import dao.CocinaDao;
 import dao.PedidoBarDao;
-import dao.dto.PedidoBarDto;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

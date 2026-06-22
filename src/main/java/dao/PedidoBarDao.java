@@ -1,6 +1,5 @@
 package dao;
 
-import dao.dto.PedidoBarDto;
 import dao.conexion.Conexion;
 import java.util.List;
 import java.util.ArrayList;

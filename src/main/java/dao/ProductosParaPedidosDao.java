@@ -17,28 +17,13 @@ import modelo.ModeloProducto;
  * @author ayala
  */
 public class ProductosParaPedidosDao {
- 
-    // Se agrega idproducto a todas las consultas para poder insertarlo en producto_pedido
-    private static final String LISTAR_BEBIDAS =
-        "SELECT idproducto, nombre, descripcion, precio FROM producto WHERE idproduccion = 3";
- 
-    private static final String LISTAR_POSTRES =
-        "SELECT idproducto, nombre, descripcion, precio FROM producto WHERE idproduccion = 2";
- 
-    private static final String LISTAR_PLATILLOS =
-        "SELECT idproducto, nombre, descripcion, precio FROM producto WHERE idproduccion = 1";
- 
-    // Entradas: idproduccion = 4. Si en tu BD es diferente, cambia el número.
-    private static final String LISTAR_ENTRADAS =
-        "SELECT idproducto, nombre, descripcion, precio FROM producto WHERE idproduccion = 4";
+
  
     private static final String BUSCAR_POR_NOMBRE =
         "SELECT idproducto, nombre, descripcion, precio FROM producto " +
         "WHERE idproduccion = ? AND LOWER(nombre) LIKE LOWER(?)";
  
-    // ----------------------------------------------------------------
-    // Listar todas las categorías
-    // ----------------------------------------------------------------
+ 
  
     public List<ModeloProducto> listarBebidas() throws Exception {
         return listarPorProduccion(3);

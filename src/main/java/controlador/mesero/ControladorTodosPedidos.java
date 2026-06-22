@@ -7,12 +7,14 @@ package controlador.mesero;
 import controlador.mesero.ControladorVerDetallePedido;
 import dao.GenerarPedidoDao;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import modelo.ModeloEmpleado;
 import vista.VistaPrincipalMesero;
 import vista.VistaTodosPedidos;
 import vista.VistaVerDetallePedido;
+
 
 /**
  *
@@ -22,13 +24,16 @@ public class ControladorTodosPedidos {
 
     private VistaTodosPedidos vistaTodosPedidos;
     private VistaPrincipalMesero vistaPrincipal;
+    private ModeloEmpleado empleado;
     private GenerarPedidoDao dao;
 
-    public ControladorTodosPedidos(VistaPrincipalMesero vistaPrincipal) {
+    public ControladorTodosPedidos(VistaPrincipalMesero vistaPrincipal, ModeloEmpleado empleado) {
         this.vistaTodosPedidos = new VistaTodosPedidos();
         this.vistaPrincipal = vistaPrincipal;
+        this.empleado = empleado;
         this.dao = new GenerarPedidoDao();
         eventos();
+        iniciarAutoRefresh();
     }
 
     public void iniciar() {
@@ -59,7 +64,7 @@ public class ControladorTodosPedidos {
 
     // Abrimos la vista y le pasamos el ID al nuevo controlador
     VistaVerDetallePedido vistaDetalle = new VistaVerDetallePedido();
-    ControladorVerDetallePedido ctrl = new ControladorVerDetallePedido(vistaDetalle, idPedido);
+    ControladorVerDetallePedido ctrl = new ControladorVerDetallePedido(vistaDetalle, idPedido, vistaPrincipal, empleado);
     ctrl.iniciar();
 }
 
@@ -81,5 +86,15 @@ public class ControladorTodosPedidos {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(vistaTodosPedidos, "Error al cargar pedidos: " + e.getMessage());
         }
+    }
+    
+    
+    private void iniciarAutoRefresh() {
+
+        Timer timer = new Timer(6000, e -> {
+            cargarDatosEnTabla();
+        });
+
+        timer.start();
     }
 }

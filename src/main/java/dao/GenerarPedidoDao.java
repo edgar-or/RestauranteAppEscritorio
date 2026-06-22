@@ -23,7 +23,7 @@ import modelo.ModeloMesa;
 public class GenerarPedidoDao {
 
     private static final String LISTAR_MESAS
-            = "SELECT idmesa, numeromesa FROM mesa";
+            = "SELECT idmesa, numeromesa, capacidad FROM mesa where estado = TRUE";
 
     private static final String INSERTAR_PEDIDO
             = "INSERT INTO public.pedido (fecha, total, estado, idmesa, idempleado) "
@@ -31,10 +31,47 @@ public class GenerarPedidoDao {
 
     private static final String INSERTAR_DETALLE
             = "INSERT INTO public.producto_pedido (idproducto, idpedido, cantidad, sub_total, nota) "
-            + "VALUES (?, ?, ?, ?, ?) "
-            + "ON CONFLICT (idproducto, idpedido) DO UPDATE SET "
-            + "cantidad = producto_pedido.cantidad + EXCLUDED.cantidad, "
-            + "sub_total = producto_pedido.sub_total + EXCLUDED.sub_total";
+            + "VALUES (?, ?, ?, ?, ?)";
+
+    private static final String ACTUALIZAR_ESTADO_MESA = "update mesa m set estado = 'False' where m.idmesa = ?";
+
+    private static final String ACTUALIZAR_ESTADO_MESA_TRUE = "update mesa m set estado = 'True' where m.idmesa = ?";
+
+    private static final String OBTENER_ID_MESA = "select idmesa from pedido where idpedido = ?";
+
+    public int obtenerIdMesa(int idpedido) throws Exception {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(OBTENER_ID_MESA)) {
+            ps.setInt(1, idpedido);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("idmesa");
+                }
+            }
+        }
+        return -1;
+    }
+
+    public boolean actualizarEstadoMesa(int idMesa) throws Exception {
+        Connection conn = Conexion.getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(ACTUALIZAR_ESTADO_MESA)) {
+            ps.setInt(1, idMesa);
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } finally {
+            conn.close();
+        }
+    }
+
+    public boolean actualizarEstadoMesaTrue(int idMesa) throws Exception {
+        Connection conn = Conexion.getConnection();
+        try (PreparedStatement ps = conn.prepareStatement(ACTUALIZAR_ESTADO_MESA_TRUE)) {
+            ps.setInt(1, idMesa);
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } finally {
+            conn.close();
+        }
+    }
 
     public ArrayList<ModeloMesa> llenarComboMesa() throws Exception {
         ArrayList<ModeloMesa> lista = new ArrayList<>();
@@ -47,6 +84,7 @@ public class GenerarPedidoDao {
                 m.setIdMesa(rs.getString("idmesa"));
 
                 m.setNumeroMesa(rs.getInt("numeromesa"));
+                m.setCapacidad(rs.getInt("capacidad"));
 
                 lista.add(m);
             }
@@ -181,7 +219,7 @@ public class GenerarPedidoDao {
 
     public List<Object[]> obtenerDetallesPedido(int idPedido) throws Exception {
         List<Object[]> lista = new ArrayList<>();
-        String sql = "SELECT pp.idproducto, p.nombre, pp.cantidad, pp.sub_total, pp.nota "
+        String sql = "SELECT pp.idproducto, p.nombre, pp.cantidad, pp.sub_total, pp.nota, pp.estado_orden "
                 + "FROM public.producto_pedido pp "
                 + "JOIN public.producto p ON pp.idproducto = p.idproducto "
                 + "WHERE pp.idpedido = ?";
@@ -189,12 +227,15 @@ public class GenerarPedidoDao {
             ps.setInt(1, idPedido);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
+                    boolean estado = rs.getBoolean("estado_orden");
+
                     lista.add(new Object[]{
                         rs.getInt("idproducto"),
                         rs.getString("nombre"),
                         rs.getInt("cantidad"),
                         rs.getDouble("sub_total"),
-                        rs.getString("nota")
+                        rs.getString("nota"),
+                        estado ? "Terminado" : "No terminado"
                     });
                 }
             }
@@ -270,16 +311,21 @@ public class GenerarPedidoDao {
         String sql = "SELECT p.idpedido, p.fecha, m.numeromesa, p.total, p.estado "
                 + "FROM public.pedido p "
                 + "JOIN public.mesa m ON p.idmesa = m.idmesa "
-                + "ORDER BY p.idpedido DESC";
+                + "ORDER BY p.idpedido ASC";
 
         try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
+
+                double subtotal = rs.getDouble("total");
+                double propina = subtotal * 0.10;
+                double totalFinal = subtotal + propina;
+
                 lista.add(new Object[]{
                     rs.getInt("idpedido"),
                     rs.getDate("fecha"),
                     "Mesa " + rs.getInt("numeromesa"),
-                    String.format("$%.2f", rs.getDouble("total")),
+                    String.format("$%.2f", totalFinal),
                     rs.getBoolean("estado") ? "PAGADO" : "PENDIENTE"
                 });
             }
