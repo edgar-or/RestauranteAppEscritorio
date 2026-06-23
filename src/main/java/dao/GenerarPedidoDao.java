@@ -147,13 +147,11 @@ public class GenerarPedidoDao {
         conn.setAutoCommit(false);
 
         try {
-            // 1. Limpiamos cualquier rastro en la tabla detalle
             try (PreparedStatement psDetalles = conn.prepareStatement(sqlDetalles)) {
                 psDetalles.setInt(1, idPedido);
                 psDetalles.executeUpdate();
             }
 
-            // 2. Eliminamos definitivamente la cabecera del pedido
             int filasAfectadas = 0;
             try (PreparedStatement psPedido = conn.prepareStatement(sqlPedido)) {
                 psPedido.setInt(1, idPedido);

@@ -205,10 +205,9 @@ public class ControladorAgregarPedido {
         totalAcumulado += subtotal;
         vistaAgregar.lblTotal.setText(String.format("$%.2f", totalAcumulado));
 
-        // Reseteo seguro de variables temporales
         idProductoSeleccionado = -1;
         vistaAgregar.txtPrecio.setText("");
-        vistaAgregar.spinnerCantidad.setValue(1); // CORREGIDO: Se cambia a 1 por usabilidad estándar
+        vistaAgregar.spinnerCantidad.setValue(1); 
         vistaAgregar.txtDescripcion.setText("");
     }
 
@@ -223,16 +222,15 @@ public class ControladorAgregarPedido {
 
         int idProducto = (int) vistaAgregar.tablaItems.getValueAt(fila, 0);
 
-        // CORREGIDO: Parseo robusto del subtotal inmune a configuraciones regionales (puntos y comas)
         String subtotalStr = vistaAgregar.tablaItems.getValueAt(fila, 4).toString()
                 .replace("$", "")
                 .replace(" ", "")
                 .trim();
 
         if (subtotalStr.contains(",") && subtotalStr.contains(".")) {
-            subtotalStr = subtotalStr.replace(",", ""); // Remueve separador de miles si existen ambos
+            subtotalStr = subtotalStr.replace(",", "");
         } else if (subtotalStr.contains(",")) {
-            subtotalStr = subtotalStr.replace(",", "."); // Convierte coma decimal a punto decimal
+            subtotalStr = subtotalStr.replace(",", "."); 
         }
 
         double subtotalFila = Double.parseDouble(subtotalStr);

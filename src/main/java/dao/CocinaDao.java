@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import modelo.AreaProduccionModelo;
 import modelo.ModeloProducto;
-import modelo.ModeloProducto_Pedido;
+import modelo.ModeloProductoPedido;
 
 /**
  *
@@ -32,9 +32,9 @@ public class CocinaDao {
             + "INNER JOIN area_produccion ap ON p.idproduccion = ap.idproduccion "
             + "WHERE ap.nombre = 'Cocina'";
 
-    public List<ModeloProducto_Pedido> listar() throws Exception {
+    public List<ModeloProductoPedido> listar() throws Exception {
 
-        List<ModeloProducto_Pedido> lista = new ArrayList<>();
+        List<ModeloProductoPedido> lista = new ArrayList<>();
         Connection conn = Conexion.getConnection();
 
         try {
@@ -43,14 +43,13 @@ public class CocinaDao {
 
             while (rs.next()) {
 
-                ModeloProducto_Pedido orden = new ModeloProducto_Pedido();
+                ModeloProductoPedido orden = new ModeloProductoPedido();
                 ModeloProducto product = new ModeloProducto();
                 AreaProduccionModelo area = new AreaProduccionModelo();
 
-// se le vas a egregar esas dos campos al dao //idpedido 
                 orden.setIdPedido(rs.getString("idpedido"));
                 product.setIdProducto(rs.getString("idproducto"));
-//
+
                 product.setNombre(rs.getString("nombreProducto"));
                 orden.setCantidad(rs.getInt("cantidad"));
                 orden.setNota(rs.getString("nota"));

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import modelo.ModeloProducto_Pedido;
+import modelo.ModeloProductoPedido;
 import vista.VistaCocina;
 import vista.VistaLogin;
 
@@ -25,7 +25,7 @@ public class ControladorCocina {
     private VistaCocina visCocina;
     private VistaLogin visLogin;
     private LoginControlador loginContro;
-    private List<ModeloProducto_Pedido> listaPedidos;
+    private List<ModeloProductoPedido> listaPedidos;
 
     public ControladorCocina(VistaCocina visCocina) {
         this.visCocina = visCocina;
@@ -58,14 +58,13 @@ public class ControladorCocina {
         try {
 
             CocinaDao dao = new CocinaDao();
-            // List<ModeloProducto_Pedido> lista = dao.listar();
             listaPedidos = dao.listar();
 
             DefaultTableModel modelo = (DefaultTableModel) visCocina.tablaCocina.getModel();
 
-            modelo.setRowCount(0); // limpia filas
+            modelo.setRowCount(0); 
 
-            for (ModeloProducto_Pedido orden : listaPedidos) {
+            for (ModeloProductoPedido orden : listaPedidos) {
 
                 modelo.addRow(new Object[]{
                     orden.getCantidad(),
@@ -107,7 +106,7 @@ public class ControladorCocina {
                 return;
             }
             try {
-                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+                ModeloProductoPedido pedido = listaPedidos.get(fila);
 
                 CocinaDao dao = new CocinaDao(); dao.actualizarEstado(pedido.getIdPedido(),pedido.getProducto().getIdProducto(), true);
 
@@ -128,7 +127,7 @@ public class ControladorCocina {
 
             try {
 
-                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+                ModeloProductoPedido pedido = listaPedidos.get(fila);
 
                 CocinaDao dao = new CocinaDao();
 

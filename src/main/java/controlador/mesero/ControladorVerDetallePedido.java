@@ -56,20 +56,16 @@ public class ControladorVerDetallePedido {
     private void configurarTabla() {
         DefaultTableModel modelo = new DefaultTableModel(
                 new String[]{"ID Prod", "Producto", "Cant.", "Subtotal", "Nota", "Estado Orden"}, 0);
-        vista.tablaPedido.setModel(modelo); // Asegúrate que en VistaVerDetallePedido la tabla se llame 'tabla'
+        vista.tablaPedido.setModel(modelo); 
     }
 
     private void cargarDatosPedido() {
         try {
-            // 1. Cargar cabecera
             Object[] cabecera = dao.obtenerPedidoCabecera(idPedido);
             if (cabecera != null) {
-                // Posiciones según el array devuelto por tu DAO:
-                // [0]id, [1]fecha, [2]mesa, [3]mesero, [4]total, [5]estado
 
                 String mesaTxt = (String) cabecera[2];
                 vista.lblMesa.setText(mesaTxt);
-                // Extrae el número de mesa de "Mesa N" para poder editar el pedido
                 try {
                     this.numeroMesa = Integer.parseInt(mesaTxt.replaceAll("[^0-9]", ""));
                 } catch (NumberFormatException ignore) {
@@ -86,13 +82,10 @@ public class ControladorVerDetallePedido {
                 vista.lblPropina.setText(String.format("$%.2f", propina));
                 vista.lblTotal.setText(String.format("$%.2f", totalConPropina));
 
-                // --- AGREGA ESTAS DOS LÍNEAS ---
                 vista.lblFecha.setText(cabecera[1].toString());
                 vista.lblEstado.setText((boolean) cabecera[5] ? "PAGADO" : "PENDIENTE");
-                // -------------------------------
             }
 
-            // 2. Cargar detalles
             List<Object[]> items = dao.obtenerDetallesPedido(idPedido);
             DefaultTableModel modelo = (DefaultTableModel) vista.tablaPedido.getModel();
             modelo.setRowCount(0);
@@ -169,7 +162,6 @@ public class ControladorVerDetallePedido {
                 return;
             }
 
-            // El reporte R3 espera el parámetro 'idpedido'
             Map<String, Object> params = new HashMap<>();
             params.put("idpedido", idPedido);
 

@@ -36,9 +36,6 @@ public class ModeloEmpleado {
         this.area = area;
     }
     
-    
-    
-    
 
     public static void setArrayTelefono(ArrayList<ModeloTelefono> arrayTelefono) {
         ModeloEmpleado.arrayTelefono = arrayTelefono;

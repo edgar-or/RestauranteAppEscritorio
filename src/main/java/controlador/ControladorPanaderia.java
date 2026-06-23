@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import modelo.ModeloProducto_Pedido;
+import modelo.ModeloProductoPedido;
 import vista.VistaLogin;
 import vista.VistaPanaderia;
 
@@ -25,7 +25,7 @@ import vista.VistaPanaderia;
  */
 public class ControladorPanaderia {
    private VistaPanaderia visPanaderia; 
-    private List<ModeloProducto_Pedido> listaPedidos;
+    private List<ModeloProductoPedido> listaPedidos;
 
 
     public ControladorPanaderia(VistaPanaderia visPanaderia) {
@@ -65,7 +65,7 @@ public class ControladorPanaderia {
 
             modelo.setRowCount(0); // limpia filas
 
-            for (ModeloProducto_Pedido orden : listaPedidos) {
+            for (ModeloProductoPedido orden : listaPedidos) {
 
                 modelo.addRow(new Object[]{
                     orden.getCantidad(),
@@ -106,7 +106,7 @@ public class ControladorPanaderia {
                 return;
             }
             try {
-                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+                ModeloProductoPedido pedido = listaPedidos.get(fila);
 
                 PedidoPanaderiaDao dao = new PedidoPanaderiaDao(); 
                 dao.actualizarEstado(pedido.getIdPedido(),pedido.getProducto().getIdProducto(), true);
@@ -128,7 +128,7 @@ public class ControladorPanaderia {
 
             try {
 
-                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+                ModeloProductoPedido pedido = listaPedidos.get(fila);
 
                 CocinaDao dao = new CocinaDao();
 

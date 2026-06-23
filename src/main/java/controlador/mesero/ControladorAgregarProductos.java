@@ -29,30 +29,28 @@ public class ControladorAgregarProductos {
     private static final int ID_BEBIDAS = 3;
     private static final int ID_ENTRADAS = 4;
 
-    // CONSTRUCTOR 1: Nuevo Pedido
     public ControladorAgregarProductos(VistaProductos visProduct, ControladorAgregarPedido controlPedido) {
         this.visProduct = visProduct;
         this.controlPedido = controlPedido;
         this.dao = new ProductosParaPedidosDao();
 
-        configurarTablas(); // <-- Inicializa la estructura correcta de las tablas
+        configurarTablas(); 
         cargarTablas();
         registrarEventos();
     }
 
-    // CONSTRUCTOR 2: Editar Pedido Existente
+    
     public ControladorAgregarProductos(VistaProductos visProduct, int idPedidoExistente) {
         this.visProduct = visProduct;
         this.controlPedido = null;
         this.idPedidoExistente = idPedidoExistente;
         this.dao = new ProductosParaPedidosDao();
 
-        configurarTablas(); // <-- Inicializa la estructura correcta de las tablas
+        configurarTablas(); 
         cargarTablas();
         registrarEventos();
     }
 
-    // NUEVO MÉTODO: Configura dinámicamente las 4 columnas y oculta el ID de forma elegante
     private void configurarTablas() {
         configurarModeloYColumnas(visProduct.tablaBebidas);
         configurarModeloYColumnas(visProduct.tablaPlatillos);
@@ -65,12 +63,11 @@ public class ControladorAgregarProductos {
                 new String[]{"ID", "Nombre", "Descripción", "Precio"}, 0) {
             @Override
             public boolean isCellEditable(int r, int c) {
-                return false; // Bloquea la edición directa de celdas
+                return false; 
             }
         };
         tabla.setModel(modelo);
 
-        // Ocultar la columna de ID (índice 0) para que no afecte el diseño visual
         var col = tabla.getColumnModel().getColumn(0);
         col.setMinWidth(0);
         col.setMaxWidth(0);
@@ -108,35 +105,30 @@ public class ControladorAgregarProductos {
 
     private void registrarEventos() {
 
-        // --- BEBIDAS ---
         visProduct.btnBuscar.addActionListener(e
                 -> buscar(ID_BEBIDAS, visProduct.txtbuscar.getText().trim(),
                         visProduct.tablaBebidas));
 
         visProduct.btnAgregarBebidas.addActionListener(e -> agregar(visProduct.tablaBebidas));
 
-        // --- PLATILLOS ---
         visProduct.btnBuscarPlatillos.addActionListener(e
                 -> buscar(ID_PLATILLOS, visProduct.txtBuscarPlatillos.getText().trim(),
                         visProduct.tablaPlatillos));
 
         visProduct.btnAgregarPlatillos.addActionListener(e -> agregar(visProduct.tablaPlatillos));
 
-        // --- POSTRES ---
         visProduct.btnBuscarPostre.addActionListener(e
                 -> buscar(ID_POSTRES, visProduct.txtBuscarPostre.getText().trim(),
                         visProduct.tablaPostres));
 
         visProduct.btnAgregarPostres.addActionListener(e -> agregar(visProduct.tablaPostres));
 
-        // --- ENTRADAS ---
         visProduct.btnBuscarEntrdas.addActionListener(e
                 -> buscar(ID_ENTRADAS, visProduct.txtBuscarEntradas.getText().trim(),
                         visProduct.tablaEntradas));
 
         visProduct.btnAgregarEntrdas.addActionListener(e -> agregar(visProduct.tablaEntradas));
 
-        // --- CERRAR ---
         visProduct.btnCerrar.addActionListener(e -> visProduct.dispose());
     }
 
@@ -182,7 +174,6 @@ public class ControladorAgregarProductos {
 
         if (this.controlPedido != null) {
 
-            // MODO NUEVO PEDIDO
             controlPedido.setProductoSeleccionado(
                     idProducto,
                     nombre,
@@ -196,7 +187,6 @@ public class ControladorAgregarProductos {
 
         } else if (this.idPedidoExistente > 0) {
 
-            // MODO EDITAR PEDIDO EXISTENTE
             try {
 
                 String cantStr = JOptionPane.showInputDialog(
@@ -219,12 +209,10 @@ public class ControladorAgregarProductos {
                     nota = "";
                 }
 
-                // CALCULAR SUBTOTAL
                 double subtotal = cantidad * precio;
 
                 GenerarPedidoDao detalleDao = new GenerarPedidoDao();
 
-                // INSERTAR PRODUCTO AL PEDIDO
                 detalleDao.insertarLineaDetalle(
                         idPedidoExistente,
                         idProducto,
@@ -232,7 +220,6 @@ public class ControladorAgregarProductos {
                         subtotal,
                         nota);
 
-                // RECALCULAR TOTAL DEL PEDIDO
                 detalleDao.actualizarTotalPedido(idPedidoExistente);
 
                 JOptionPane.showMessageDialog(

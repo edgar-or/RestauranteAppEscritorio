@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import modelo.AreaProduccionModelo;
 import modelo.ModeloProducto;
-import modelo.ModeloProducto_Pedido;
+import modelo.ModeloProductoPedido;
 
 /**
  *

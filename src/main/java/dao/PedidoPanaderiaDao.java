@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.AreaProduccionModelo;
 import modelo.ModeloProducto;
-import modelo.ModeloProducto_Pedido;
+import modelo.ModeloProductoPedido;
 
 /**
  *
@@ -30,9 +30,9 @@ public class PedidoPanaderiaDao {
             + "INNER JOIN empleado e ON ped.idEmpleado = e.idEmpleado "
             + "INNER JOIN area_produccion ap ON p.idproduccion = ap.idproduccion "
             + "WHERE ap.nombre = 'Panaderia'";
-    public List<ModeloProducto_Pedido> listar() throws Exception {
+    public List<ModeloProductoPedido> listar() throws Exception {
 
-        List<ModeloProducto_Pedido> lista = new ArrayList<>();
+        List<ModeloProductoPedido> lista = new ArrayList<>();
         Connection conn = Conexion.getConnection();
 
         try {
@@ -41,7 +41,7 @@ public class PedidoPanaderiaDao {
 
             while (rs.next()) {
 
-               ModeloProducto_Pedido orden = new ModeloProducto_Pedido();
+               ModeloProductoPedido orden = new ModeloProductoPedido();
                     ModeloProducto product = new ModeloProducto();
 
                     orden.setIdPedido(rs.getString("idpedido"));

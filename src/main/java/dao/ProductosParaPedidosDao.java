@@ -41,9 +41,7 @@ public class ProductosParaPedidosDao {
         return listarPorProduccion(4);
     }
  
-    // ----------------------------------------------------------------
-    // Buscar por nombre dentro de una categoría
-    // ----------------------------------------------------------------
+   
  
     public List<ModeloProducto> buscarPorNombre(int idProduccion, String texto) throws Exception {
         List<ModeloProducto> lista = new ArrayList<>();
@@ -68,10 +66,7 @@ public class ProductosParaPedidosDao {
         return lista;
     }
  
-    // ----------------------------------------------------------------
-    // Helpers privados
-    // ----------------------------------------------------------------
- 
+
     public List<ModeloProducto> listarPorProduccion(int idProduccion) throws Exception {
         List<ModeloProducto> lista = new ArrayList<>();
         Connection conn = Conexion.getConnection();

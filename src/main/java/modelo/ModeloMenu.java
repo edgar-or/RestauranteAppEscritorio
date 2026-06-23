@@ -15,13 +15,13 @@ public class ModeloMenu {
     private String idMenu;
     private String descrpcion;
     
-    private static ArrayList<ModeloProducto_Menu> arrayProducto_Menu = new ArrayList<>();
+    private static ArrayList<ModeloProductoMenu> arrayProducto_Menu = new ArrayList<>();
 
-    public static ArrayList<ModeloProducto_Menu> getArrayProducto_Menu() {
+    public static ArrayList<ModeloProductoMenu> getArrayProducto_Menu() {
         return arrayProducto_Menu;
     }
 
-    public static void setArrayProducto_Menu(ArrayList<ModeloProducto_Menu> arrayProducto_Menu) {
+    public static void setArrayProducto_Menu(ArrayList<ModeloProductoMenu> arrayProducto_Menu) {
         ModeloMenu.arrayProducto_Menu = arrayProducto_Menu;
     }
 

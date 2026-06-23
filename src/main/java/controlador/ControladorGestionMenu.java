@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.AreaProduccionModelo;
 import modelo.ModeloProducto;
-import modelo.ModeloProducto_Pedido;
+import modelo.ModeloProductoPedido;
 import vista.VistaGestionMenu;
 
 /**

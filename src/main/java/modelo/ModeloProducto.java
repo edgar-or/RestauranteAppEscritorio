@@ -19,8 +19,8 @@ public class ModeloProducto {
     
     private AreaProduccionModelo areaProduccion; 
     
-    private ModeloProducto_Pedido productoPedido;
-    private ModeloProducto_Menu productoMenu;
+    private ModeloProductoPedido productoPedido;
+    private ModeloProductoMenu productoMenu;
     
 
     public AreaProduccionModelo getAreaProduccion() {
@@ -32,10 +32,10 @@ public class ModeloProducto {
     }
     
     
-    private static ArrayList<ModeloProducto_Menu> arrayProducto_Menu = new ArrayList<>();
-    private static ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido = new ArrayList<>();
+    private static ArrayList<ModeloProductoMenu> arrayProducto_Menu = new ArrayList<>();
+    private static ArrayList<ModeloProductoPedido> arrayProducto_Pedido = new ArrayList<>();
 
-    public static ArrayList<ModeloProducto_Menu> getArrayProducto_Menu() {
+    public static ArrayList<ModeloProductoMenu> getArrayProducto_Menu() {
         return arrayProducto_Menu;
     }
 
@@ -44,15 +44,15 @@ public class ModeloProducto {
     
     
 
-    public static void setArrayProducto_Menu(ArrayList<ModeloProducto_Menu> arrayProducto_Menu) {
+    public static void setArrayProducto_Menu(ArrayList<ModeloProductoMenu> arrayProducto_Menu) {
         ModeloProducto.arrayProducto_Menu = arrayProducto_Menu;
     }
 
-    public static ArrayList<ModeloProducto_Pedido> getArrayProducto_Pedido() {
+    public static ArrayList<ModeloProductoPedido> getArrayProducto_Pedido() {
         return arrayProducto_Pedido;
     }
 
-    public static void setArrayProducto_Pedido(ArrayList<ModeloProducto_Pedido> arrayProducto_Pedido) {
+    public static void setArrayProducto_Pedido(ArrayList<ModeloProductoPedido> arrayProducto_Pedido) {
         ModeloProducto.arrayProducto_Pedido = arrayProducto_Pedido;
     }
 

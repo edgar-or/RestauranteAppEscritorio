@@ -4,9 +4,7 @@ import dao.conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-/**
- * DAO para insertar productos en un pedido existente.
- */
+
 public class AgregarProductoaPedido {
 
     private static final String INSERT_PRODUCTO_PEDIDO =

@@ -37,8 +37,8 @@ public class ControladorTodosPedidos {
     }
 
     public void iniciar() {
-        configurarTabla(); // Prepara columnas
-        cargarDatosEnTabla(); // Trae datos de la BD
+        configurarTabla(); 
+        cargarDatosEnTabla(); 
 
         vistaTodosPedidos.pack();
         vistaTodosPedidos.setLocationRelativeTo(null);
@@ -48,7 +48,6 @@ public class ControladorTodosPedidos {
     private void eventos() {
         vistaTodosPedidos.btnCerrar.addActionListener(e -> vistaTodosPedidos.dispose());
 
-        // Acción del botón para abrir el detalle
         vistaTodosPedidos.btnVerDetalle.addActionListener(e -> abrirDetalle());
     }
 
@@ -59,10 +58,8 @@ public class ControladorTodosPedidos {
         return;
     }
 
-    // Obtenemos el ID de la primera columna
     int idPedido = (int) vistaTodosPedidos.tablaPedidos.getValueAt(fila, 0);
 
-    // Abrimos la vista y le pasamos el ID al nuevo controlador
     VistaVerDetallePedido vistaDetalle = new VistaVerDetallePedido();
     ControladorVerDetallePedido ctrl = new ControladorVerDetallePedido(vistaDetalle, idPedido, vistaPrincipal, empleado);
     ctrl.iniciar();
@@ -76,9 +73,9 @@ public class ControladorTodosPedidos {
 
     private void cargarDatosEnTabla() {
         try {
-            List<Object[]> pedidos = dao.listarTodosLosPedidos(); // Método que creamos arriba
+            List<Object[]> pedidos = dao.listarTodosLosPedidos(); 
             DefaultTableModel modelo = (DefaultTableModel) vistaTodosPedidos.tablaPedidos.getModel();
-            modelo.setRowCount(0); // Limpiar tabla antes de cargar
+            modelo.setRowCount(0); 
 
             for (Object[] fila : pedidos) {
                 modelo.addRow(fila);

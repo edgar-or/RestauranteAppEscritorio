@@ -8,14 +8,14 @@ package modelo;
  *
  * @author renec
  */
-public class ModeloProducto_Menu {
+public class ModeloProductoMenu {
     
 
     
     private ModeloProducto producto;
     private ModeloMenu menu;
 
-    public ModeloProducto_Menu(ModeloProducto producto, ModeloMenu menu) {
+    public ModeloProductoMenu(ModeloProducto producto, ModeloMenu menu) {
         this.producto = producto;
         this.menu = menu;
     }

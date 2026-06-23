@@ -8,7 +8,7 @@ package modelo;
  *
  * @author renec
  */
-public class ModeloProducto_Pedido {
+public class ModeloProductoPedido {
 
     private String idPedido;
 
@@ -36,10 +36,10 @@ public class ModeloProducto_Pedido {
         this.nota = nota;
     }
 
-    public ModeloProducto_Pedido() {
+    public ModeloProductoPedido() {
     }
 
-    public ModeloProducto_Pedido(String idPedido, ModeloProducto producto, ModeloPedido pedido, int cantidad, double subTotal) {
+    public ModeloProductoPedido(String idPedido, ModeloProducto producto, ModeloPedido pedido, int cantidad, double subTotal) {
         this.idPedido = idPedido;
         this.producto = producto;
         this.pedido = pedido;

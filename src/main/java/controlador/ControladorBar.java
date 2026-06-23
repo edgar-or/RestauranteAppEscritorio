@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import modelo.ModeloProducto_Pedido;
+import modelo.ModeloProductoPedido;
 import vista.VistaBar;
 import vista.VistaLogin;
 
@@ -22,7 +22,7 @@ import vista.VistaLogin;
 public class ControladorBar {
 
     private VistaBar visBar;
-    private List<ModeloProducto_Pedido> listaPedidos;
+    private List<ModeloProductoPedido> listaPedidos;
 
     public ControladorBar(VistaBar visBar) {
         this.visBar = visBar;
@@ -70,7 +70,7 @@ public class ControladorBar {
 
             modelo.setRowCount(0); // limpia filas
 
-            for (ModeloProducto_Pedido orden : listaPedidos) {
+            for (ModeloProductoPedido orden : listaPedidos) {
 
                 modelo.addRow(new Object[]{
                     orden.getCantidad(),
@@ -102,7 +102,7 @@ public class ControladorBar {
                 return;
             }
             try {
-                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+                ModeloProductoPedido pedido = listaPedidos.get(fila);
 
                 PedidoBarDao dao = new PedidoBarDao();
                 dao.actualizarEstado(pedido.getIdPedido(),
@@ -126,7 +126,7 @@ public class ControladorBar {
 
             try {
 
-                ModeloProducto_Pedido pedido = listaPedidos.get(fila);
+                ModeloProductoPedido pedido = listaPedidos.get(fila);
 
                 PedidoBarDao dao = new PedidoBarDao();
 
